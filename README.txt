@@ -1,12 +1,11 @@
-PROFESSIONAL WEBSITE UPDATE
+STAR TECH STANDARD - GOOGLE MAPS LOCATIONS
 
-Apply professional-header-fix.css to the existing index.html.
+This ZIP contains only the Google Maps location page.
 
-Requested changes:
-- Bigger Star Tech Standard Ltd company name.
-- Bigger logo.
-- Three-line mobile menu opens as a vertical dropdown/list.
-- Add the three KAT-POWER showroom addresses from KAT-POWER-showrooms.txt
-  in the KAT-POWER section, preferably as three professional showroom cards.
+File:
+google-maps-locations.html
 
-Do not replace the existing website content or assets unnecessarily.
+Each showroom has an "Open in Google Maps" button.
+
+Note:
+The second location was supplied as "Ajah Thomas Estate Showroom" without a street address, so it is kept exactly at that level rather than inventing an address.
