@@ -1,80 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Star Tech Standard Ltd — professional diesel generator sales, maintenance, diesel systems, fuel systems and technical power solutions in Lagos, Nigeria. KAT-POWER gasoline generators also available.">
-<meta name="theme-color" content="#07152f">
-<title>Star Tech Standard Ltd | Power You Can Depend On</title>
-<link rel="icon" href="assets/star-tech-standard-logo.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--navy:#07152f;--blue:#1266d6;--orange:#f58220;--ink:#10213e;--muted:#63728a;--light:#f4f7fb;--white:#fff;--line:#e5ebf3;--shadow:0 18px 55px rgba(8,31,67,.12);--radius:22px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);line-height:1.65}a{text-decoration:none;color:inherit}.container{width:min(1160px,92%);margin:auto}
-.topbar{background:#06122a;color:#d9e6fb;font-size:13px}.topbar .inner{min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav-inner{min-height:104px;display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative}
-.brand{display:flex;align-items:center;gap:18px;flex:0 0 auto}.brand img{width:132px;height:82px;object-fit:contain;border-radius:10px}.brand strong{font-family:Manrope;font-size:24px;line-height:1.08;font-weight:800;color:var(--navy);white-space:nowrap;letter-spacing:-.025em}
-.links{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:700;color:#33445e}.links a:hover{color:var(--blue)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 20px;border-radius:12px;font-weight:700;font-size:14px;border:1px solid transparent;cursor:pointer}.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 22px rgba(245,130,32,.25)}.btn-dark{background:var(--navy);color:#fff}.btn-outline{border-color:#cdd8e7;color:var(--navy);background:#fff}
-.menu{display:none;background:none;border:0;font-size:30px;line-height:1;color:var(--navy);cursor:pointer}
-.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#06142e,#0b2b5d 58%,#114d8e);color:#fff}.hero-grid{min-height:600px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:50px}.kicker{color:#ffb36e;font-weight:800;letter-spacing:.11em;text-transform:uppercase;font-size:12px}.kicker:before{content:"";display:inline-block;width:26px;height:2px;background:var(--orange);vertical-align:middle;margin-right:9px}
-h1{font-family:Manrope;font-size:clamp(42px,5.5vw,72px);line-height:1.03;letter-spacing:-.045em;margin:17px 0 22px}.hero p{font-size:18px;color:#d5e0f2;max-width:620px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.hero-visual{min-height:430px;display:flex;align-items:center;justify-content:center}.power-card{width:min(430px,100%);aspect-ratio:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:34px;display:grid;place-items:center;position:relative}.power-card .bolt{font-size:150px;color:var(--orange)}.power-card .label{position:absolute;bottom:28px;left:30px;right:30px;border-top:1px solid rgba(255,255,255,.15);padding-top:18px;display:flex;justify-content:space-between}.power-card span{color:#b9c9df;font-size:12px}
-section{padding:88px 0}.trust{border-bottom:1px solid var(--line)}.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}.trust-item{background:#fff;padding:24px;text-align:center}.trust-item b{display:block;font-size:18px;color:var(--navy)}.trust-item span{font-size:12px;color:var(--muted)}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:40px}.eyebrow{color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:12px}.section-head h2{font-family:Manrope;font-size:40px;line-height:1.1;margin:8px 0}.section-head p{max-width:520px;color:var(--muted)}
-.about-grid,.kat-grid,.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.about-panel{background:var(--navy);color:#fff;border-radius:30px;padding:42px}.about-panel h3{font-family:Manrope;font-size:31px;margin:0 0 16px}.about-panel p{color:#c9d6e9}.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}.mini-stat{border:1px solid rgba(255,255,255,.12);border-radius:15px;padding:15px}.mini-stat b{display:block}.mini-stat span{font-size:12px;color:#aebed5}.about-copy h2{font-family:Manrope;font-size:42px;line-height:1.1;margin:8px 0 20px}.about-copy p{color:var(--muted)}.check{display:flex;gap:12px;margin:18px 0}.check i{flex:0 0 24px;height:24px;border-radius:50%;background:#e9f2ff;color:var(--blue);display:grid;place-items:center;font-style:normal;font-weight:800}
-.services,.contact{background:var(--light)}.cards,.special-grid,.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card,.step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px}.icon{width:48px;height:48px;border-radius:14px;background:#eaf2ff;color:var(--blue);display:grid;place-items:center;font-size:22px;margin-bottom:22px}.card h3{font-family:Manrope;margin:0 0 9px}.card p,.step p{color:var(--muted);font-size:14px;margin:0}
-.kat{background:linear-gradient(135deg,#fff7ef,#fff)}.kat-logo{background:#fff;border-radius:30px;box-shadow:var(--shadow);padding:35px;display:grid;place-items:center;min-height:360px;border:1px solid #f0e3d7}.kat-logo img{width:90%;max-width:500px;mix-blend-mode:multiply}.kat-copy h2{font-family:Manrope;font-size:50px;line-height:1.05;margin:8px 0 20px}.kat-copy p{color:var(--muted)}.kat-badges{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.badge{padding:9px 12px;border-radius:999px;background:#fff;border:1px solid #f0dfcf;font-size:12px;font-weight:700}
-.showrooms{margin-top:42px}.showrooms h3{font-family:Manrope;font-size:28px;margin:0 0 20px}.showroom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.showroom{background:#fff;border:1px solid #f0dfcf;border-radius:18px;padding:22px;box-shadow:0 8px 25px rgba(80,50,20,.06)}.showroom h4{font-family:Manrope;margin:0 0 10px;font-size:17px}.showroom p{margin:0;color:var(--muted);font-size:14px}
-.special{background:var(--navy);color:#fff}.special .eyebrow{color:#ffae63}.special .section-head p{color:#aebed5}.special-grid{grid-template-columns:repeat(3,1fr)}.special-card{border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;background:rgba(255,255,255,.035)}.special-card b{font-family:Manrope;font-size:28px}.special-card h3{margin:12px 0 7px}.special-card p{color:#aebed5;font-size:14px}
-.process-grid{grid-template-columns:repeat(4,1fr)}.step{position:relative}.num{font-family:Manrope;font-size:12px;color:var(--blue);font-weight:800}.step h3{font-family:Manrope;font-size:18px;margin:8px 0}
-.cta{padding:70px 0}.cta-box{border-radius:30px;background:linear-gradient(120deg,#0a2450,#123e79);padding:55px;display:flex;justify-content:space-between;align-items:center;gap:30px;color:#fff}.cta-box h2{font-family:Manrope;font-size:40px;margin:0 0 8px}.cta-box p{color:#c8d7eb;margin:0}
-.contact-grid{align-items:stretch}.contact-info{background:var(--navy);color:#fff;border-radius:28px;padding:38px}.contact-info h3{font-family:Manrope;font-size:28px;margin-top:0}.contact-info p{color:#bdcce0}.contact-line{padding:18px 0;border-top:1px solid rgba(255,255,255,.12)}.contact-line span{display:block;color:#8fa3c0;font-size:11px;text-transform:uppercase;letter-spacing:.1em}.form{background:#fff;border:1px solid var(--line);border-radius:28px;padding:38px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:800}.field input,.field textarea{font:inherit;border:1px solid #d9e1ec;border-radius:11px;padding:13px 14px}.field textarea{min-height:125px}
-footer{background:#050f22;color:#aebed5;padding:55px 0 25px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px}.footer-brand img{width:110px;height:72px;object-fit:contain;background:#fff;border-radius:8px}.footer-brand p{max-width:420px;font-size:13px}.footer h4{color:#fff;margin-top:0}.footer a{display:block;font-size:13px;margin:10px 0}.copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:35px;padding-top:20px;font-size:12px;display:flex;justify-content:space-between}.whatsapp{position:fixed;right:20px;bottom:20px;z-index:30;background:#1aa86b;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-weight:800}
-@media(max-width:1100px) and (min-width:901px){.brand img{width:108px;height:70px}.brand strong{font-size:19px}.links{gap:14px;font-size:13px}.nav-inner{gap:20px}}
-@media(max-width:900px){
-.nav-inner{min-height:78px;height:auto;padding:10px 0}.brand img{width:92px;height:60px}.brand strong{font-size:17px}.menu{display:block}
-.links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:10px 0 14px;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 14px 30px rgba(8,31,67,.12)}
-.links.open{display:flex}.links a{display:block;width:100%;padding:13px 20px;border-bottom:1px solid #edf1f6}.links .btn{margin:10px 20px 0;width:calc(100% - 40px)}
-.hero-grid,.about-grid,.kat-grid,.contact-grid{grid-template-columns:1fr}.hero-grid{padding:65px 0}.cards,.special-grid,.showroom-grid{grid-template-columns:1fr 1fr}.process-grid{grid-template-columns:1fr 1fr}.trust-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.section-head{display:block}.section-head p{margin-top:15px}}
-@media(max-width:600px){.topbar{display:none}.brand img{width:82px;height:54px}.brand strong{font-size:15px}.hero h1{font-size:44px}.hero p{font-size:16px}.cards,.special-grid,.showroom-grid,.process-grid,.trust-grid,.footer-grid,.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.cta-box{padding:34px 25px;display:block}.cta-box h2{font-size:31px}.cta-box .btn{margin-top:22px}.about-panel{padding:30px}.kat-logo{min-height:260px}.kat-copy h2,.about-copy h2{font-size:34px}}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Star Tech Standard Ltd | Generators, Diesel Service & Power Solutions</title>
+<meta name="description" content="Star Tech Standard Ltd provides diesel generator sales, repairs and maintenance, diesel fuel systems, parts and industrial power solutions in Lagos, Nigeria.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="topbar"><div class="container inner"><span>Professional Power Solutions • Lagos, Nigeria</span><span>Diesel Systems • Generator Sales • Technical Services</span></div></div>
-<nav><div class="container nav-inner">
-<a class="brand" href="#home"><img src="assets/star-tech-standard-logo.jpg" alt="Star Tech Standard Ltd logo"><strong>Star Tech Standard Ltd</strong></a>
-<div class="links" id="siteLinks"><a href="#about">About</a><a href="#services">Services</a><a href="#kat-power">KAT-POWER</a><a href="#approach">Our Approach</a><a href="#contact">Contact</a><a class="btn btn-primary" href="#contact">Request a Quote</a></div>
-<button class="menu" aria-label="Open navigation" aria-expanded="false" onclick="const l=document.getElementById('siteLinks');const o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
-</div></nav>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><b>STS</b><span>STAR TECH<small>STANDARD LTD</small></span></a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#kat-power">Kat Power</a>
+      <a href="#locations">Locations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn small" href="https://wa.me/2348033452862" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
 
-<main id="home">
-<section class="hero"><div class="container hero-grid"><div><div class="kicker">Power. Reliability. Expertise.</div><h1>Power systems engineered for confidence.</h1><p>Star Tech Standard Ltd delivers professional generator sales, diesel-system expertise, maintenance and practical power solutions for businesses that cannot afford unnecessary downtime.</p><div class="hero-actions"><a class="btn btn-primary" href="#contact">Request a Quote</a><a class="btn btn-outline" href="#services">Explore Services</a></div></div><div class="hero-visual"><div class="power-card"><div class="bolt">ϟ</div><div class="label"><b>Star Tech Standard</b><span>Reliable Power Solutions</span></div></div></div></div></section>
+<main id="top">
+<section class="hero">
+  <div class="grid"></div>
+  <div class="wrap hero-in">
+    <p class="eyebrow">POWER • ENGINEERING • SERVICE</p>
+    <h1>Reliable power solutions for businesses that cannot afford downtime.</h1>
+    <p class="lead">Star Tech Standard Ltd supplies generators and provides specialist diesel-generator repairs, maintenance, diesel fuel systems, parts and industrial power support.</p>
+    <div class="actions">
+      <a class="btn" href="#contact">Request a Quote</a>
+      <a class="btn ghost" href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    </div>
+    <p class="note">Diesel generator repair and technical service. Gasoline generators are supplied under our Kat Power brand; gasoline-generator repair is not offered.</p>
+  </div>
+  <div class="generator" aria-hidden="true"><div class="gen-body"></div><div class="panel"></div><div class="grille"></div><small>GENERATOR SYSTEMS</small></div>
+</section>
 
-<section class="trust"><div class="container trust-grid"><div class="trust-item"><b>Diesel Expertise</b><span>Systems &amp; maintenance</span></div><div class="trust-item"><b>Generator Sales</b><span>Professional supply</span></div><div class="trust-item"><b>Fuel Systems</b><span>Transfer &amp; monitoring</span></div><div class="trust-item"><b>Lagos, Nigeria</b><span>Technical support</span></div></div></section>
+<section class="strip"><div class="wrap stripgrid">
+  <div><b>DIESEL GENERATORS</b><span>Sales, repair & maintenance</span></div>
+  <div><b>DIESEL FUEL SYSTEMS</b><span>Pumps, tanks & transfer</span></div>
+  <div><b>PARTS</b><span>Engine & alternator components</span></div>
+  <div><b>TECHNICAL SUPPORT</b><span>Practical site solutions</span></div>
+</div></section>
 
-<section id="about"><div class="container about-grid"><div class="about-panel"><h3>Built around dependable power.</h3><p>Star Tech Standard Ltd is focused on generator systems, diesel technology and practical power solutions for commercial and industrial customers.</p><div class="mini-stats"><div class="mini-stat"><b>Technical</b><span>Hands-on expertise</span></div><div class="mini-stat"><b>Reliable</b><span>Quality-focused work</span></div></div></div><div class="about-copy"><div class="eyebrow">About Star Tech Standard</div><h2>Power solutions with technical thinking behind them.</h2><p>We support businesses with generator sales, diesel-generator maintenance, fuel-system work and related power infrastructure.</p><div class="check"><i>✓</i><div><b>Diesel generator specialists</b><br>Maintenance and technical troubleshooting.</div></div><div class="check"><i>✓</i><div><b>Practical fuel-system solutions</b><br>Transfer, storage and monitoring systems.</div></div></div></div></section>
+<section id="services" class="section">
+  <div class="wrap">
+    <p class="eyebrow dark">WHAT WE DO</p>
+    <div class="head"><h2>Generator and power services built around your site.</h2><p>From routine maintenance to complex diesel fuel and monitoring systems, we focus on dependable operation and clear technical scope.</p></div>
+    <div class="cards">
+      <article><i>01</i><h3>Generator Sales</h3><p>Supply of diesel generator sets for commercial, residential and industrial applications.</p></article>
+      <article><i>02</i><h3>Diesel Repairs & Maintenance</h3><p>Fault diagnosis, preventive maintenance, corrective repairs and technical troubleshooting for diesel generators.</p></article>
+      <article><i>03</i><h3>Diesel Fuel Systems</h3><p>Diesel pumps, injection systems, filters, tanks, transfer equipment and fuel-system servicing.</p></article>
+      <article><i>04</i><h3>Monitoring & Transfer</h3><p>Fuel transfer, flow metering, level protection and control systems for generator plants and facilities.</p></article>
+      <article><i>05</i><h3>Parts & Components</h3><p>Specialist generator components including alternators, AVR, pumps and engine-system parts.</p></article>
+      <article><i>06</i><h3>Technical Support</h3><p>Practical support focused on reliability, troubleshooting and reducing equipment downtime.</p></article>
+    </div>
+  </div>
+</section>
 
-<section id="services" class="services"><div class="container"><div class="section-head"><div><div class="eyebrow">Services</div><h2>Technical power services.</h2></div><p>Professional support for generator systems and the diesel infrastructure around them.</p></div><div class="cards"><div class="card"><div class="icon">⚙</div><h3>Generator Maintenance</h3><p>Inspection, troubleshooting, preventive maintenance and repair of diesel generator systems.</p></div><div class="card"><div class="icon">▣</div><h3>Generator Sales</h3><p>Generator supply and practical selection for commercial and business applications.</p></div><div class="card"><div class="icon">⛽</div><h3>Diesel &amp; Fuel Systems</h3><p>Fuel transfer, storage, filtration and monitoring solutions for reliable operation.</p></div></div></div></section>
+<section id="kat-power" class="feature">
+  <div class="wrap featuregrid">
+    <div class="kat-card" role="img" aria-label="Kat Power gasoline generator product presentation">
+      <div class="kat-label">KAT POWER</div>
+      <div class="kat-generator"><div class="kg-top"></div><div class="kg-body"><span>KP</span></div><div class="kg-wheel w1"></div><div class="kg-wheel w2"></div></div>
+      <div class="kat-caption">GASOLINE GENERATORS</div>
+    </div>
+    <div>
+      <p class="eyebrow dark">KAT POWER</p>
+      <h2>Gasoline generators for sale.</h2>
+      <p class="big">Kat Power is our gasoline-generator brand. Selected models are available for sale through our showroom display locations.</p>
+      <div class="notice"><b>Important:</b> Kat Power gasoline generators are supplied for sale. Star Tech Standard's repair and maintenance service is for diesel generators.</div>
+      <div class="specs">
+        <span><b>Available</b> 8 kW / 10 kVA soundproof</span>
+        <span><b>Available</b> 5 kW basic model</span>
+        <span><b>Brand</b> KAT POWER</span>
+        <span><b>Sales</b> Lagos showroom locations</span>
+      </div>
+      <a class="btn" href="#locations">View Sales Locations</a>
+    </div>
+  </div>
+</section>
 
-<section id="kat-power" class="kat"><div class="container"><div class="kat-grid"><div class="kat-logo"><img src="assets/kat-power-logo.png" alt="KAT-POWER gasoline generators"></div><div class="kat-copy"><div class="eyebrow">Gasoline Generator Division</div><h2>KAT-POWER</h2><p>Reliable gasoline generators for homes, shops and practical backup-power applications. KAT-POWER is the gasoline-generator sales division of Star Tech Standard Ltd.</p><div class="kat-badges"><span class="badge">Gasoline Generators</span><span class="badge">Home &amp; Business</span><span class="badge">Sales</span></div></div></div>
-<div class="showrooms"><h3>KAT-POWER Showrooms</h3><div class="showroom-grid">
-<div class="showroom"><h4>Kosher Home Electronics</h4><p>Emperor Estate Mall<br>Lekki 2, Lagos</p></div>
-<div class="showroom"><h4>MRS KOSHAR HOME OF ELECTRONICS</h4><p>Ajah Thomas Estate Showroom<br>Lagos</p></div>
-<div class="showroom"><h4>MBE (TRY N CARRY)</h4><p>Dream Plaza, First Floor<br>Bishop Aboyade Cole Street<br>Victoria Island, Lagos</p></div>
-</div></div></div></section>
+<section class="dark section">
+  <div class="wrap aboutgrid">
+    <div><p class="eyebrow">ABOUT STAR TECH STANDARD</p><h2>Power equipment. Practical expertise. Dependable service.</h2></div>
+    <div><p class="big">Star Tech Standard Ltd is a Nigeria-based power equipment and technical service company serving customers who depend on reliable electrical power.</p><p>Our work covers generator sales, diesel generator repairs and maintenance, diesel fuel systems, monitoring and transfer systems, parts and specialist technical services.</p></div>
+  </div>
+</section>
 
-<section id="approach" class="special"><div class="container"><div class="section-head"><div><div class="eyebrow">Our Approach</div><h2>Focused on the details that keep power running.</h2></div><p>From generator systems to fuel infrastructure, we look at the complete operating picture.</p></div><div class="special-grid"><div class="special-card"><b>01</b><h3>Diagnose</h3><p>Find the real cause of equipment problems instead of treating symptoms.</p></div><div class="special-card"><b>02</b><h3>Engineer</h3><p>Choose practical components and configurations for the application.</p></div><div class="special-card"><b>03</b><h3>Deliver</h3><p>Execute with attention to installation quality, reliability and long-term operation.</p></div></div></div></section>
+<section id="locations" class="section">
+  <div class="wrap">
+    <p class="eyebrow dark">KAT POWER SALES LOCATIONS</p>
+    <div class="head"><h2>Find a display location in Lagos.</h2><p>Use the Google Maps buttons below to open the location directly in Google Maps.</p></div>
+    <div class="locations">
+      <article><small>LEKKI / AJAH</small><h3>Koshar Home Electronics</h3><p>The Emperor Estate Mall, Km 34, Lekki–Epe Expressway, Ajah, Lagos.</p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Koshar+Electronics+Lekki+Epe+Expressway+Ajah+Lagos" target="_blank" rel="noopener">Open in Google Maps →</a></article>
+      <article><small>AJAH</small><h3>MRS Koshar Home of Electronics</h3><p>Thomas Estate Showroom, Ajah, Lagos.</p><a class="map" href="https://www.google.com/maps/search/?api=1&query=MRS+Koshar+Home+of+Electronics+Thomas+Estate+Ajah+Lagos" target="_blank" rel="noopener">Open in Google Maps →</a></article>
+      <article><small>VICTORIA ISLAND</small><h3>MBE Electronics (MBE Resources)</h3><p>Bishop Aboyade Cole Street, Lagos. Display at MBE / Try N Carry, Dream Plaza, First Floor.</p><a class="map" href="https://www.google.com/maps/search/?api=1&query=MBE+Electronics+Bishop+Aboyade+Cole+Street+Lagos" target="_blank" rel="noopener">Open in Google Maps →</a></article>
+    </div>
+  </div>
+</section>
 
-<section><div class="container"><div class="section-head"><div><div class="eyebrow">How We Work</div><h2>A straightforward process.</h2></div></div><div class="process-grid"><div class="step"><div class="num">STEP 01</div><h3>Discuss</h3><p>Understand your power requirement and operating conditions.</p></div><div class="step"><div class="num">STEP 02</div><h3>Assess</h3><p>Review equipment, site conditions and technical needs.</p></div><div class="step"><div class="num">STEP 03</div><h3>Recommend</h3><p>Provide a practical technical and commercial solution.</p></div><div class="step"><div class="num">STEP 04</div><h3>Support</h3><p>Stay focused on reliable operation after delivery.</p></div></div></div></section>
-
-<section class="cta"><div class="container"><div class="cta-box"><div><h2>Need dependable power?</h2><p>Tell us what you need and we will help you find a practical solution.</p></div><a class="btn btn-primary" href="#contact">Contact Star Tech Standard</a></div></div></section>
-
-<section id="contact" class="contact"><div class="container contact-grid"><div class="contact-info"><h3>Contact Star Tech Standard</h3><p>For generator sales, diesel-generator maintenance and technical power solutions.</p><div class="contact-line"><span>Location</span><b>Victoria Island, Lagos, Nigeria</b></div><div class="contact-line"><span>Company</span><b>Star Tech Standard Ltd</b></div><div class="contact-line"><span>Gasoline Division</span><b>KAT-POWER</b></div><<div class="contact-line"><span>Email</span><b><a href="mailto:info@startechstandard.com">info@startechstandard.com</a></b></div>/<div class="form"><form onsubmit="return false"><div class="form-grid"><div class="field"><label>Name</label><input type="text" placeholder="Your name"></div><div class="field"><label>Phone</label><input type="tel" placeholder="Your phone number"></div><div class="field full"><label>Email</label><input type="email" placeholder="Your email"></div><div class="field full"><label>Message</label><textarea placeholder="Tell us what you need"></textarea></div><div class="field full"><button class="btn btn-primary" type="submit">Send Enquiry</button></div></div></form></div></div></section>
+<section id="contact" class="section contact">
+  <div class="wrap contactgrid">
+    <div>
+      <p class="eyebrow dark">CONTACT</p>
+      <h2>Tell us what you need.</h2>
+      <p>For generator service, equipment supply, parts or a power-system project, contact Star Tech Standard Ltd.</p>
+      <div class="details">
+        <b>Star Tech Standard Ltd</b>
+        <span>Victoria Island, Lagos, Nigeria</span>
+        <a href="mailto:info@startechstandard.com">info@startechstandard.com</a>
+        <a href="https://wa.me/2348033452862" target="_blank" rel="noopener">WhatsApp: +234 803 345 2862</a>
+      </div>
+    </div>
+    <div class="contact-actions">
+      <a class="btn" href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a class="btn outline-dark" href="mailto:info@startechstandard.com?subject=Star%20Tech%20Standard%20Enquiry">Email Us</a>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer><div class="container footer-grid"><div class="footer-brand"><img src="assets/star-tech-standard-logo.jpg" alt="Star Tech Standard Ltd logo"><p>Star Tech Standard Ltd — generator sales, diesel-generator maintenance, fuel systems and practical power solutions in Lagos, Nigeria.</p></div><div><h4>Quick Links</h4><a href="#about">About</a><a href="#services">Services</a><a href="#kat-power">KAT-POWER</a><a href="#contact">Contact</a></div><div><h4>Focus</h4><a href="#services">Diesel Generators</a><a href="#services">Fuel Systems</a><a href="#kat-power">Gasoline Generators</a></div></div><div class="container copyright"><span>© 2026 Star Tech Standard Ltd. All rights reserved.</span><span>Lagos, Nigeria</span></div></footer>
-<a class="whatsapp" href="https://wa.me/2348033452862" aria-label="WhatsApp">WA</a>
-</body></html>
+<footer><div class="wrap foot"><div class="brand"><b>STS</b><span>STAR TECH<small>STANDARD LTD</small></span></div><div><b>POWER</b><span>Diesel generators</span><span>Fuel systems</span><span>Technical service</span></div><div><b>KAT POWER</b><span>Gasoline generators for sale</span><span>No gasoline-generator repair</span></div><div><b>CONTACT</b><span>Victoria Island, Lagos</span><span>+234 803 345 2862</span></div></div><div class="wrap copy">© 2026 Star Tech Standard Ltd. All rights reserved.</div></footer>
+</body>
+</html>
