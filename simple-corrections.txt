@@ -1,0 +1,33 @@
+STAR TECH STANDARD — SIMPLE CORRECTION NOTES
+
+USE THIS AS A REFERENCE ONLY.
+Do NOT replace your whole website with this file.
+
+1. COMPANY LOGO — DO NOT CHANGE
+Existing file:
+assets/star-tech-standard-logo.jpg
+
+Keep this exactly as it is.
+
+2. KAT-POWER IMAGE — USE THIS FILE
+Existing file:
+assets/kat-power-logo.jpg
+
+In your existing index.html, the KAT-POWER image should be:
+<img src="assets/kat-power-logo.jpg" alt="KAT-POWER gasoline generators">
+
+3. GOOGLE MAPS — USE THESE LINKS
+
+Koshar Home:
+https://www.google.com/maps/search/?api=1&query=Koshar%20Home%20of%20Electronics%2C%20The%20Emperor%20Estate%20Mall%2C%20Km%2034%2C%20New%20Road%2C%20Sangotedo%2C%20Lagos%2C%20Nigeria
+
+Koshar Electronics:
+https://www.google.com/maps/search/?api=1&query=KOSHAR%20ELECTRONICS%2C%20Lekki-Epe%20Expressway%2C%20Ajah%2C%20Lekki%20106104%2C%20Lagos%2C%20Nigeria
+
+MBE Electronics:
+https://www.google.com/maps/search/?api=1&query=MBE%20Electronics%20MBE%20Resources%2C%20Dream%20Plaza%2C%20No.%207%2C%20Bishop%20Aboyade%20Cole%20Street%2C%20Victoria%20Island%2C%20Lagos%2C%20Nigeria
+
+IMPORTANT:
+Do not delete the assets folder.
+Do not rename either logo.
+Do not replace index.html with this notes file.
