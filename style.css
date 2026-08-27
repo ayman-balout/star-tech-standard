@@ -14,21 +14,12 @@
 .fs-list li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;background:#e1a52c}
 .fs-list-dark li{color:#aeb9c7}
 .fs-list-dark li b{color:#fff}
-.spec-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
-.spec-table th{background:#0b1220;color:#fff;text-align:left;padding:14px 16px;font-size:11px;letter-spacing:.06em;font-weight:bold}
-.spec-table td{padding:14px 16px;border-bottom:1px solid #dfe5ec;color:#536073}
-.spec-table tr:nth-child(even) td{background:#f3f5f7}
-
-@media(max-width:900px){
-  .diagram-panel{padding:14px}
-}
 /* ============================================================
-   MOBILE FIX — spec table overflow
-   Add this to the VERY END of style.css, after everything else
-   (including the block you already added). This wraps the table
-   so it scrolls sideways on small screens instead of cutting off
-   the right-hand columns.
+   CORRECTED mobile fix for the spec table — replaces the
+   previous broken version. This wraps the table in a scrolling
+   container instead of changing the table's own display type,
+   so columns stay aligned to their rows.
    ============================================================ */
 
-.spec-table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
-.spec-table th,.spec-table td{white-space:normal;min-width:120px}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px}
+.spec-table{min-width:720px;margin-top:0}
