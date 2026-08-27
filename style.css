@@ -22,3 +22,13 @@
 @media(max-width:900px){
   .diagram-panel{padding:14px}
 }
+/* ============================================================
+   MOBILE FIX — spec table overflow
+   Add this to the VERY END of style.css, after everything else
+   (including the block you already added). This wraps the table
+   so it scrolls sideways on small screens instead of cutting off
+   the right-hand columns.
+   ============================================================ */
+
+.spec-table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.spec-table th,.spec-table td{white-space:normal;min-width:120px}
