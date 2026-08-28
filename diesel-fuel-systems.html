@@ -1,0 +1,11 @@
+/* ============================================================
+   ADD TO style.css — makes the 6 service cards clickable
+   without changing their existing grid/border layout.
+   The link is an invisible full-card overlay (a common,
+   safe pattern) so .cards article keeps all its current CSS.
+   Append this after everything else already in style.css.
+   ============================================================ */
+
+.cards article{position:relative;transition:box-shadow .15s ease,background .15s ease}
+.cards article:hover{background:#fafbfc;box-shadow:inset 0 0 0 1px #e1a52c}
+.card-link{position:absolute;inset:0;z-index:1}
