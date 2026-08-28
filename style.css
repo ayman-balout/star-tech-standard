@@ -1,3 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diesel Tank Supply & Transfer System Design | Star Tech Standard Ltd</title>
+<meta name="description" content="Diesel tank supply and transfer system design by Star Tech Standard Ltd — tanker offloading skids, day tank distribution, and standing tank specifications from 500 to 100,000 litres.">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  /* SVG Container & Rendering Fixes */
+  .diagram-panel {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    min-height: 480px !important;
+    margin: 0 auto 20px auto !important;
+    padding: 15px !important;
+    background: #ffffff !important;
+    border: 1px solid #dfe5ec !important;
+    border-radius: 6px !important;
+    box-sizing: border-box !important;
+  }
+  .diagram-panel-dark {
+    background: #0b1220 !important;
+    border-color: #17263c !important;
+    min-height: 400px !important;
+  }
+  .diagram-panel svg {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Star Tech Standard Ltd home"><img src="star-tech-logo.png" alt="Star Tech Standard Ltd" class="brand-logo"><span>STAR TECH STANDARD LTD</span></a>
+    <nav>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#kat-power">Kat Power</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="btn small" href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat with Us</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" style="min-height:320px">
+  <div class="grid"></div>
+  <div class="wrap hero-in" style="padding:70px 0">
+    <p class="eyebrow">DIESEL FUEL SYSTEMS</p>
+    <h1>Diesel tank supply &amp; transfer system design.</h1>
+    <p class="lead">Complete storage and transfer systems engineered to your generator load, site layout and fuel autonomy requirements — from tanker offloading through to day tank feed.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow dark">OUR SCOPE</p>
+    <div class="head"><h2>Every part of the fuel path, covered.</h2><p>From bulk storage through to metered day tank delivery, engineered as one system.</p></div>
+    <div class="cards">
+      <article><i>01</i><h3>Bulk Storage Tanks</h3><p>Above-ground and underground diesel tanks, sized to required autonomy (24hr, 48hr, 72hr+ backup).</p></article>
+      <article><i>02</i><h3>Day Tanks</h3><p>Sub-base and free-standing day tanks with level control, sized to generator fuel consumption.</p></article>
+      <article><i>03</i><h3>Tanker Offloading Systems</h3><p>Engineered offloading skids with overfill protection and spill containment.</p></article>
+      <article><i>04</i><h3>Transfer Pump Systems</h3><p>Duty/standby pump systems moving fuel from bulk storage to day tanks.</p></article>
+      <article><i>05</i><h3>Fuel Metering</h3><p>Flow counters and dispensing meters sized to site requirements.</p></article>
+      <article><i>06</i><h3>Monitoring &amp; Reporting</h3><p>Tank levels and transfer volumes tracked via level counters and control panel readouts, with manual log recording.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap featuregrid">
+    <div class="diagram-panel">
+      <svg viewBox="0 0 380 500" xmlns="http://www.w3.org/2000/svg" width="100%" height="500">
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#0b1220" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect x="30" y="10" width="190" height="52" rx="2" fill="#fff" stroke="#dfe5ec"/>
+        <text x="125" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#0b1220">Tanker</text>
+        <text x="125" y="47" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#667487">Fuel delivery</text>
+        <line x1="125" y1="62" x2="125" y2="79" stroke="#0b1220" stroke-width="1.6" marker-end="url(#a1)"/>
+
+        <rect x="30" y="81" width="190" height="52" rx="2" fill="#f3f5f7" stroke="#dfe5ec"/>
+        <text x="125" y="101" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#0b1220">Camlock Coupling</text>
+        <text x="125" y="118" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#667487">Quick-connect fitting</text>
+        <line x1="125" y1="133" x2="125" y2="150" stroke="#0b1220" stroke-width="1.6" marker-end="url(#a1)"/>
+
+        <rect x="30" y="152" width="190" height="52" rx="2" fill="#f3f5f7" stroke="#dfe5ec"/>
+        <text x="125" y="172" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#0b1220">Y-Strainer</text>
+        <text x="125" y="189" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#667487">Filters debris</text>
+        <line x1="125" y1="204" x2="125" y2="221" stroke="#0b1220" stroke-width="1.6" marker-end="url(#a1)"/>
+
+        <rect x="30" y="223" width="190" height="52" rx="2" fill="#f3f5f7" stroke="#dfe5ec"/>
+        <text x="125" y="243" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#0b1220">Transfer Pump</text>
+        <text x="125" y="260" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#667487">Duty / standby</text>
+        <line x1="220" y1="249" x2="233" y2="249" stroke="#dca532" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <rect x="235" y="223" width="130" height="52" rx="2" fill="#fff" stroke="#dca532"/>
+        <text x="300" y="243" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="bold" fill="#0b1220">Control Panel</text>
+        <text x="300" y="260" text-anchor="middle" font-family="Arial" font-size="10" fill="#667487">Manual on/off</text>
+
+        <line x1="125" y1="275" x2="125" y2="292" stroke="#0b1220" stroke-width="1.6" marker-end="url(#a1)"/>
+        <rect x="30" y="294" width="190" height="52" rx="2" fill="#f3f5f7" stroke="#dfe5ec"/>
+        <text x="125" y="314" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#0b1220">High Pressure Sensor</text>
+        <text x="125" y="331" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#667487">Cutoff protection</text>
+        <line x1="125" y1="346" x2="125" y2="363" stroke="#0b1220" stroke-width="1.6" marker-end="url(#a1)"/>
+
+        <rect x="30" y="365" width="190" height="52" rx="2" fill="#f3f5f7" stroke="#dfe5ec"/>
+        <text x="125" y="385" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#0b1220">Level Counter</text>
+        <text x="125" y="402" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#667487">Meters volume</text>
+        <line x1="125" y1="417" x2="125" y2="434" stroke="#0b1220" stroke-width="1.6" marker-end="url(#a1)"/>
+
+        <rect x="30" y="436" width="190" height="56" rx="2" fill="#0b1220"/>
+        <text x="125" y="457" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">Underground Tank</text>
+        <text x="125" y="475" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#c1ccda">Overflow switch fitted</text>
+      </svg>
+      <div class="kat-caption" style="position:static;text-align:center;margin-top:14px;">EXAMPLE CONFIGURATION</div>
+    </div>
+    <div>
+      <p class="eyebrow dark">TANKER OFFLOADING SYSTEM</p>
+      <h2>Every delivery, safely controlled.</h2>
+      <p class="big">Tanker deliveries are handled through a fully controlled offloading skid, ensuring safe and accurate transfer into underground or bulk storage tanks.</p>
+      <ul class="fs-list">
+        <li><b>Camlock coupling</b> — quick-connect fitting between tanker hose and offloading line</li>
+        <li><b>Y-strainer</b> — filters debris before the pump</li>
+        <li><b>Transfer pump</b> (duty/standby)</li>
+        <li><b>High pressure sensor</b> — cutoff protection on the line</li>
+        <li><b>Level counter</b> — meters volume transferred</li>
+        <li><b>Control panel</b> — manual on/off operation</li>
+        <li><b>Overflow switch</b> — stops the pump automatically when the tank is full</li>
+        <li><b>Static earthing / bonding</b> — safe discharge of static charge during transfer</li>
+        <li><b>Manual bypass valve</b> — keeps fuel transfer running during pump failure or power outage</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="dark section">
+  <div class="wrap aboutgrid">
+    <div>
+      <p class="eyebrow">DAY TANK DISTRIBUTION SYSTEM</p>
+      <h2>One pump, every day tank, safely metered.</h2>
+      <p class="big">Fuel is transferred from the underground tank to day tanks using a transfer pump with a manual selector panel. Since only one tank is filled at a time, a single flow counter positioned after the pump meters all transfers — no need for a counter on every tank.</p>
+      <ul class="fs-list fs-list-dark">
+        <li>Transfer pump with manual selector control panel</li>
+        <li>Single flow counter positioned after the pump</li>
+        <li>Each day tank fitted with an overflow switch that automatically stops the pump once full</li>
+        <li>Multiple day tanks filled safely in sequence from one transfer system</li>
+      </ul>
+    </div>
+    <div class="diagram-panel diagram-panel-dark">
+      <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg" width="100%" height="380">
+        <defs>
+          <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#c1ccda" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect x="105" y="16" width="170" height="52" rx="2" fill="#e1a52c"/>
+        <text x="190" y="36" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#101722">Underground Tank</text>
+        <text x="190" y="53" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#101722">Bulk storage</text>
+        <line x1="190" y1="68" x2="190" y2="85" stroke="#c1ccda" stroke-width="1.6" marker-end="url(#a2)"/>
+
+        <rect x="105" y="87" width="170" height="52" rx="2" fill="#17263c" stroke="#3a4a63"/>
+        <text x="190" y="107" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">Transfer Pump</text>
+        <text x="190" y="124" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#c1ccda">+ level counter</text>
+        <line x1="275" y1="113" x2="288" y2="113" stroke="#dca532" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <rect x="290" y="87" width="80" height="52" rx="2" fill="#17263c" stroke="#dca532"/>
+        <text x="330" y="108" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#fff">Selector</text>
+        <text x="330" y="123" text-anchor="middle" font-family="Arial" font-size="9.5" fill="#c1ccda">Manual panel</text>
+
+        <line x1="190" y1="139" x2="190" y2="156" stroke="#3a4a63" stroke-width="1.2"/>
+        <line x1="95" y1="156" x2="285" y2="156" stroke="#3a4a63" stroke-width="1.2"/>
+        <line x1="95" y1="156" x2="95" y2="182" stroke="#c1ccda" stroke-width="1.6" marker-end="url(#a2)"/>
+        <line x1="285" y1="156" x2="285" y2="182" stroke="#c1ccda" stroke-width="1.6" marker-end="url(#a2)"/>
+
+        <rect x="20" y="184" width="150" height="52" rx="2" fill="#17263c" stroke="#3a4a63"/>
+        <text x="95" y="204" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="bold" fill="#fff">Day Tank 1</text>
+        <text x="95" y="221" text-anchor="middle" font-family="Arial" font-size="10" fill="#c1ccda">Auto-stop on full</text>
+
+        <rect x="210" y="184" width="150" height="52" rx="2" fill="#17263c" stroke="#3a4a63"/>
+        <text x="285" y="204" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="bold" fill="#fff">Day Tank 2</text>
+        <text x="285" y="221" text-anchor="middle" font-family="Arial" font-size="10" fill="#c1ccda">Auto-stop on full</text>
+
+        <line x1="95" y1="236" x2="95" y2="249" stroke="#3a4a63" stroke-width="1.2"/>
+        <line x1="285" y1="236" x2="285" y2="249" stroke="#3a4a63" stroke-width="1.2"/>
+        <line x1="95" y1="249" x2="285" y2="249" stroke="#3a4a63" stroke-width="1.2"/>
+        <line x1="190" y1="249" x2="190" y2="264" stroke="#c1ccda" stroke-width="1.6" marker-end="url(#a2)"/>
+
+        <rect x="105" y="266" width="170" height="52" rx="2" fill="#e1a52c"/>
+        <text x="190" y="286" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#101722">Generators</text>
+        <text x="190" y="303" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#101722">Diesel gensets</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow dark">STANDING TANK SPECIFICATIONS</p>
+    <div class="head">
+      <h2>Reference dimensions, 500 to 100,000 litres.</h2>
+      <p>Indicative dimensions and fittings for standing diesel storage tanks. Final specifications are engineered per project, site space and local code requirements.</p>
+    </div>
+    <div class="table-scroll">
+    <table class="spec-table">
+      <tr><th>Capacity range</th><th>Typical diameter</th><th>Typical length / height</th><th>Construction</th><th>Standard fittings</th></tr>
+      <tr><td>500 – 2,000 L</td><td>1.0 – 1.2 m</td><td>1.0 – 1.8 m (vertical or horizontal)</td><td>Mild steel, 4–5 mm shell</td><td>Fill inlet, vent, level gauge, outlet, drain valve</td></tr>
+      <tr><td>2,000 – 10,000 L</td><td>1.4 – 1.8 m</td><td>2.5 – 5.0 m (horizontal)</td><td>Mild steel, 5–6 mm shell, internal baffles</td><td>Fill inlet, vent, level counter, manhole, drain valve</td></tr>
+      <tr><td>10,000 – 30,000 L</td><td>2.0 – 2.4 m</td><td>4.0 – 8.0 m (horizontal)</td><td>Mild steel, 6–8 mm shell, baffles, saddle supports</td><td>Fill inlet, vent, level counter, overflow switch, manhole</td></tr>
+      <tr><td>30,000 – 100,000 L</td><td>2.5 – 3.5 m</td><td>8.0 – 16.0 m (horizontal) or vertical silo</td><td>Mild steel, 8–10 mm shell, reinforced saddles/foundation</td><td>Fill inlet, vent, level counter, overflow switch, bunding, manhole</td></tr>
+    </table>
+    </div>
+    <div class="notice">All configurations and dimensions shown above are illustrative examples. Every diesel tank and transfer system we deliver is custom-engineered to your generator load, site layout and applicable fire and safety codes.</div>
+  </div>
+</section>
+
+<section class="section contact">
+  <div class="wrap" style="text-align:center">
+    <a class="btn" href="https://wa.me/2348033452862" target="_blank" rel="noopener">Discuss Your Site Requirements</a>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap foot"><div class="brand"><img src="star-tech-logo.png" alt="Star Tech Standard Ltd" class="brand-logo"><span>STAR TECH STANDARD LTD</span></div><div><b>POWER</b><span>Diesel generators</span><span>Fuel systems</span><span>Technical service</span></div><div><b>KAT POWER</b><span>Gasoline generators for sale</span><span>No gasoline-generator repair</span></div><div><b>CONTACT</b><span>Victoria Island, Lagos</span><span><a href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat on WhatsApp</a></span></div></div><div class="wrap copy">© 2026 Star Tech Standard Ltd. All rights reserved.</div></footer>
+</body>
+</html>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#0b1220}a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 42px));margin:auto}header{position:sticky;top:0;z-index:20;background:#0b1220;color:#fff;border-bottom:1px solid #273244}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:flex;align-items:center;gap:12px;letter-spacing:.02em}.brand-logo{width:48px;height:48px;object-fit:contain;flex-shrink:0}.brand span{font-size:17px;font-weight:bold;letter-spacing:.02em;white-space:nowrap}.nav nav{display:flex;gap:25px}.nav nav a{font-size:13px;color:#d6dde7}.btn{display:inline-block;background:#e1a52c;color:#101722;font-weight:bold;font-size:13px;padding:14px 22px;border:1px solid #e1a52c}.btn.small{padding:10px 15px}.btn.ghost{background:transparent;color:#fff;border-color:#637083}.outline-dark{background:transparent;color:#a56f00;border-color:#a56f00}.hero{position:relative;min-height:650px;overflow:hidden;background:linear-gradient(120deg,#070e1b,#17263c);color:#fff}.grid{position:absolute;inset:0;opacity:.18;background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:65px 65px;transform:perspective(500px) rotateX(55deg) scale(1.8);transform-origin:center bottom}.hero-in{position:relative;z-index:2;padding:110px 0;max-width:820px}.eyebrow{font-size:11px;font-weight:bold;letter-spacing:.18em;color:#e1a52c}.eyebrow.dark{color:#a56f00}.hero h1{font-size:clamp(28px,3.6vw,42px);line-height:1.15;letter-spacing:-.02em;margin:16px 0}.lead{font-size:16px;color:#c1ccda;max-width:640px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}.note{font-size:12px;color:#99a8bb;margin-top:25px;max-width:690px}.generator{position:absolute;right:3%;bottom:10%;width:43%;height:250px;opacity:.78}.gen-body{position:absolute;inset:15% 4% 7%;background:linear-gradient(145deg,#d7dee5,#697788);border:3px solid #48576a}.panel{position:absolute;left:9%;top:18%;width:24%;height:43%;background:#101925;border:5px solid #9da8b4}.grille{position:absolute;right:9%;top:17%;width:49%;height:60%;background:repeating-linear-gradient(0deg,#263241 0 7px,#87929e 8px 11px);opacity:.6}.generator small{position:absolute;right:5%;bottom:0;color:#e1a52c;letter-spacing:.2em;font-weight:bold}.strip{background:#0e1727;color:#fff}.stripgrid{display:grid;grid-template-columns:repeat(4,1fr)}.stripgrid div{padding:24px 15px;border-right:1px solid #ffffff16}.stripgrid b,.stripgrid span{display:block}.stripgrid b{font-size:10px;letter-spacing:.12em}.stripgrid span{font-size:12px;color:#8d9aab}.section{padding:95px 0}.head{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:end;margin-bottom:48px}.head h2,.feature h2,.aboutgrid h2,.contact h2{font-size:clamp(22px,2.4vw,30px);line-height:1.18;letter-spacing:-.015em;margin:10px 0}.head>p{color:#657183;font-size:14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #dfe5ec;border-left:1px solid #dfe5ec}.cards article{min-height:260px;padding:30px 25px;border-right:1px solid #dfe5ec;border-bottom:1px solid #dfe5ec}.cards i{font-size:13px;color:#dca532;font-style:normal;font-weight:bold}.cards h3{font-size:17px;line-height:1.2;margin-top:32px}.cards p{font-size:13px;color:#667487}.feature{padding:110px 0;background:#f3f5f7}.featuregrid,.aboutgrid,.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:85px;align-items:center}.kat-card{height:480px;background:#fff;border:1px solid #dfe5ec;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:40px}.kat-caption{position:absolute;bottom:25px;right:28px;color:#8a97a8;font-size:11px;letter-spacing:.16em}.kat-logo-img{max-width:80%;max-height:70%;object-fit:contain;filter:drop-shadow(0 12px 18px #0002)}.big{font-size:17px;line-height:1.5;color:#263246!important}.notice{border-left:3px solid #dca532;background:#fff;padding:15px;font-size:13px;margin:25px 0}.specs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:25px 0}.specs span{font-size:13px;color:#536073}.specs b{color:#a56f00;margin-right:8px}.dark{background:#0b1220;color:#fff}.dark .aboutgrid p{color:#aeb9c7}.locations{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.locations article{border:1px solid #dfe5ec;padding:28px;min-height:260px}.locations small{color:#a56f00;font-weight:bold;letter-spacing:.12em}.locations h3{font-size:18px;line-height:1.2}.locations p{color:#667487;font-size:13px}.map{display:inline-block;color:#a56f00;font-weight:bold;font-size:13px;margin-top:15px}.contact{background:#f3f5f7}.contactgrid{align-items:start}.details{border-top:1px solid #dfe5ec;margin-top:30px}.details>*{display:block;padding:14px 0;border-bottom:1px solid #dfe5ec;font-size:16px}.details>b{font-size:18px}.details a{color:#a56f00;text-decoration:underline;text-underline-offset:3px}.contact-actions{display:flex;gap:12px;flex-wrap:wrap;background:#fff;padding:35px;border:1px solid #dfe5ec}.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}.foot>div:not(.brand){display:flex;flex-direction:column;gap:6px;color:#8b98aa;font-size:13px}.foot>div>b{color:#fff;font-size:10px;letter-spacing:.14em;margin-bottom:5px}.copy{border-top:1px solid #ffffff18;margin-top:40px;padding-top:16px;color:#687486;font-size:11px}footer{background:#080e18;color:#fff;padding:50px 0 20px}@media(max-width:900px){.nav nav{display:none}.generator{opacity:.2;width:70%;right:-15%}.head,.featuregrid,.aboutgrid,.contactgrid{grid-template-columns:1fr;gap:35px}.locations{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.stripgrid,.foot{grid-template-columns:1fr 1fr}}@media(max-width:600px){.wrap{width:calc(100% - 24px)}.nav{min-height:60px;gap:10px}.brand{gap:8px}.brand-logo{width:32px;height:32px}.brand span{font-size:12px}.btn.small{padding:8px 12px;font-size:11px}.hero-in{padding:60px 0}.hero h1{font-size:24px;line-height:1.22;margin:12px 0}.lead{font-size:14px}.note{font-size:11px}.eyebrow{font-size:10px}.big{font-size:15px}.head h2,.feature h2,.aboutgrid h2,.contact h2{font-size:22px}.cards,.stripgrid,.foot{grid-template-columns:1fr}.specs{grid-template-columns:1fr}.kat-card{height:280px;padding:25px}.generator{display:none}}
 /* ============================================================
    ADD TO style.css — supports the new Diesel Fuel Systems
