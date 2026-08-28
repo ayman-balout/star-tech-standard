@@ -6,18 +6,40 @@
 <title>Star Tech Standard Ltd | Generators, Diesel Service & Power Solutions</title>
 <meta name="description" content="Star Tech Standard Ltd provides diesel generator sales, repairs and maintenance, diesel fuel systems, parts and industrial power solutions in Lagos, Nigeria.">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Makes the entire card block interactive and clearly clickable */
+  #services .cards article {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  #services .cards article:hover {
+    background-color: rgba(0, 0, 0, 0.03); /* Subtle hint color on hover */
+    transform: translateY(-3px); /* Slight lift animation */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+  /* Stretches the link to cover the exact boundaries of the card structure */
+  #services .cards article .card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+</style>
 </head>
 <body>
 <header>
   <div class="wrap nav">
-    <a class="brand" href="https://wa.me/2348033452862" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><img src="star-tech-logo.png" alt="Star Tech Standard Ltd" class="brand-logo"><span>STAR TECH STANDARD LTD</span></a>
+    <a class="brand" href="https://wa.me" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><img src="star-tech-logo.png" alt="Star Tech Standard Ltd" class="brand-logo"><span>STAR TECH STANDARD LTD</span></a>
     <nav>
       <a href="#services">Services</a>
       <a href="#kat-power">Kat Power</a>
       <a href="#locations">Locations</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="btn small" href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat with Us</a>
+    <a class="btn small" href="https://wa.me" target="_blank" rel="noopener">Chat with Us</a>
   </div>
 </header>
 
@@ -30,7 +52,7 @@
     <p class="lead">Star Tech Standard Ltd supplies generators and provides specialist diesel-generator repairs, maintenance, diesel fuel systems, parts and industrial power support.</p>
     <div class="actions">
       <a class="btn" href="#contact">Request a Quote</a>
-      <a class="btn ghost" href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a class="btn ghost" href="https://wa.me" target="_blank" rel="noopener">Chat on WhatsApp</a>
     </div>
     <p class="note">Diesel generator repair and technical service. Gasoline generators are supplied under our Kat Power brand; gasoline-generator repair is not offered.</p>
   </div>
@@ -48,23 +70,23 @@
     <p class="eyebrow dark">WHAT WE DO</p>
     <div class="head"><h2>Generator and power services built around your site.</h2><p>From routine maintenance to complex diesel fuel and monitoring systems, we focus on dependable operation and clear technical scope.</p></div>
     <div class="cards">
-      <!-- Card 01 — placeholder link, not yet built. Replace href="#" with the real page when ready. -->
-      <article><i>01</i><h3>Generator Sales</h3><p>Supply of diesel generator sets for commercial, residential and industrial applications.</p><a class="card-link" href="#" aria-label="Generator Sales — more information coming soon"></a></article>
+      <!-- Card 01 — Connected to generator-sales.html -->
+      <article><i>01</i><h3>Generator Sales</h3><p>Supply of diesel generator sets for commercial, residential and industrial applications.</p><a class="card-link" href="generator-sales.html" aria-label="Generator Sales — view details"></a></article>
 
-      <!-- Card 02 — placeholder link, not yet built. Replace href="#" with the real page when ready. -->
-      <article><i>02</i><h3>Diesel Repairs & Maintenance</h3><p>Fault diagnosis, preventive maintenance, corrective repairs and technical troubleshooting for diesel generators.</p><a class="card-link" href="#" aria-label="Diesel Repairs and Maintenance — more information coming soon"></a></article>
+      <!-- Card 02 — Connected to repairs-maintenance.html -->
+      <article><i>02</i><h3>Diesel Repairs & Maintenance</h3><p>Fault diagnosis, preventive maintenance, corrective repairs and technical troubleshooting for diesel generators.</p><a class="card-link" href="repairs-maintenance.html" aria-label="Diesel Repairs and Maintenance — view details"></a></article>
 
-      <!-- Card 03 — placeholder link, not yet built. Replace href="#" with the real page when ready. -->
-      <article><i>03</i><h3>Diesel Fuel Systems</h3><p>Diesel pumps, injection systems, filters, tanks, transfer equipment and fuel-system servicing.</p><a class="card-link" href="#" aria-label="Diesel Fuel Systems — more information coming soon"></a></article>
+      <!-- Card 03 — Connected to diesel-fuel-systems.html -->
+      <article><i>03</i><h3>Diesel Fuel Systems</h3><p>Diesel pumps, injection systems, filters, tanks, transfer equipment and fuel-system servicing.</p><a class="card-link" href="diesel-fuel-systems.html" aria-label="Diesel Fuel Systems — view details"></a></article>
 
-      <!-- Card 04 — LIVE: links to the new Diesel Fuel Systems / Tank & Transfer page -->
-      <article><i>04</i><h3>Monitoring & Transfer</h3><p>Fuel transfer, flow metering, level protection and control systems for generator plants and facilities.</p><a class="card-link" href="diesel-fuel-systems.html" aria-label="Monitoring and Transfer — view tank and transfer system design"></a></article>
+      <!-- Card 04 — Connected to monitoring-transfer.html -->
+      <article><i>04</i><h3>Monitoring & Transfer</h3><p>Fuel transfer, flow metering, level protection and control systems for generator plants and facilities.</p><a class="card-link" href="monitoring-transfer.html" aria-label="Monitoring and Transfer — view details"></a></article>
 
-      <!-- Card 05 — placeholder link, not yet built. Replace href="#" with the real page when ready. -->
-      <article><i>05</i><h3>Parts & Components</h3><p>Specialist generator components including alternators, AVR, pumps and engine-system parts.</p><a class="card-link" href="#" aria-label="Parts and Components — more information coming soon"></a></article>
+      <!-- Card 05 — Connected to parts-components.html -->
+      <article><i>05</i><h3>Parts & Components</h3><p>Specialist generator components including alternators, AVR, pumps and engine-system parts.</p><a class="card-link" href="parts-components.html" aria-label="Parts and Components — view details"></a></article>
 
-      <!-- Card 06 — placeholder link, not yet built. Replace href="#" with the real page when ready. -->
-      <article><i>06</i><h3>Technical Support</h3><p>Practical support focused on reliability, troubleshooting and reducing equipment downtime.</p><a class="card-link" href="#" aria-label="Technical Support — more information coming soon"></a></article>
+      <!-- Card 06 — Connected to technical-support.html -->
+      <article><i>06</i><h3>Technical Support</h3><p>Practical support focused on reliability, troubleshooting and reducing equipment downtime.</p><a class="card-link" href="technical-support.html" aria-label="Technical Support — view details"></a></article>
     </div>
   </div>
 </section>
@@ -103,9 +125,9 @@
     <p class="eyebrow dark">KAT POWER SALES LOCATIONS</p>
     <div class="head"><h2>Find a display location in Lagos.</h2><p>Use the Google Maps buttons below to open the location directly in Google Maps.</p></div>
     <div class="locations">
-      <article><small>SANGOTEDO</small><h3>Koshar Home of Electronics</h3><p>The Emperor Estate Mall, Km 34, New Road, Sangotedo, Lagos.</p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Koshar+Home+of+Electronics&query_place_id=ChIJ623is-35OxARfiR_PqK-icE" target="_blank" rel="noopener">Open in Google Maps →</a></article>
-      <article><small>AJAH / LEKKI</small><h3>Koshar Electronics</h3><p>Lekki–Epe Expressway, Ajah, Lekki 106104, Lagos.</p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Koshar+Electronics&query_place_id=ChIJ76mYVwD3OxARmuoMGyNlNME" target="_blank" rel="noopener">Open in Google Maps →</a></article>
-      <article><small>VICTORIA ISLAND</small><h3>MBE (Dream Plaza)</h3><p>Dream Plaza, 7 Bishop Aboyade Cole Street, Eti-Osa, Lagos 106104.</p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Dream+Plaza+Bishop+Aboyade+Cole+Street&query_place_id=ChIJkYLuYCb1OxARFUhZ8kp_SbQ" target="_blank" rel="noopener">Open in Google Maps →</a></article>
+      <article><small>SANGOTEDO</small><h3>Koshar Home of Electronics</h3><p>The Emperor Estate Mall, Km 34, New Road, Sangotedo, Lagos.</p><a class="map" href="https://google.com" target="_blank" rel="noopener">Open in Google Maps →</a></article>
+      <article><small>AJAH / LEKKI</small><h3>Koshar Electronics</h3><p>Lekki–Epe Expressway, Ajah, Lekki 106104, Lagos.</p><a class="map" href="https://google.com" target="_blank" rel="noopener">Open in Google Maps →</a></article>
+      <article><small>VICTORIA ISLAND</small><h3>MBE (Dream Plaza)</h3><p>Dream Plaza, 7 Bishop Aboyade Cole Street, Eti-Osa, Lagos 106104.</p><a class="map" href="https://google.com" target="_blank" rel="noopener">Open in Google Maps →</a></article>
     </div>
   </div>
 </section>
@@ -116,21 +138,9 @@
       <p class="eyebrow dark">CONTACT</p>
       <h2>Tell us what you need.</h2>
       <p>For generator service, equipment supply, parts or a power-system project, contact Star Tech Standard Ltd.</p>
-      <div class="details">
-        <b>Star Tech Standard Ltd</b>
-        <span>Victoria Island, Lagos, Nigeria</span>
-        <a href="mailto:info@startechstandard.com">info@startechstandard.com</a>
-        <a href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat with us on WhatsApp</a>
-      </div>
-    </div>
-    <div class="contact-actions">
-      <a class="btn" href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat on WhatsApp</a>
-      <a class="btn outline-dark" href="mailto:info@startechstandard.com?subject=Star%20Tech%20Standard%20Enquiry">Email Us</a>
     </div>
   </div>
 </section>
 </main>
-
-<footer><div class="wrap foot"><div class="brand"><img src="star-tech-logo.png" alt="Star Tech Standard Ltd" class="brand-logo"><span>STAR TECH STANDARD LTD</span></div><div><b>POWER</b><span>Diesel generators</span><span>Fuel systems</span><span>Technical service</span></div><div><b>KAT POWER</b><span>Gasoline generators for sale</span><span>No gasoline-generator repair</span></div><div><b>CONTACT</b><span>Victoria Island, Lagos</span><span><a href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat on WhatsApp</a></span></div></div><div class="wrap copy">© 2026 Star Tech Standard Ltd. All rights reserved.</div></footer>
 </body>
 </html>
