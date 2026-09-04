@@ -4,25 +4,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diesel Generator DoctorAI | Star Tech Standard Ltd</title><style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#f4f6f8;
   color:#17202a;
 }
+
 header{
   background:#111827;
   color:#fff;
   padding:24px 18px;
   text-align:center;
 }
-header h1{margin:0 0 6px;font-size:28px}
-header p{margin:0;color:#cbd5e1}
+
+header h1{
+  margin:0 0 6px;
+  font-size:28px;
+}
+
+header p{
+  margin:0;
+  color:#cbd5e1;
+}
+
 .container{
   max-width:1000px;
   margin:25px auto;
   padding:0 15px;
 }
+
 .card{
   background:#fff;
   border-radius:12px;
@@ -30,17 +42,23 @@ header p{margin:0;color:#cbd5e1}
   margin-bottom:20px;
   box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
-h2{margin-top:0}
+
+h2{
+  margin-top:0;
+}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:14px;
 }
+
 label{
   display:block;
   font-weight:bold;
   margin-bottom:6px;
 }
+
 input,select,textarea{
   width:100%;
   padding:11px;
@@ -48,7 +66,12 @@ input,select,textarea{
   border-radius:7px;
   font-size:15px;
 }
-textarea{min-height:110px;resize:vertical}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
 button{
   border:0;
   border-radius:7px;
@@ -56,10 +79,24 @@ button{
   cursor:pointer;
   font-weight:bold;
   font-size:15px;
+  margin:4px 4px 4px 0;
 }
-.primary{background:#111827;color:white}
-.secondary{background:#e5e7eb;color:#111827}
-.danger{background:#dc2626;color:white}
+
+.primary{
+  background:#111827;
+  color:white;
+}
+
+.secondary{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.danger{
+  background:#dc2626;
+  color:white;
+}
+
 .whatsapp{
   display:inline-block;
   background:#16a34a;
@@ -69,12 +106,28 @@ button{
   text-decoration:none;
   font-weight:bold;
 }
+
 .warning{
   background:#fff7ed;
   border-left:5px solid #f97316;
   padding:14px;
   margin-top:15px;
 }
+
+.info{
+  background:#eff6ff;
+  border-left:5px solid #2563eb;
+  padding:14px;
+  margin-top:15px;
+}
+
+.success{
+  background:#f0fdf4;
+  border-left:5px solid #16a34a;
+  padding:14px;
+  margin-top:15px;
+}
+
 .result{
   background:#f8fafc;
   border:1px solid #e2e8f0;
@@ -82,17 +135,23 @@ button{
   padding:15px;
   margin-top:15px;
 }
-.result h3{margin-top:0}
+
+.result h3{
+  margin-top:0;
+}
+
 .photo-grid{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
   margin-top:12px;
 }
+
 .photo-box{
   position:relative;
   width:110px;
 }
+
 .photo-box img{
   width:110px;
   height:90px;
@@ -100,6 +159,7 @@ button{
   border-radius:7px;
   border:1px solid #cbd5e1;
 }
+
 .remove-photo{
   position:absolute;
   top:-6px;
@@ -111,108 +171,195 @@ button{
   background:#dc2626;
   color:#fff;
 }
+
 .item{
   padding:9px 0;
   border-bottom:1px solid #e5e7eb;
 }
+
 .small{
   color:#64748b;
   font-size:13px;
 }
+
+.hidden{
+  display:none!important;
+}
+
 @media print{
-  button,.whatsapp,input,select,textarea,.warning{display:none!important}
-  body{background:#fff}
-  .card{box-shadow:none}
+  button,.whatsapp,input,select,textarea,.warning,.info,.success{
+    display:none!important;
+  }
+
+  body{
+    background:#fff;
+  }
+
+  .card{
+    box-shadow:none;
+  }
 }
 </style></head><body><header>
   <h1>Diesel Generator DoctorAI</h1>
   <p>Heavy Diesel Diagnostics & Star Tech Standard Ltd Service Recommendations</p>
-</header><div class="container"><div class="card">
-  <h2>Your Equipment</h2>  <div class="grid">
-    <div>
-      <label>Generator Brand</label>
-      <input id="brand" placeholder="e.g. Perkins, Cummins, CAT">
-    </div><div>
-  <label>Model</label>
-  <input id="model" placeholder="Generator / engine model">
-</div>
+</header><div class="container">  <!-- EQUIPMENT INFORMATION -->  <div class="card"><h2>Your Equipment</h2>
 
-<div>
-  <label>Capacity (kVA)</label>
-  <input id="kva" type="number" placeholder="e.g. 500">
-</div>
+<div class="grid">
 
-<div>
-  <label>Controller</label>
-  <input id="controller" placeholder="e.g. DSE, ComAp">
-</div>
-
-<div>
-  <label>Running Hours</label>
-  <input id="hours" type="number" placeholder="e.g. 5000">
-</div>
-
-<div>
-  <label>Voltage</label>
-  <input id="voltage" placeholder="e.g. 415V">
-</div>
-
-<div>
-  <label>Frequency</label>
-  <input id="frequency" placeholder="e.g. 50Hz">
-</div>
-
-<div>
-  <label>Main Problem</label>
-  <select id="problem">
-    <option value="">Select problem</option>
-    <option>No start</option>
-    <option>Starts then stops</option>
-    <option>Voltage problem</option>
-    <option>Overheating</option>
-    <option>Low oil pressure</option>
-    <option>Black smoke</option>
-    <option>White smoke</option>
-    <option>High fuel consumption</option>
-    <option>Battery / starting problem</option>
-    <option>Frequency / RPM problem</option>
-    <option>Alternator / charging problem</option>
-    <option>Controller alarm</option>
-    <option>Other</option>
-  </select>
-</div>
-
-  </div>  <br><label>Describe the Symptoms</label>
-
-  <textarea id="symptoms" placeholder="Describe exactly what the generator is doing..."></textarea></div><div class="card">
-  <h2>Upload Generator Photos</h2>  <p class="small">
-    Upload ONLY photos of generator components, engine/fuel-system parts,
-    alternator, wiring, terminals, or controller screens to assist with
-    professional diagnostics.
-  </p>  <input type="file" id="photoInput" accept="image/*" multiple>  <div id="photoGrid" class="photo-grid"></div>  <div class="warning">
-    <strong>Safety:</strong> Do not upload private documents, identity
-    documents, passwords, payment information, or other sensitive personal data.
+  <div>
+    <label>Generator Brand</label>
+    <input id="brand" placeholder="e.g. Perkins, Cummins, CAT">
   </div>
-</div><div class="card">
-  <button class="primary" onclick="startDiagnosis()">Start Diagnosis</button>
-  <button class="secondary" onclick="clearForm()">Clear</button>  <div id="diagnosisResult"></div>
-</div><div class="card">
-  <h2>Professional Assistance</h2>
-  <p>
-    For complex diesel generator faults, contact Star Tech Standard Ltd
-    for professional technician assistance.
-  </p>  <a class="whatsapp" href="https://wa.me/2348033452862" target="_blank">
-    Request Star Tech Technician
-  </a>
-</div><div class="card">
-  <h2>Diagnostic Logs Vault</h2>
-  <div id="logs"></div>
-</div></div><script>
+
+  <div>
+    <label>Model</label>
+    <input id="model" placeholder="Generator / engine model">
+  </div>
+
+  <div>
+    <label>Capacity (kVA)</label>
+    <input id="kva" type="number" placeholder="e.g. 500">
+  </div>
+
+  <div>
+    <label>Controller</label>
+    <input id="controller" placeholder="e.g. DSE, ComAp">
+  </div>
+
+  <div>
+    <label>Running Hours</label>
+    <input id="hours" type="number" placeholder="e.g. 5000">
+  </div>
+
+  <div>
+    <label>Voltage</label>
+    <input id="voltage" placeholder="e.g. 415V">
+  </div>
+
+  <div>
+    <label>Frequency</label>
+    <input id="frequency" placeholder="e.g. 50Hz">
+  </div>
+
+  <div>
+    <label>Main Problem</label>
+
+    <select id="problem">
+      <option value="">Select problem</option>
+      <option>No start</option>
+      <option>Starts then stops</option>
+      <option>Voltage problem</option>
+      <option>Overheating</option>
+      <option>Low oil pressure</option>
+      <option>Black smoke</option>
+      <option>White smoke</option>
+      <option>High fuel consumption</option>
+      <option>Battery / starting problem</option>
+      <option>Frequency / RPM problem</option>
+      <option>Alternator / charging problem</option>
+      <option>Controller alarm</option>
+      <option>Other</option>
+    </select>
+
+  </div>
+
+</div>
+
+<br>
+
+<label>Describe the Symptoms</label>
+
+<textarea
+  id="symptoms"
+  placeholder="Describe exactly what the generator is doing, when the problem started, any alarm displayed, unusual noise, smoke, voltage/frequency changes, etc."
+></textarea>
+
+<div class="info">
+  <strong>Diagnostic Process:</strong>
+  First provide the generator information and symptoms. DoctorAI will perform a preliminary diagnostic assessment. If visual confirmation is useful, you will then be asked to provide photographs of the relevant generator components or controller screen.
+</div>
+
+  </div>  <!-- DIAGNOSIS -->  <div class="card"><button class="primary" onclick="startDiagnosis()">
+  Start Preliminary Diagnosis
+</button>
+
+<button class="secondary" onclick="clearForm()">
+  Clear
+</button>
+
+<div id="diagnosisResult"></div>
+
+  </div>  <!-- PHOTO CONFIRMATION - HIDDEN UNTIL AFTER DIAGNOSIS -->  <div class="card hidden" id="photoCard"><h2>Photo Confirmation</h2>
+
+<div class="success">
+  <strong>Preliminary diagnosis completed.</strong><br>
+  To help identify the exact generator, controller, component, or fault area, please provide photographs of the relevant equipment.
+</div>
+
+<p id="photoInstruction">
+  Upload clear photographs of the generator or the relevant component identified in the preliminary assessment.
+</p>
+
+<p class="small">
+  <strong>Important:</strong>
+  Upload ONLY photos of generator equipment, engine components, fuel-system parts,
+  alternator, wiring, terminals, batteries, sensors, or controller screens.
+  Do not upload personal documents or unrelated images.
+</p>
+
+<input
+  type="file"
+  id="photoInput"
+  accept="image/*"
+  multiple
+>
+
+<div id="photoGrid" class="photo-grid"></div>
+
+<div class="warning">
+  <strong>Safety:</strong>
+  Never open, touch, or photograph exposed live electrical terminals while the generator is running.
+  Follow safe electrical procedures.
+</div>
+
+<br>
+
+<button class="primary" onclick="reviewPhotos()">
+  Continue With Photo Confirmation
+</button>
+
+  </div>  <!-- PROFESSIONAL ASSISTANCE -->  <div class="card"><h2>Professional Assistance</h2>
+
+<p>
+  For complex diesel generator faults, contact Star Tech Standard Ltd
+  for professional technician assistance.
+</p>
+
+<a
+  class="whatsapp"
+  href="https://wa.me/2348033452862"
+  target="_blank"
+>
+  Request Star Tech Technician
+</a>
+
+  </div>  <!-- LOGS -->  <div class="card"><h2>Diagnostic Logs Vault</h2>
+
+<div id="logs"></div>
+
+  </div></div><script>
 
 let selectedPhotos = [];
+let lastReport = null;
 
 const photoInput = document.getElementById("photoInput");
 const photoGrid = document.getElementById("photoGrid");
+const photoCard = document.getElementById("photoCard");
+
+
+/* =========================
+   PHOTO SELECTION
+========================= */
 
 photoInput.addEventListener("change", function(){
 
@@ -232,12 +379,15 @@ photoInput.addEventListener("change", function(){
       });
 
       renderPhotos();
+
     };
 
     reader.readAsDataURL(file);
+
   });
 
   this.value = "";
+
 });
 
 
@@ -248,23 +398,37 @@ function renderPhotos(){
   selectedPhotos.forEach((photo,index)=>{
 
     const box = document.createElement("div");
+
     box.className = "photo-box";
 
     box.innerHTML = `
-      <img src="${photo.src}" alt="Generator photo">
-      <button class="remove-photo" onclick="removePhoto(${index})">×</button>
+      <img src="${photo.src}" alt="Generator component photo">
+      <button
+        class="remove-photo"
+        onclick="removePhoto(${index})"
+        title="Remove photo"
+      >×</button>
     `;
 
     photoGrid.appendChild(box);
+
   });
+
 }
 
 
 function removePhoto(index){
+
   selectedPhotos.splice(index,1);
+
   renderPhotos();
+
 }
 
+
+/* =========================
+   SECURITY
+========================= */
 
 function escapeHTML(value){
 
@@ -274,31 +438,59 @@ function escapeHTML(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
 
+/* =========================
+   PRELIMINARY DIAGNOSIS
+========================= */
+
 function startDiagnosis(){
 
-  const brand = document.getElementById("brand").value.trim();
-  const model = document.getElementById("model").value.trim();
-  const kva = document.getElementById("kva").value.trim();
-  const controller = document.getElementById("controller").value.trim();
-  const hours = document.getElementById("hours").value.trim();
-  const voltage = document.getElementById("voltage").value.trim();
-  const frequency = document.getElementById("frequency").value.trim();
-  const problem = document.getElementById("problem").value;
-  const symptoms = document.getElementById("symptoms").value.trim();
+  const brand =
+    document.getElementById("brand").value.trim();
+
+  const model =
+    document.getElementById("model").value.trim();
+
+  const kva =
+    document.getElementById("kva").value.trim();
+
+  const controller =
+    document.getElementById("controller").value.trim();
+
+  const hours =
+    document.getElementById("hours").value.trim();
+
+  const voltage =
+    document.getElementById("voltage").value.trim();
+
+  const frequency =
+    document.getElementById("frequency").value.trim();
+
+  const problem =
+    document.getElementById("problem").value;
+
+  const symptoms =
+    document.getElementById("symptoms").value.trim();
+
 
   if(!problem && !symptoms){
 
-    alert("Please select the main problem or describe the symptoms.");
+    alert(
+      "Please select the main problem or describe the symptoms."
+    );
 
     return;
+
   }
+
 
   let causes = [];
   let checks = [];
   let safety = [];
+
 
   if(problem === "No start"){
 
@@ -321,6 +513,7 @@ function startDiagnosis(){
 
   }
 
+
   else if(problem === "Starts then stops"){
 
     causes.push(
@@ -341,6 +534,7 @@ function startDiagnosis(){
 
   }
 
+
   else if(problem === "Voltage problem"){
 
     causes.push(
@@ -360,6 +554,7 @@ function startDiagnosis(){
     );
 
   }
+
 
   else if(problem === "Overheating"){
 
@@ -382,6 +577,7 @@ function startDiagnosis(){
 
   }
 
+
   else if(problem === "Low oil pressure"){
 
     causes.push(
@@ -400,6 +596,7 @@ function startDiagnosis(){
     );
 
   }
+
 
   else if(problem === "Black smoke"){
 
@@ -422,6 +619,7 @@ function startDiagnosis(){
 
   }
 
+
   else if(problem === "White smoke"){
 
     causes.push(
@@ -440,6 +638,7 @@ function startDiagnosis(){
     );
 
   }
+
 
   else if(problem === "High fuel consumption"){
 
@@ -461,6 +660,7 @@ function startDiagnosis(){
 
   }
 
+
   else if(problem === "Battery / starting problem"){
 
     causes.push(
@@ -480,6 +680,7 @@ function startDiagnosis(){
     );
 
   }
+
 
   else if(problem === "Frequency / RPM problem"){
 
@@ -501,6 +702,7 @@ function startDiagnosis(){
 
   }
 
+
   else if(problem === "Alternator / charging problem"){
 
     causes.push(
@@ -520,6 +722,7 @@ function startDiagnosis(){
     );
 
   }
+
 
   else if(problem === "Controller alarm"){
 
@@ -541,6 +744,7 @@ function startDiagnosis(){
 
   }
 
+
   else{
 
     causes.push(
@@ -554,13 +758,16 @@ function startDiagnosis(){
       "Check fuel, coolant, oil and battery condition",
       "Measure voltage and frequency"
     );
+
   }
+
 
   safety.push(
     "Do not bypass generator safety shutdowns.",
     "Stop the generator immediately if there is abnormal noise, severe overheating, very low oil pressure, smoke/fire, or fuel leakage.",
     "Electrical measurements should be performed by a qualified technician."
   );
+
 
   const report = {
 
@@ -582,23 +789,38 @@ function startDiagnosis(){
     checks,
     safety,
 
-    photos:selectedPhotos.map(p=>p.name)
+    photos:[]
+
   };
+
+
+  lastReport = report;
+
 
   localStorage.setItem(
     "doctor_last_report",
     JSON.stringify(report)
   );
 
+
   saveLog(report);
 
   displayDiagnosis(report);
+
+  showPhotoRequest(report);
+
 }
 
 
+/* =========================
+   DISPLAY DIAGNOSIS
+========================= */
+
 function displayDiagnosis(report){
 
-  const result = document.getElementById("diagnosisResult");
+  const result =
+    document.getElementById("diagnosisResult");
+
 
   result.innerHTML = `
 
@@ -610,12 +832,28 @@ function displayDiagnosis(report){
         <strong>Equipment:</strong>
         ${escapeHTML(report.equipment.brand)}
         ${escapeHTML(report.equipment.model)}
-        ${report.equipment.kva ? " - "+escapeHTML(report.equipment.kva)+" kVA" : ""}
+        ${
+          report.equipment.kva
+          ? " - "+escapeHTML(report.equipment.kva)+" kVA"
+          : ""
+        }
       </p>
+
+      ${
+        report.equipment.controller
+        ? `<p><strong>Controller:</strong> ${escapeHTML(report.equipment.controller)}</p>`
+        : ""
+      }
+
+      ${
+        report.equipment.hours
+        ? `<p><strong>Running Hours:</strong> ${escapeHTML(report.equipment.hours)}</p>`
+        : ""
+      }
 
       <p>
         <strong>Main Problem:</strong>
-        ${escapeHTML(report.problem)}
+        ${escapeHTML(report.problem || "Not specified")}
       </p>
 
       ${
@@ -624,50 +862,296 @@ function displayDiagnosis(report){
         : ""
       }
 
+
       <h3>Possible Causes</h3>
 
       <ul>
-        ${report.causes.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+        ${
+          report.causes
+            .map(x=>`<li>${escapeHTML(x)}</li>`)
+            .join("")
+        }
       </ul>
+
 
       <h3>Recommended Checks</h3>
 
       <ul>
-        ${report.checks.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+        ${
+          report.checks
+            .map(x=>`<li>${escapeHTML(x)}</li>`)
+            .join("")
+        }
       </ul>
+
 
       <h3>Safety / Stop Conditions</h3>
 
       <ul>
-        ${report.safety.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+        ${
+          report.safety
+            .map(x=>`<li>${escapeHTML(x)}</li>`)
+            .join("")
+        }
       </ul>
 
+
+      <div class="info">
+        <strong>Next Step:</strong>
+        The preliminary assessment is now complete.
+        If the fault requires visual confirmation, use the
+        Photo Confirmation section below to provide relevant
+        generator or controller photographs.
+      </div>
+
+
       <p class="small">
-        Photos selected: ${report.photos.length}
+        Photos attached to this preliminary report:
+        ${report.photos.length}
       </p>
+
 
       <br>
 
-      <button class="secondary" onclick="copyReport()">
+
+      <button
+        class="secondary"
+        onclick="copyReport()"
+      >
         Copy Report
       </button>
 
-      <button class="secondary" onclick="window.print()">
+
+      <button
+        class="secondary"
+        onclick="window.print()"
+      >
         Print Report
       </button>
 
     </div>
+
   `;
+
 }
 
 
+/* =========================
+   PHOTO REQUEST
+========================= */
+
+function showPhotoRequest(report){
+
+  photoCard.classList.remove("hidden");
+
+
+  const instruction =
+    document.getElementById("photoInstruction");
+
+
+  let text =
+    "Please provide clear photographs of the generator and the relevant component or controller screen.";
+
+
+  if(report.problem === "Controller alarm"){
+
+    text =
+      "Please photograph the controller screen showing the exact alarm or shutdown message, plus a clear photo of the controller itself.";
+
+  }
+
+  else if(report.problem === "Voltage problem"){
+
+    text =
+      "Please photograph the alternator, AVR area, terminal connections, and controller screen showing voltage/fault information if available.";
+
+  }
+
+  else if(report.problem === "Overheating"){
+
+    text =
+      "Please photograph the radiator, coolant area, cooling fan/belt, and controller temperature/alarm screen if available.";
+
+  }
+
+  else if(
+    report.problem === "No start" ||
+    report.problem === "Battery / starting problem"
+  ){
+
+    text =
+      "Please photograph the battery/terminals, starter area, fuel-system components, and controller screen if an alarm is displayed.";
+
+  }
+
+  else if(
+    report.problem === "Black smoke" ||
+    report.problem === "White smoke" ||
+    report.problem === "High fuel consumption"
+  ){
+
+    text =
+      "Please photograph the engine, air-intake system, fuel-system components, injectors/fuel pump area where accessible, and controller screen if available.";
+
+  }
+
+  else if(report.problem === "Frequency / RPM problem"){
+
+    text =
+      "Please photograph the controller screen showing frequency/RPM, and the governor/actuator area if safely accessible.";
+
+  }
+
+  else if(report.problem === "Low oil pressure"){
+
+    text =
+      "Please photograph the controller screen showing the oil-pressure alarm and the oil-pressure sensor/engine area if safely accessible.";
+
+  }
+
+
+  instruction.textContent = text;
+
+}
+
+
+/* =========================
+   PHOTO CONFIRMATION
+========================= */
+
+function reviewPhotos(){
+
+  if(selectedPhotos.length === 0){
+
+    alert(
+      "Please upload at least one relevant generator or controller photo for photo confirmation."
+    );
+
+    return;
+
+  }
+
+
+  if(!lastReport){
+
+    alert(
+      "Please complete the preliminary diagnosis first."
+    );
+
+    return;
+
+  }
+
+
+  lastReport.photos =
+    selectedPhotos.map(p=>p.name);
+
+
+  localStorage.setItem(
+    "doctor_last_report",
+    JSON.stringify(lastReport)
+  );
+
+
+  updateLastLog(lastReport);
+
+  displayPhotoConfirmation(lastReport);
+
+
+  document
+    .getElementById("diagnosisResult")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+}
+
+
+/* =========================
+   PHOTO CONFIRMATION RESULT
+========================= */
+
+function displayPhotoConfirmation(report){
+
+  const result =
+    document.getElementById("diagnosisResult");
+
+
+  const confirmation = document.createElement("div");
+
+  confirmation.className = "result";
+
+
+  confirmation.innerHTML = `
+
+    <h3>Photo-Assisted Diagnostic Review</h3>
+
+    <div class="success">
+
+      <strong>
+        ${report.photos.length} photo(s) received.
+      </strong>
+
+      The photographs can help identify the generator,
+      controller, component, wiring arrangement, or visible
+      condition related to the reported fault.
+
+    </div>
+
+
+    <h3>What the Photos Should Help Confirm</h3>
+
+    <ul>
+
+      <li>Generator and engine identification</li>
+
+      <li>Controller type and displayed alarm</li>
+
+      <li>Relevant component and its location</li>
+
+      <li>Visible wiring, terminals, connectors or damage</li>
+
+      <li>Visible fuel, cooling, alternator or electrical-system conditions</li>
+
+    </ul>
+
+
+    <div class="warning">
+
+      <strong>Professional Diagnostic Notice:</strong>
+
+      A photograph can assist with identifying a fault area,
+      but it cannot by itself prove the mechanical or electrical
+      condition of a component. Measurements and physical testing
+      may still be required before replacing parts.
+
+    </div>
+
+  `;
+
+
+  result.appendChild(confirmation);
+
+}
+
+
+/* =========================
+   COPY REPORT
+========================= */
+
 function copyReport(){
 
-  const report = localStorage.getItem("doctor_last_report");
+  const report =
+    localStorage.getItem("doctor_last_report");
+
 
   if(!report) return;
 
-  const data = JSON.parse(report);
+
+  const data =
+    JSON.parse(report);
+
 
   let text =
 `DIESEL GENERATOR DOCTORAI
@@ -688,50 +1172,104 @@ Symptoms:
 ${data.symptoms}
 
 Possible Causes:
-${data.causes.join("\n- ")}
+- ${data.causes.join("\n- ")}
 
 Recommended Checks:
-${data.checks.join("\n- ")}
+- ${data.checks.join("\n- ")}
 
 Safety:
-${data.safety.join("\n- ")}
+- ${data.safety.join("\n- ")}
 
 Photos:
 ${data.photos.length}
 `;
 
-  navigator.clipboard.writeText(text);
 
-  alert("Diagnostic report copied.");
+  navigator.clipboard.writeText(text)
+    .then(()=>{
+      alert("Diagnostic report copied.");
+    })
+    .catch(()=>{
+      alert("Unable to copy automatically. Please use the browser copy function.");
+    });
+
 }
 
 
+/* =========================
+   LOGGING
+========================= */
+
 function saveLog(report){
 
-  let logs = JSON.parse(
-    localStorage.getItem("doctor_logs") || "[]"
-  );
+  let logs =
+    JSON.parse(
+      localStorage.getItem("doctor_logs") || "[]"
+    );
+
 
   logs.unshift(report);
 
   logs = logs.slice(0,20);
+
 
   localStorage.setItem(
     "doctor_logs",
     JSON.stringify(logs)
   );
 
+
   renderLogs();
+
 }
 
 
+/*
+  Update the latest matching log after
+  photo confirmation.
+*/
+
+function updateLastLog(report){
+
+  let logs =
+    JSON.parse(
+      localStorage.getItem("doctor_logs") || "[]"
+    );
+
+
+  if(logs.length > 0){
+
+    logs[0] = report;
+
+  }
+
+
+  localStorage.setItem(
+    "doctor_logs",
+    JSON.stringify(logs)
+  );
+
+
+  renderLogs();
+
+}
+
+
+/* =========================
+   LOG DISPLAY
+========================= */
+
 function renderLogs(){
 
-  const container = document.getElementById("logs");
+  const container =
+    document.getElementById("logs");
 
-  const logs = JSON.parse(
-    localStorage.getItem("doctor_logs") || "[]"
-  );
+
+  const logs =
+    JSON.parse(
+      localStorage.getItem("doctor_logs") || "[]"
+    );
+
 
   if(logs.length === 0){
 
@@ -739,77 +1277,122 @@ function renderLogs(){
       `<p class="small">No diagnostic cases saved yet.</p>`;
 
     return;
+
   }
 
-  container.innerHTML = logs.map((log,index)=>`
 
-    <div class="item">
+  container.innerHTML =
+    logs.map((log,index)=>`
 
-      <strong>
-        ${escapeHTML(log.equipment.brand)}
-        ${escapeHTML(log.equipment.model)}
-      </strong>
+      <div class="item">
 
-      <br>
+        <strong>
+          ${escapeHTML(log.equipment.brand)}
+          ${escapeHTML(log.equipment.model)}
+        </strong>
 
-      <span class="small">
-        ${escapeHTML(log.problem)}
-        — ${escapeHTML(log.date)}
-      </span>
+        <br>
 
-      <br><br>
+        <span class="small">
+          ${escapeHTML(log.problem)}
+          — ${escapeHTML(log.date)}
+        </span>
 
-      <button
-        class="secondary"
-        onclick="viewLog(${index})">
-        View
-      </button>
+        <br><br>
 
-      <button
-        class="danger"
-        onclick="deleteLog(${index})">
-        Delete
-      </button>
+        <button
+          class="secondary"
+          onclick="viewLog(${index})"
+        >
+          View
+        </button>
 
-    </div>
+        <button
+          class="danger"
+          onclick="deleteLog(${index})"
+        >
+          Delete
+        </button>
 
-  `).join("");
+      </div>
+
+    `).join("");
+
 }
 
+
+/* =========================
+   VIEW LOG
+========================= */
 
 function viewLog(index){
 
-  const logs = JSON.parse(
-    localStorage.getItem("doctor_logs") || "[]"
-  );
+  const logs =
+    JSON.parse(
+      localStorage.getItem("doctor_logs") || "[]"
+    );
+
 
   if(logs[index]){
+
+    lastReport = logs[index];
+
     displayDiagnosis(logs[index]);
 
+
+    if(logs[index].photos &&
+       logs[index].photos.length > 0){
+
+      displayPhotoConfirmation(logs[index]);
+
+    }
+
+
     window.scrollTo({
-      top:document.getElementById("diagnosisResult").offsetTop,
+
+      top:
+        document.getElementById(
+          "diagnosisResult"
+        ).offsetTop,
+
       behavior:"smooth"
+
     });
+
   }
+
 }
 
 
+/* =========================
+   DELETE LOG
+========================= */
+
 function deleteLog(index){
 
-  let logs = JSON.parse(
-    localStorage.getItem("doctor_logs") || "[]"
-  );
+  let logs =
+    JSON.parse(
+      localStorage.getItem("doctor_logs") || "[]"
+    );
+
 
   logs.splice(index,1);
+
 
   localStorage.setItem(
     "doctor_logs",
     JSON.stringify(logs)
   );
 
+
   renderLogs();
+
 }
 
+
+/* =========================
+   CLEAR FORM
+========================= */
 
 function clearForm(){
 
@@ -823,12 +1406,28 @@ function clearForm(){
   document.getElementById("problem").value="";
   document.getElementById("symptoms").value="";
 
+
   selectedPhotos=[];
+
+  lastReport=null;
+
+
   renderPhotos();
 
-  document.getElementById("diagnosisResult").innerHTML="";
+
+  document.getElementById(
+    "diagnosisResult"
+  ).innerHTML="";
+
+
+  photoCard.classList.add("hidden");
+
 }
 
+
+/* =========================
+   INITIAL LOAD
+========================= */
 
 renderLogs();
 
