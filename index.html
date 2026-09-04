@@ -1,814 +1,816 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-43MGSDB87Z"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-43MGSDB87Z');
+</script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Star Tech Standard Ltd | Generators, Diesel Service & Power Solutions</title>
+
+<meta name="description" content="Star Tech Standard Ltd provides diesel generator sales, repairs and maintenance, diesel fuel systems, parts and industrial power solutions in Lagos, Nigeria.">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* Ensures the cards are properly relative and clickable over their full area */
+.cards article {
+  position: relative;
+  transition: box-shadow .15s ease, background .15s ease;
+  cursor: pointer;
+}
+
+.cards article:hover {
+  background: #fafbfc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1), inset 0 0 0 1px #e1a52c;
+}
+
+.card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: block;
+}
+
+/* Generator DoctorAI */
+.doctor-link {
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 15px;
+  background:#111827;
+  color:#fff;
+  text-decoration:none;
+  border-radius:7px;
+  font-weight:bold;
+}
+
+.doctor-link:hover {
+  opacity:.9;
+}
+
+.doctor-cta {
+  margin-top:32px;
+  padding:30px;
+  text-align:center;
+  border:1px solid #e1a52c;
+  border-radius:10px;
+  background:#fafbfc;
+}
+
+.doctor-cta h2 {
+  margin-bottom:10px;
+}
+
+.doctor-cta p {
+  max-width:700px;
+  margin:0 auto 20px;
+}
+</style>
 
-  <title>Star Tech Standard Ltd | Diesel Generator Sales, Repairs & Technical Support</title>
-
-  <meta name="description" content="Star Tech Standard Ltd provides diesel generator sales, repairs, maintenance, diesel fuel system diagnostics, monitoring and transfer systems, parts and technical support in Lagos, Nigeria.">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-43MGSDB87Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-43MGSDB87Z');
-  </script>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #18202a;
-      background: #ffffff;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .wrap {
-      width: min(1180px, 92%);
-      margin: auto;
-    }
-
-    header {
-      background: #101820;
-      color: #ffffff;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 20px;
-      white-space: nowrap;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border: 2px solid #e1a52c;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #e1a52c;
-      font-weight: 900;
-    }
-
-    nav {
-      display: flex;
-      gap: 22px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    nav a {
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    nav a:hover {
-      color: #e1a52c;
-    }
-
-    .hero {
-      background: #111a22;
-      color: #ffffff;
-      padding: 95px 0 90px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      font-size: 13px;
-      letter-spacing: 2px;
-      font-weight: 800;
-      color: #e1a52c;
-      margin-bottom: 15px;
-    }
-
-    .eyebrow.dark {
-      color: #8b650d;
-    }
-
-    h1 {
-      font-size: clamp(40px, 6vw, 72px);
-      line-height: 1.05;
-      margin: 0 0 25px;
-    }
-
-    h2 {
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.15;
-      margin: 0 0 20px;
-    }
-
-    h3 {
-      margin-top: 0;
-    }
-
-    .hero p {
-      max-width: 700px;
-      font-size: 18px;
-      color: #d7dde3;
-    }
-
-    .btn {
-      display: inline-block;
-      background: #e1a52c;
-      color: #111820;
-      padding: 13px 21px;
-      border-radius: 6px;
-      font-weight: 800;
-      margin-top: 12px;
-    }
-
-    .btn:hover {
-      background: #f1bd4a;
-    }
-
-    section {
-      padding: 75px 0;
-    }
-
-    .section-head {
-      margin-bottom: 35px;
-    }
-
-    .section-head p {
-      max-width: 760px;
-      color: #5d6873;
-    }
-
-    .service-strip {
-      background: #f4f6f8;
-      padding: 45px 0;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      border: 1px solid #e0e4e8;
-      border-radius: 10px;
-      padding: 28px;
-      background: #ffffff;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
-    }
-
-    .number {
-      color: #e1a52c;
-      font-weight: 900;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      color: #5d6873;
-      margin-bottom: 20px;
-    }
-
-    .card-link {
-      font-weight: 800;
-      color: #17212b;
-    }
-
-    .card-link:hover {
-      color: #b17b09;
-    }
-
-    /* GENERATOR DOCTORAI */
-
-    .doctor-cta {
-      margin-top: 32px;
-      padding: 30px;
-      text-align: center;
-      border: 1px solid #e1a52c;
-      border-radius: 10px;
-      background: #fafbfc;
-    }
-
-    .doctor-cta h2 {
-      margin-bottom: 10px;
-    }
-
-    .doctor-cta p {
-      max-width: 700px;
-      margin: 0 auto 20px;
-      color: #4f5963;
-    }
-
-    /* KAT POWER */
-
-    .kat-power {
-      background: #111a22;
-      color: #ffffff;
-    }
-
-    .kat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .kat-power p {
-      color: #d7dde3;
-    }
-
-    .kat-box {
-      border: 1px solid #39434d;
-      border-radius: 10px;
-      padding: 30px;
-      background: #18222c;
-    }
-
-    .kat-box strong {
-      color: #e1a52c;
-    }
-
-    /* ABOUT */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: start;
-    }
-
-    .about-box {
-      background: #f5f6f7;
-      padding: 30px;
-      border-radius: 10px;
-    }
-
-    .about-box ul {
-      padding-left: 20px;
-    }
-
-    /* LOCATIONS */
-
-    .locations {
-      background: #f4f6f8;
-    }
-
-    .location-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .location-card {
-      background: #ffffff;
-      border: 1px solid #e0e4e8;
-      padding: 25px;
-      border-radius: 10px;
-    }
-
-    .location-card h3 {
-      margin-bottom: 10px;
-    }
-
-    .location-card p {
-      color: #5d6873;
-    }
-
-    /* CONTACT */
-
-    .contact {
-      background: #ffffff;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
-
-    .contact-box {
-      border: 1px solid #e0e4e8;
-      border-radius: 10px;
-      padding: 30px;
-    }
-
-    .contact-box p {
-      margin: 10px 0;
-    }
-
-    footer {
-      background: #101820;
-      color: #cfd5da;
-      padding: 35px 0;
-      font-size: 14px;
-    }
-
-    footer a {
-      color: #e1a52c;
-    }
-
-    @media (max-width: 850px) {
-      .nav {
-        flex-direction: column;
-        padding: 15px 0;
-      }
-
-      nav {
-        justify-content: center;
-        gap: 13px;
-      }
-
-      .hero-grid,
-      .kat-grid,
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cards,
-      .location-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding: 65px 0;
-      }
-    }
-  </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="wrap nav">
+<header>
 
-      <a href="index.html" class="brand">
-        <span class="brand-mark">STS</span>
-        <span>Star Tech Standard Ltd</span>
+  <div class="wrap nav">
+
+    <a class="brand"
+       href="https://wa.me/2348033452862"
+       target="_blank"
+       rel="noopener"
+       aria-label="Chat with us on WhatsApp">
+
+      <img
+        src="star-tech-logo.png"
+        alt="Star Tech Standard Ltd"
+        class="brand-logo">
+
+      <span>STAR TECH STANDARD LTD</span>
+
+    </a>
+
+    <nav>
+
+      <a href="#services">Services</a>
+
+      <a href="#kat-power">Kat Power</a>
+
+      <a href="#locations">Locations</a>
+
+      <a href="generator-doctor.html">DoctorAI</a>
+
+      <a href="#contact">Contact</a>
+
+    </nav>
+
+    <a
+      class="btn small"
+      href="https://wa.me/2348033452862"
+      target="_blank"
+      rel="noopener">
+      Chat with Us
+    </a>
+
+  </div>
+
+</header>
+
+
+<main id="top">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="grid"></div>
+
+  <div class="wrap hero-in">
+
+    <p class="eyebrow">
+      POWER • ENGINEERING • SERVICE
+    </p>
+
+    <h1>
+      Reliable power solutions for businesses that cannot afford downtime.
+    </h1>
+
+    <p class="lead">
+      Star Tech Standard Ltd supplies generators and provides specialist
+      diesel-generator repairs, maintenance, diesel fuel systems, parts
+      and industrial power support.
+    </p>
+
+    <div class="actions">
+
+      <a class="btn" href="#contact">
+        Request a Quote
       </a>
 
-      <nav>
-        <a href="#services">Services</a>
-        <a href="#kat-power">Kat Power</a>
-        <a href="#locations">Locations</a>
-        <a href="generator-doctor.html">DoctorAI</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a
+        class="btn ghost"
+        href="https://wa.me/2348033452862"
+        target="_blank"
+        rel="noopener">
+        Chat on WhatsApp
+      </a>
 
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-grid">
+    <p class="note">
+      Diesel generator repair and technical service.
+      Gasoline generators are supplied under our Kat Power brand;
+      gasoline-generator repair is not offered.
+    </p>
 
-      <div>
-        <p class="eyebrow">DIESEL GENERATOR SPECIALISTS</p>
+  </div>
 
-        <h1>
-          Power. Reliability. Technical Expertise.
-        </h1>
+</section>
 
-        <p>
-          Star Tech Standard Ltd provides professional diesel generator
-          sales, repairs, maintenance, diagnostics, fuel-system services,
-          monitoring systems, parts and technical support.
-        </p>
 
-        <a class="btn" href="#services">
-          Explore Our Services →
-        </a>
-      </div>
+<!-- SERVICE STRIP -->
 
-      <div>
-        <p class="eyebrow">STAR TECH STANDARD LTD</p>
+<section class="strip">
 
-        <p>
-          Professional generator solutions for banks, businesses,
-          facilities, industrial operations and private clients.
-        </p>
-      </div>
+  <div class="wrap stripgrid">
 
+    <div>
+      <b>DIESEL GENERATORS</b>
+      <span>Sales, repair & maintenance</span>
     </div>
-  </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="service-strip">
-    <div class="wrap">
-
-      <div class="section-head">
-        <p class="eyebrow dark">WHAT WE DO</p>
-
-        <h2>Generator Services</h2>
-
-        <p>
-          Specialist diesel generator services covering mechanical,
-          electrical, fuel-system and power-management requirements.
-        </p>
-      </div>
-
-      <!-- SIX SERVICE CARDS -->
-      <div class="cards">
-
-        <article class="card">
-          <div class="number">01</div>
-
-          <h3>Generator Sales</h3>
-
-          <p>
-            Diesel and gasoline generator solutions for commercial,
-            industrial and residential applications.
-          </p>
-
-          <a class="card-link" href="generator-sales.html">
-            Learn More →
-          </a>
-        </article>
-
-        <article class="card">
-          <div class="number">02</div>
-
-          <h3>Diesel Repairs & Maintenance</h3>
-
-          <p>
-            Professional troubleshooting, repair, preventive maintenance
-            and technical servicing of diesel generator sets.
-          </p>
-
-          <a class="card-link" href="repairs-maintenance.html">
-            Learn More →
-          </a>
-        </article>
-
-        <article class="card">
-          <div class="number">03</div>
-
-          <h3>Diesel Fuel Systems</h3>
-
-          <p>
-            Diagnostics and technical support for diesel fuel systems,
-            injection pumps, injectors and related components.
-          </p>
-
-          <a class="card-link" href="fuel-quality-diagnostics.html">
-            Learn More →
-          </a>
-        </article>
-
-        <article class="card">
-          <div class="number">04</div>
-
-          <h3>Monitoring & Transfer</h3>
-
-          <p>
-            Diesel monitoring, fuel transfer systems, flow measurement,
-            tanks, pumps and related control solutions.
-          </p>
-
-          <a class="card-link" href="monitoring-transfer.html">
-            Learn More →
-          </a>
-        </article>
-
-        <article class="card">
-          <div class="number">05</div>
-
-          <h3>Parts & Components</h3>
-
-          <p>
-            Generator parts and technical components for diesel engines,
-            alternators, controllers and associated systems.
-          </p>
-
-          <a class="card-link" href="parts-components.html">
-            Learn More →
-          </a>
-        </article>
-
-        <article class="card">
-          <div class="number">06</div>
-
-          <h3>Technical Support</h3>
-
-          <p>
-            Technical guidance and professional support for generator
-            owners, facility managers and maintenance teams.
-          </p>
-
-          <a class="card-link" href="technical-support.html">
-            Learn More →
-          </a>
-        </article>
-
-      </div>
-
-      <!-- DOCTORAI MUST STAY DIRECTLY AFTER THE SIX CARDS -->
-      <div class="doctor-cta">
-
-        <p class="eyebrow dark">
-          DIESEL GENERATOR DIAGNOSTICS
-        </p>
-
-        <h2>
-          Generator DoctorAI
-        </h2>
-
-        <p>
-          Start with your generator details and symptoms.
-          Get a preliminary diagnosis first. If more information is needed,
-          DoctorAI can then request relevant photos of the generator,
-          controller screen or components to help identify the exact fault area.
-        </p>
-
-        <a class="btn" href="generator-doctor.html">
-          Open Generator DoctorAI →
-        </a>
-
-      </div>
-
+    <div>
+      <b>DIESEL FUEL SYSTEMS</b>
+      <span>Pumps, tanks & transfer</span>
     </div>
-  </section>
 
-  <!-- KAT POWER -->
-  <section id="kat-power" class="kat-power">
-
-    <div class="wrap kat-grid">
-
-      <div>
-        <p class="eyebrow">KAT POWER</p>
-
-        <h2>
-          Reliable Power for Home & Business
-        </h2>
-
-        <p>
-          Kat Power generators are available in selected capacities
-          for residential and commercial applications.
-        </p>
-
-        <p>
-          We sell Kat Power gasoline generators.
-          Star Tech Standard Ltd's specialist repair services are
-          focused on diesel generator systems.
-        </p>
-      </div>
-
-      <div class="kat-box">
-
-        <h3>KAT POWER</h3>
-
-        <p>
-          <strong>Available models include:</strong>
-        </p>
-
-        <p>
-          Soundproof 8kW / 10kVA generator
-        </p>
-
-        <p>
-          Kat Power 5kW basic generator
-        </p>
-
-        <p>
-          Availability may vary depending on current stock.
-        </p>
-
-      </div>
-
+    <div>
+      <b>PARTS</b>
+      <span>Engine & alternator components</span>
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section>
-
-    <div class="wrap about-grid">
-
-      <div>
-
-        <p class="eyebrow dark">
-          ABOUT STAR TECH STANDARD LTD
-        </p>
-
-        <h2>
-          Built Around Technical Experience
-        </h2>
-
-        <p>
-          Star Tech Standard Ltd provides professional generator
-          sales, maintenance, diagnostics and technical solutions.
-        </p>
-
-        <p>
-          Our work covers diesel engines, alternators, fuel systems,
-          generator controls, monitoring and fuel-transfer systems.
-        </p>
-
-      </div>
-
-      <div class="about-box">
-
-        <h3>Our Technical Focus</h3>
-
-        <ul>
-          <li>Diesel generator diagnostics</li>
-          <li>Generator repairs and preventive maintenance</li>
-          <li>Diesel injection systems</li>
-          <li>Alternator and AVR troubleshooting</li>
-          <li>Diesel monitoring and transfer systems</li>
-          <li>Generator parts and components</li>
-          <li>Technical support</li>
-        </ul>
-
-      </div>
-
+    <div>
+      <b>TECHNICAL SUPPORT</b>
+      <span>Practical site solutions</span>
     </div>
-  </section>
 
-  <!-- KAT POWER LOCATIONS -->
-  <section id="locations" class="locations">
+  </div>
 
-    <div class="wrap">
+</section>
 
-      <div class="section-head">
 
-        <p class="eyebrow dark">LOCATIONS</p>
+<!-- SERVICES -->
 
-        <h2>
-          KAT POWER Showrooms
-        </h2>
+<section id="services" class="section">
 
-        <p>
-          Visit our locations for Kat Power generator sales
-          and product enquiries.
-        </p>
+  <div class="wrap">
 
-      </div>
+    <p class="eyebrow dark">
+      WHAT WE DO
+    </p>
 
-      <div class="location-grid">
+    <div class="head">
 
-        <div class="location-card">
-
-          <h3>Victoria Island</h3>
-
-          <p>
-            Lagos, Nigeria
-          </p>
-
-          <p>
-            Kat Power generator sales and product enquiries.
-          </p>
-
-        </div>
-
-        <div class="location-card">
-
-          <h3>Lagos</h3>
-
-          <p>
-            Nigeria
-          </p>
-
-          <p>
-            Contact Star Tech Standard Ltd for current
-            product availability.
-          </p>
-
-        </div>
-
-        <div class="location-card">
-
-          <h3>Customer Enquiries</h3>
-
-          <p>
-            Contact our team for current stock,
-            pricing and product information.
-          </p>
-
-          <a class="btn" href="https://wa.me/2348033452862">
-            WhatsApp Us →
-          </a>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-
-    <div class="wrap">
-
-      <div class="section-head">
-
-        <p class="eyebrow dark">CONTACT</p>
-
-        <h2>
-          Speak With Star Tech Standard Ltd
-        </h2>
-
-        <p>
-          For generator repairs, technical support, generator sales,
-          parts or diesel power-system solutions, contact us directly.
-        </p>
-
-      </div>
-
-      <div class="contact-grid">
-
-        <div class="contact-box">
-
-          <h3>WhatsApp</h3>
-
-          <p>
-            <a href="https://wa.me/2348033452862">
-              +234 803 345 2862
-            </a>
-          </p>
-
-          <a class="btn" href="https://wa.me/2348033452862">
-            Contact Us on WhatsApp →
-          </a>
-
-        </div>
-
-        <div class="contact-box">
-
-          <h3>Generator DoctorAI</h3>
-
-          <p>
-            Start with your generator details and symptoms
-            before providing photos if they are required.
-          </p>
-
-          <a class="btn" href="generator-doctor.html">
-            Open Generator DoctorAI →
-          </a>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-
-    <div class="wrap">
+      <h2>
+        Generator and power services built around your site.
+      </h2>
 
       <p>
-        © 2026 Star Tech Standard Ltd. All rights reserved.
-      </p>
-
-      <p>
-        Diesel Generator Sales • Repairs • Maintenance •
-        Diagnostics • Technical Support
+        From routine maintenance to complex diesel fuel and monitoring
+        systems, we focus on dependable operation and clear technical scope.
       </p>
 
     </div>
 
-  </footer>
+
+    <div class="cards">
+
+
+      <!-- CARD 01 -->
+
+      <article>
+
+        <i>01</i>
+
+        <h3>Generator Sales</h3>
+
+        <p>
+          Supply of diesel generator sets for commercial,
+          residential and industrial applications.
+        </p>
+
+        <a
+          class="card-link"
+          href="generator-sales.html"
+          aria-label="Generator Sales — view details">
+        </a>
+
+      </article>
+
+
+      <!-- CARD 02 -->
+
+      <article>
+
+        <i>02</i>
+
+        <h3>Diesel Repairs & Maintenance</h3>
+
+        <p>
+          Fault diagnosis, preventive maintenance, corrective repairs
+          and technical troubleshooting for diesel generators.
+        </p>
+
+        <a
+          class="card-link"
+          href="repairs-maintenance.html"
+          aria-label="Diesel Repairs and Maintenance — view details">
+        </a>
+
+      </article>
+
+
+      <!-- CARD 03 -->
+
+      <article>
+
+        <i>03</i>
+
+        <h3>Diesel Fuel Systems</h3>
+
+        <p>
+          Injector protection, fuel filtration and fuel-quality
+          diagnostics — identifying contamination and faults before
+          they damage your engine.
+        </p>
+
+        <a
+          class="card-link"
+          href="fuel-quality-diagnostics.html"
+          aria-label="Diesel Fuel Systems — view details">
+        </a>
+
+      </article>
+
+
+      <!-- CARD 04 -->
+
+      <article>
+
+        <i>04</i>
+
+        <h3>Monitoring & Transfer</h3>
+
+        <p>
+          Fuel transfer, flow metering, level protection and control
+          systems for generator plants and facilities.
+        </p>
+
+        <a
+          class="card-link"
+          href="monitoring-transfer.html"
+          aria-label="Monitoring and Transfer — view tank and transfer system design">
+        </a>
+
+      </article>
+
+
+      <!-- CARD 05 -->
+
+      <article>
+
+        <i>05</i>
+
+        <h3>Parts & Components</h3>
+
+        <p>
+          Specialist generator components including alternators,
+          AVR, pumps and engine-system parts.
+        </p>
+
+        <a
+          class="card-link"
+          href="parts-components.html"
+          aria-label="Parts and Components — view details">
+        </a>
+
+      </article>
+
+
+      <!-- CARD 06 -->
+
+      <article>
+
+        <i>06</i>
+
+        <h3>Technical Support</h3>
+
+        <p>
+          Practical support focused on reliability,
+          troubleshooting and reducing equipment downtime.
+        </p>
+
+        <a
+          class="card-link"
+          href="technical-support.html"
+          aria-label="Technical Support — view details">
+        </a>
+
+      </article>
+
+
+    </div>
+
+
+    <!-- GENERATOR DOCTORAI — DIRECTLY UNDER THE 6 CARDS -->
+
+    <div class="doctor-cta">
+
+      <p class="eyebrow dark">
+        DIESEL GENERATOR DIAGNOSTICS
+      </p>
+
+      <h2>
+        Generator DoctorAI
+      </h2>
+
+      <p>
+        Start with your generator details and symptoms.
+        Get a preliminary diagnosis first. If more information is needed,
+        DoctorAI can then request relevant photos of the generator,
+        controller screen or components to help identify the exact fault area.
+      </p>
+
+      <a
+        class="btn"
+        href="generator-doctor.html">
+        Open Generator DoctorAI →
+      </a>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- KAT POWER -->
+
+<section id="kat-power" class="feature">
+
+  <div class="wrap featuregrid">
+
+
+    <div class="kat-card">
+
+      <a href="katpower.html">
+
+        <img
+          src="kat-power-logo.png"
+          alt="KAT-POWER gasoline generators"
+          class="kat-logo-img">
+
+      </a>
+
+      <div class="kat-caption">
+        GASOLINE GENERATORS
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <p class="eyebrow dark">
+        KAT POWER
+      </p>
+
+      <h2>
+        Gasoline generators for sale.
+      </h2>
+
+      <p class="big">
+        Kat Power is our gasoline-generator brand.
+        Selected models are available for sale through our
+        showroom display locations.
+      </p>
+
+      <div class="notice">
+
+        <b>Important:</b>
+        Kat Power gasoline generators are supplied for sale.
+        Star Tech Standard's repair and maintenance service
+        is for diesel generators.
+
+      </div>
+
+
+      <div class="specs">
+
+        <span>
+          <b>Available</b>
+          8 kW / 10 kVA soundproof
+        </span>
+
+        <span>
+          <b>Available</b>
+          5 kW basic model
+        </span>
+
+        <span>
+          <b>Brand</b>
+          KAT POWER
+        </span>
+
+        <span>
+          <b>Sales</b>
+          Lagos showroom locations
+        </span>
+
+      </div>
+
+
+      <a class="btn" href="#locations">
+        View Sales Locations
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="dark section">
+
+  <div class="wrap aboutgrid">
+
+    <div>
+
+      <p class="eyebrow">
+        ABOUT STAR TECH STANDARD
+      </p>
+
+      <h2>
+        Power equipment. Practical expertise. Dependable service.
+      </h2>
+
+    </div>
+
+
+    <div>
+
+      <p class="big">
+        Star Tech Standard Ltd is a Nigeria-based power equipment
+        and technical service company serving customers who depend
+        on reliable electrical power.
+      </p>
+
+      <p>
+        Our work covers generator sales, diesel generator repairs
+        and maintenance, diesel fuel systems, monitoring and transfer
+        systems, parts and specialist technical services.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LOCATIONS -->
+
+<section id="locations" class="section">
+
+  <div class="wrap">
+
+    <p class="eyebrow dark">
+      KAT POWER SALES LOCATIONS
+    </p>
+
+    <div class="head">
+
+      <h2>
+        Find a display location in Lagos.
+      </h2>
+
+      <p>
+        Use the Google Maps buttons below to open the location
+        directly in Google Maps.
+      </p>
+
+    </div>
+
+
+    <div class="locations">
+
+
+      <!-- SANGOTEDO -->
+
+      <article>
+
+        <small>
+          SANGOTEDO
+        </small>
+
+        <h3>
+          Koshar Home of Electronics
+        </h3>
+
+        <p>
+          The Emperor Estate Mall, Km 34, New Road,
+          Sangotedo, Lagos.
+        </p>
+
+        <a
+          class="map"
+          href="https://www.google.com/maps/search/?api=1&query=Koshar+Home+of+Electronics+Sangotedo+Lagos"
+          target="_blank"
+          rel="noopener">
+          Open in Google Maps →
+        </a>
+
+      </article>
+
+
+      <!-- AJAH / LEKKI -->
+
+      <article>
+
+        <small>
+          AJAH / LEKKI
+        </small>
+
+        <h3>
+          Koshar Electronics
+        </h3>
+
+        <p>
+          Lekki–Epe Expressway, Ajah, Lekki 106104, Lagos.
+        </p>
+
+        <a
+          class="map"
+          href="https://www.google.com/maps/search/?api=1&query=Koshar+Electronics+Ajah+Lagos"
+          target="_blank"
+          rel="noopener">
+          Open in Google Maps →
+        </a>
+
+      </article>
+
+
+      <!-- VICTORIA ISLAND -->
+
+      <article>
+
+        <small>
+          VICTORIA ISLAND
+        </small>
+
+        <h3>
+          MBE (Dream Plaza)
+        </h3>
+
+        <p>
+          Dream Plaza, 7 Bishop Aboyade Cole Street,
+          Eti-Osa, Lagos 106104.
+        </p>
+
+        <a
+          class="map"
+          href="https://www.google.com/maps/search/?api=1&query=Dream+Plaza+7+Bishop+Aboyade+Cole+Street+Lagos"
+          target="_blank"
+          rel="noopener">
+          Open in Google Maps →
+        </a>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="section contact">
+
+  <div class="wrap contactgrid">
+
+
+    <div>
+
+      <p class="eyebrow dark">
+        CONTACT
+      </p>
+
+      <h2>
+        Tell us what you need.
+      </h2>
+
+      <p>
+        For generator service, equipment supply, parts or a
+        power-system project, contact Star Tech Standard Ltd.
+      </p>
+
+
+      <div class="details">
+
+        <b>
+          Star Tech Standard Ltd
+        </b>
+
+        <span>
+          Victoria Island, Lagos, Nigeria
+        </span>
+
+        <a href="mailto:info@startechstandard.com">
+          info@startechstandard.com
+        </a>
+
+        <a
+          href="https://wa.me/2348033452862"
+          target="_blank"
+          rel="noopener">
+          Chat with us on WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="contact-actions">
+
+      <a
+        class="btn"
+        href="https://wa.me/2348033452862"
+        target="_blank"
+        rel="noopener">
+        Chat on WhatsApp
+      </a>
+
+      <a
+        class="btn outline-dark"
+        href="mailto:info@startechstandard.com?subject=Star%20Tech%20Standard%20Enquiry">
+        Email Us
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="wrap foot">
+
+
+    <div class="brand">
+
+      <img
+        src="star-tech-logo.png"
+        alt="Star Tech Standard Ltd"
+        class="brand-logo">
+
+      <span>
+        STAR TECH STANDARD LTD
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <b>POWER</b>
+
+      <span>
+        Diesel generators
+      </span>
+
+      <span>
+        Fuel systems
+      </span>
+
+      <span>
+        Technical service
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <b>KAT POWER</b>
+
+      <span>
+        Gasoline generators for sale
+      </span>
+
+      <span>
+        No gasoline-generator repair
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <b>CONTACT</b>
+
+      <span>
+        Victoria Island, Lagos
+      </span>
+
+      <span>
+        <a
+          href="https://wa.me/2348033452862"
+          target="_blank"
+          rel="noopener">
+          Chat on WhatsApp
+        </a>
+      </span>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="wrap copy">
+    © 2026 Star Tech Standard Ltd. All rights reserved.
+  </div>
+
+</footer>
+
 
 </body>
 </html>
