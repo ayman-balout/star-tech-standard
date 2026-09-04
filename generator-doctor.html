@@ -128,6 +128,14 @@ button{
   margin-top:15px;
 }
 
+.ai-box{
+  background:#faf5ff;
+  border-left:5px solid #9333ea;
+  padding:14px;
+  margin-top:15px;
+  border-radius:0 8px 8px 0;
+}
+
 .result{
   background:#f8fafc;
   border:1px solid #e2e8f0;
@@ -184,6 +192,22 @@ button{
 
 .hidden{
   display:none!important;
+}
+
+.spinner{
+  display:inline-block;
+  width:16px;
+  height:16px;
+  border:2px solid #d1d5db;
+  border-top-color:#9333ea;
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  vertical-align:middle;
+  margin-right:8px;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
 }
 
 @media print{
@@ -276,7 +300,7 @@ button{
 
 <div class="info">
   <strong>Diagnostic Process:</strong>
-  First provide the generator information and symptoms. DoctorAI will perform a preliminary diagnostic assessment. If visual confirmation is useful, you will then be asked to provide photographs of the relevant generator components or controller screen.
+  First provide the generator information and symptoms. DoctorAI will perform a preliminary diagnostic assessment, then a deeper AI-powered analysis. If visual confirmation is useful, you will then be asked to provide photographs of the relevant generator components or controller screen.
 </div>
 
   </div>  <!-- DIAGNOSIS -->  <div class="card"><button class="primary" onclick="startDiagnosis()">
@@ -348,6 +372,19 @@ button{
 <div id="logs"></div>
 
   </div></div><script>
+
+/* =========================
+   GEMINI CONFIG
+   Replace the key below with your real Gemini API key.
+   Get one at: https://aistudio.google.com/app/apikey
+========================= */
+
+const GEMINI_API_KEY = "AQ.Ab8RN6KXF7R1YdawvkMtsK64HJk1xFNtjGnlES9J0B6ZhVNcog";
+const GEMINI_MODEL = "gemini-3.5-flash";
+const GEMINI_URL =
+  "https://generativelanguage.googleapis.com/v1beta/models/" +
+  GEMINI_MODEL + ":generateContent";
+
 
 let selectedPhotos = [];
 let lastReport = null;
@@ -789,7 +826,9 @@ function startDiagnosis(){
     checks,
     safety,
 
-    photos:[]
+    photos:[],
+
+    aiAnalysis:null
 
   };
 
@@ -808,6 +847,132 @@ function startDiagnosis(){
   displayDiagnosis(report);
 
   showPhotoRequest(report);
+
+  runAIAnalysis(report);
+
+}
+
+
+/* =========================
+   GEMINI AI DEEP ANALYSIS
+========================= */
+
+function buildGeminiPrompt(report){
+
+  return (
+    "You are an expert diesel generator technician assisting a generator sales, repair and fuel-systems company " +
+    "(Star Tech Standard Ltd, servicing Perkins, Cummins and Caterpillar generators). " +
+    "A customer submitted the following case through a diagnostic tool. " +
+    "Give a deeper technical analysis than a basic checklist: reason about how the symptoms relate to each other, " +
+    "rank the most likely root cause first, explain WHY, and give a clear step-by-step troubleshooting order a field technician should follow. " +
+    "Keep it practical and specific to diesel generators. Keep the whole answer under 250 words. " +
+    "Do not use markdown formatting like asterisks or hash symbols, just plain text with line breaks.\n\n" +
+    "Brand: " + (report.equipment.brand || "not specified") + "\n" +
+    "Model: " + (report.equipment.model || "not specified") + "\n" +
+    "Capacity: " + (report.equipment.kva || "not specified") + " kVA\n" +
+    "Controller: " + (report.equipment.controller || "not specified") + "\n" +
+    "Running hours: " + (report.equipment.hours || "not specified") + "\n" +
+    "Voltage: " + (report.equipment.voltage || "not specified") + "\n" +
+    "Frequency: " + (report.equipment.frequency || "not specified") + "\n" +
+    "Main problem selected: " + (report.problem || "not specified") + "\n" +
+    "Customer's description of symptoms: " + (report.symptoms || "none provided")
+  );
+
+}
+
+
+async function runAIAnalysis(report){
+
+  const box = document.getElementById("aiAnalysisBox");
+
+  if(!box) return;
+
+  if(!GEMINI_API_KEY){
+
+    box.innerHTML =
+      `<div class="warning"><strong>AI analysis not active:</strong> add your Gemini API key in the code to enable deep AI diagnosis.</div>`;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    `<div class="ai-box"><span class="spinner"></span>Running deeper AI analysis...</div>`;
+
+  try{
+
+    const response = await fetch(GEMINI_URL, {
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json",
+        "x-goog-api-key":GEMINI_API_KEY
+      },
+
+      body:JSON.stringify({
+
+        contents:[
+          {
+            role:"user",
+            parts:[
+              { text: buildGeminiPrompt(report) }
+            ]
+          }
+        ]
+
+      })
+
+    });
+
+    if(!response.ok){
+
+      const errText = await response.text();
+
+      throw new Error("Gemini request failed: " + response.status + " " + errText);
+
+    }
+
+    const data = await response.json();
+
+    const aiText =
+      data &&
+      data.candidates &&
+      data.candidates[0] &&
+      data.candidates[0].content &&
+      data.candidates[0].content.parts &&
+      data.candidates[0].content.parts[0] &&
+      data.candidates[0].content.parts[0].text;
+
+    if(!aiText){
+
+      throw new Error("Empty response from Gemini");
+
+    }
+
+    report.aiAnalysis = aiText;
+
+    localStorage.setItem(
+      "doctor_last_report",
+      JSON.stringify(report)
+    );
+
+    updateLastLog(report);
+
+    box.innerHTML =
+      `<div class="ai-box">
+        <h3 style="margin-top:0">Deep AI Diagnostic Analysis</h3>
+        ${escapeHTML(aiText).replace(/\n/g,"<br>")}
+      </div>`;
+
+  }catch(err){
+
+    console.error(err);
+
+    box.innerHTML =
+      `<div class="warning"><strong>AI analysis unavailable right now.</strong> The checklist above still applies. (${escapeHTML(err.message)})</div>`;
+
+  }
 
 }
 
@@ -894,6 +1059,9 @@ function displayDiagnosis(report){
             .join("")
         }
       </ul>
+
+
+      <div id="aiAnalysisBox"></div>
 
 
       <div class="info">
@@ -1180,6 +1348,11 @@ Recommended Checks:
 Safety:
 - ${data.safety.join("\n- ")}
 
+${
+  data.aiAnalysis
+  ? "Deep AI Analysis:\n" + data.aiAnalysis + "\n"
+  : ""
+}
 Photos:
 ${data.photos.length}
 `;
@@ -1226,7 +1399,7 @@ function saveLog(report){
 
 /*
   Update the latest matching log after
-  photo confirmation.
+  photo confirmation or AI analysis.
 */
 
 function updateLastLog(report){
@@ -1338,6 +1511,22 @@ function viewLog(index){
     lastReport = logs[index];
 
     displayDiagnosis(logs[index]);
+
+    if(logs[index].aiAnalysis){
+
+      const box = document.getElementById("aiAnalysisBox");
+
+      if(box){
+
+        box.innerHTML =
+          `<div class="ai-box">
+            <h3 style="margin-top:0">Deep AI Diagnostic Analysis</h3>
+            ${escapeHTML(logs[index].aiAnalysis).replace(/\n/g,"<br>")}
+          </div>`;
+
+      }
+
+    }
 
 
     if(logs[index].photos &&
