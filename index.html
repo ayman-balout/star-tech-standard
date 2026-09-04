@@ -56,6 +56,7 @@
       padding: 24px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       border: 1px solid #202b3c;
+      text-align: center;
     }
 
     .card-title {
@@ -63,9 +64,6 @@
       font-size: 22px;
       margin-top: 0;
       margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .card-description {
@@ -73,54 +71,6 @@
       font-size: 14px;
       line-height: 1.5;
       margin-bottom: 20px;
-    }
-
-    textarea {
-      width: 100%;
-      box-sizing: border-box;
-      height: 100px;
-      background-color: #1c273a;
-      border: 1px solid #2d3d59;
-      border-radius: 6px;
-      color: #ffffff;
-      padding: 12px;
-      font-family: inherit;
-      font-size: 14px;
-      resize: vertical;
-      margin-bottom: 15px;
-    }
-
-    textarea:focus {
-      outline: none;
-      border-color: #e2b13c;
-    }
-
-    .action-btn {
-      width: 100%;
-      background-color: #e2b13c;
-      color: #000000;
-      border: none;
-      padding: 14px;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    .action-btn:active {
-      opacity: 0.9;
-    }
-
-    #aiResponseOutput {
-      display: none;
-      margin-top: 20px;
-      padding: 15px;
-      background-color: #1c273a;
-      border-left: 4px solid #e2b13c;
-      border-radius: 4px;
-      font-size: 14px;
-      line-height: 1.6;
-      word-wrap: break-word;
     }
   </style>
 </head>
@@ -136,66 +86,12 @@
 
   <div class="container">
     <div class="card">
-      <h2 class="card-title">🩺 Diesel Generator Doctor AI</h2>
+      <h2 class="card-title">STAR TECH STANDARD LTD</h2>
       <p class="card-description">
-        Enter your generator model, fault code, or engine symptom below for instant troubleshooting advice.
+        Welcome to Star Tech Standard Ltd. Premier engineering and diesel generator services.
       </p>
-
-      <textarea 
-        id="aiQueryInput" 
-        placeholder="Example: Perkins engine starting failure, fault code E04, or black exhaust smoke..."></textarea>
-
-      <button class="action-btn" onclick="askDoctorAI()">Ask Generator Doctor</button>
-
-      <div id="aiResponseOutput"></div>
     </div>
   </div>
-
-  <script>
-    async function askDoctorAI() {
-      const inputField = document.getElementById('aiQueryInput');
-      const responseBox = document.getElementById('aiResponseOutput');
-      const userPrompt = inputField.value.trim();
-
-      if (!userPrompt) {
-        responseBox.style.display = 'block';
-        responseBox.innerHTML = '<p style="color: #ff4d4d; margin:0;">Please enter a fault code or symptom first.</p>';
-        return;
-      }
-
-      responseBox.style.display = 'block';
-      responseBox.innerHTML = '<p style="color: #e2b13c; margin:0;">DoctorAI is analyzing your generator issue...</p>';
-
-      // REPLACE THE TEXT BELOW WITH YOUR GOOGLE AI STUDIO KEY (starts with AIzaSy...)
-      const apiKey = "AQ.Ab8RN6LUqVvpmFXEZDh6J6L7fiXG18rHKj2vVokHp8b1rWCf2Q";
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{ text: `You are an expert diesel generator engineer. Provide concise troubleshooting advice for: ${userPrompt}` }]
-            }]
-          })
-        });
-
-        const data = await response.json();
-
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-          const reply = data.candidates[0].content.parts[0].text;
-          responseBox.innerHTML = `<p style="color: #ffffff; margin:0;">${reply.replace(/\n/g, '<br>')}</p>`;
-        } else {
-          throw new Error('Invalid API Response');
-        }
-      } catch (err) {
-        responseBox.innerHTML = '<p style="color: #ff4d4d; margin:0;">Error: Unable to process diagnostic request. Please check your key or try again.</p>';
-      }
-    }
-  </script>
 
 </body>
 </html>
