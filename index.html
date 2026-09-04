@@ -56,7 +56,6 @@
       padding: 24px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       border: 1px solid #202b3c;
-      text-align: center;
     }
 
     .card-title {
@@ -64,6 +63,9 @@
       font-size: 22px;
       margin-top: 0;
       margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .card-description {
@@ -71,6 +73,54 @@
       font-size: 14px;
       line-height: 1.5;
       margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      height: 100px;
+      background-color: #1c273a;
+      border: 1px solid #2d3d59;
+      border-radius: 6px;
+      color: #ffffff;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+      margin-bottom: 15px;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #e2b13c;
+    }
+
+    .action-btn {
+      width: 100%;
+      background-color: #e2b13c;
+      color: #000000;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .action-btn:active {
+      opacity: 0.9;
+    }
+
+    #aiResponseOutput {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #1c273a;
+      border-left: 4px solid #e2b13c;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.6;
+      word-wrap: break-word;
     }
   </style>
 </head>
@@ -86,12 +136,28 @@
 
   <div class="container">
     <div class="card">
-      <h2 class="card-title">STAR TECH STANDARD LTD</h2>
+      <h2 class="card-title">🩺 Diesel Generator Doctor AI</h2>
       <p class="card-description">
-        Welcome to Star Tech Standard Ltd. Premier engineering and diesel generator services.
+        Enter your generator model, fault code, or engine symptom below for instant troubleshooting advice.
       </p>
+
+      <textarea 
+        id="aiQueryInput" 
+        placeholder="Example: Perkins engine starting failure, fault code E04, or black exhaust smoke..."></textarea>
+
+      <button class="action-btn" onclick="askDoctorAI()">Ask Generator Doctor</button>
+
+      <div id="aiResponseOutput"></div>
     </div>
   </div>
+
+  <script>
+    function askDoctorAI() {
+      const responseBox = document.getElementById('aiResponseOutput');
+      responseBox.style.display = 'block';
+      responseBox.innerHTML = '<p style="color: #e2b13c; margin:0;">System offline for maintenance. Please contact support via Chat.</p>';
+    }
+  </script>
 
 </body>
 </html>
