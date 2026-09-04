@@ -145,19 +145,11 @@
         id="aiQueryInput" 
         placeholder="Example: Perkins engine starting failure, fault code E04, or black exhaust smoke..."></textarea>
 
-      <button class="action-btn" onclick="askDoctorAI()">Ask Generator Doctor</button>
+      <button class="action-btn">Ask Generator Doctor</button>
 
       <div id="aiResponseOutput"></div>
     </div>
   </div>
-
-  <script>
-    function askDoctorAI() {
-      const responseBox = document.getElementById('aiResponseOutput');
-      responseBox.style.display = 'block';
-      responseBox.innerHTML = '<p style="color: #e2b13c; margin:0;">System offline for maintenance. Please contact support via Chat.</p>';
-    }
-  </script>
 
 </body>
 </html>
