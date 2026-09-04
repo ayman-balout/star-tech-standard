@@ -374,16 +374,12 @@ button{
   </div></div><script>
 
 /* =========================
-   GEMINI CONFIG
-   Replace the key below with your real Gemini API key.
-   Get one at: https://aistudio.google.com/app/apikey
+   AI DIAGNOSIS ENDPOINT
+   No API key here — the key lives safely on the server side
+   (Cloudflare Pages Function at /api/diagnose).
 ========================= */
 
-const GEMINI_API_KEY = "AQ.Ab8RN6KXF7R1YdawvkMtsK64HJk1xFNtjGnlES9J0B6ZhVNcog";
-const GEMINI_MODEL = "gemini-3.5-flash";
-const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/" +
-  GEMINI_MODEL + ":generateContent";
+const DIAGNOSE_ENDPOINT = "/api/diagnose";
 
 
 let selectedPhotos = [];
@@ -857,96 +853,42 @@ function startDiagnosis(){
    GEMINI AI DEEP ANALYSIS
 ========================= */
 
-function buildGeminiPrompt(report){
-
-  return (
-    "You are an expert diesel generator technician assisting a generator sales, repair and fuel-systems company " +
-    "(Star Tech Standard Ltd, servicing Perkins, Cummins and Caterpillar generators). " +
-    "A customer submitted the following case through a diagnostic tool. " +
-    "Give a deeper technical analysis than a basic checklist: reason about how the symptoms relate to each other, " +
-    "rank the most likely root cause first, explain WHY, and give a clear step-by-step troubleshooting order a field technician should follow. " +
-    "Keep it practical and specific to diesel generators. Keep the whole answer under 250 words. " +
-    "Do not use markdown formatting like asterisks or hash symbols, just plain text with line breaks.\n\n" +
-    "Brand: " + (report.equipment.brand || "not specified") + "\n" +
-    "Model: " + (report.equipment.model || "not specified") + "\n" +
-    "Capacity: " + (report.equipment.kva || "not specified") + " kVA\n" +
-    "Controller: " + (report.equipment.controller || "not specified") + "\n" +
-    "Running hours: " + (report.equipment.hours || "not specified") + "\n" +
-    "Voltage: " + (report.equipment.voltage || "not specified") + "\n" +
-    "Frequency: " + (report.equipment.frequency || "not specified") + "\n" +
-    "Main problem selected: " + (report.problem || "not specified") + "\n" +
-    "Customer's description of symptoms: " + (report.symptoms || "none provided")
-  );
-
-}
-
-
 async function runAIAnalysis(report){
 
   const box = document.getElementById("aiAnalysisBox");
 
   if(!box) return;
 
-  if(!GEMINI_API_KEY){
-
-    box.innerHTML =
-      `<div class="warning"><strong>AI analysis not active:</strong> add your Gemini API key in the code to enable deep AI diagnosis.</div>`;
-
-    return;
-
-  }
-
   box.innerHTML =
     `<div class="ai-box"><span class="spinner"></span>Running deeper AI analysis...</div>`;
 
   try{
 
-    const response = await fetch(GEMINI_URL, {
+    const response = await fetch(DIAGNOSE_ENDPOINT, {
 
       method:"POST",
 
       headers:{
-        "Content-Type":"application/json",
-        "x-goog-api-key":GEMINI_API_KEY
+        "Content-Type":"application/json"
       },
 
-      body:JSON.stringify({
-
-        contents:[
-          {
-            role:"user",
-            parts:[
-              { text: buildGeminiPrompt(report) }
-            ]
-          }
-        ]
-
-      })
+      body:JSON.stringify({ report })
 
     });
 
-    if(!response.ok){
+    const data = await response.json();
 
-      const errText = await response.text();
+    if(!response.ok || data.error){
 
-      throw new Error("Gemini request failed: " + response.status + " " + errText);
+      throw new Error(data.error || ("Request failed: " + response.status));
 
     }
 
-    const data = await response.json();
-
-    const aiText =
-      data &&
-      data.candidates &&
-      data.candidates[0] &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts[0] &&
-      data.candidates[0].content.parts[0].text;
+    const aiText = data.text;
 
     if(!aiText){
 
-      throw new Error("Empty response from Gemini");
+      throw new Error("Empty response from server");
 
     }
 
