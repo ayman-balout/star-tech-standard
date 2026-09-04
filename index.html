@@ -71,6 +71,61 @@
     .service-item .doctor-link {
       align-self: flex-start;
     }
+
+    /* Generator Doctor AI Live Module Styles */
+    .doctor-ai-container {
+      background: #111827;
+      color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      margin: 40px auto;
+      max-width: 800px;
+    }
+
+    .doctor-ai-container h2 {
+      color: #e1a52c;
+      margin-top: 0;
+    }
+
+    .doctor-ai-container textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #1f2937;
+      color: #fff;
+      font-size: 16px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    .doctor-ai-container button {
+      background: #e1a52c;
+      color: #111827;
+      border: none;
+      padding: 12px 24px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    .doctor-ai-container button:hover {
+      background: #d4931f;
+    }
+
+    .doctor-ai-response {
+      margin-top: 20px;
+      padding: 15px;
+      background: #1f2937;
+      border-left: 4px solid #e1a52c;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      display: none;
+    }
   </style>
 </head>
 
@@ -94,7 +149,7 @@
       <a href="#services">Services</a>
       <a href="#kat-power">Kat Power</a>
       <a href="#locations">Locations</a>
-      <a href="generator-doctor.html">DoctorAI</a>
+      <a href="#generator-doctor-app">DoctorAI</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -229,7 +284,7 @@
         </article>
 
         <a class="doctor-link"
-           href="generator-doctor.html">
+           href="#generator-doctor-app">
           🩺 Generator DoctorAI
         </a>
 
@@ -260,7 +315,7 @@
         </article>
 
         <a class="doctor-link"
-           href="generator-doctor.html">
+           href="#generator-doctor-app">
           🩺 Generator DoctorAI
         </a>
 
@@ -292,7 +347,7 @@
         </article>
 
         <a class="doctor-link"
-           href="generator-doctor.html">
+           href="#generator-doctor-app">
           🩺 Generator DoctorAI
         </a>
 
@@ -323,7 +378,7 @@
         </article>
 
         <a class="doctor-link"
-           href="generator-doctor.html">
+           href="#generator-doctor-app">
           🩺 Generator DoctorAI
         </a>
 
@@ -354,7 +409,7 @@
         </article>
 
         <a class="doctor-link"
-           href="generator-doctor.html">
+           href="#generator-doctor-app">
           🩺 Generator DoctorAI
         </a>
 
@@ -385,7 +440,7 @@
         </article>
 
         <a class="doctor-link"
-           href="generator-doctor.html">
+           href="#generator-doctor-app">
           🩺 Generator DoctorAI
         </a>
 
@@ -480,6 +535,20 @@
 
   </div>
 
+</section>
+
+
+<!-- GENERATOR DOCTOR AI APP SECTION -->
+<section id="generator-doctor-app" class="section">
+  <div class="wrap">
+    <div class="doctor-ai-container">
+      <h2>🩺 Diesel Generator Doctor AI</h2>
+      <p>Enter your generator model, fault code, or engine symptom below for instant troubleshooting advice.</p>
+      <textarea id="ai-user-input" rows="4" placeholder="Example: Perkins engine starting failure, fault code E04, or black exhaust smoke..."></textarea>
+      <button onclick="runGeneratorDoctor()">Ask Generator Doctor</button>
+      <div id="ai-output" class="doctor-ai-response"></div>
+    </div>
+  </div>
 </section>
 
 
@@ -791,6 +860,58 @@
 
 </footer>
 
+<!-- JAVASCRIPT FOR GENERATOR DOCTOR AI -->
+<script>
+async function runGeneratorDoctor() {
+  const userInput = document.getElementById("ai-user-input").value;
+  const outputDiv = document.getElementById("ai-output");
+
+  if (!userInput.trim()) {
+    outputDiv.style.display = "block";
+    outputDiv.innerText = "Please describe the generator issue or fault code first.";
+    return;
+  }
+
+  outputDiv.style.display = "block";
+  outputDiv.innerText = "Analyzing generator fault...";
+
+  // PASTE YOUR GEMINI API KEY BETWEEN THE QUOTES BELOW
+  const apiKey = "AQ.Ab8RN6LlK2CERs1ndD9Qr0P5urElAkC5HmWV6kNBisGTSJoHvw";
+  
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+  const requestData = {
+    system_instruction: {
+      parts: [{ text: "You are the Star Tech Standard Diesel Generator Doctor AI. Provide concise, clear, expert diagnostic troubleshooting steps for diesel generator engines, electrical alternators, AVRs, and fault codes." }]
+    },
+    contents: [
+      {
+        parts: [{ text: userInput }]
+      }
+    ]
+  };
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestData)
+    });
+
+    const data = await response.json();
+
+    if (data.candidates && data.candidates[0].content.parts[0].text) {
+      outputDiv.innerText = data.candidates[0].content.parts[0].text;
+    } else {
+      outputDiv.innerText = "Error: Unable to process diagnostic request. Please check your key or try again.";
+    }
+  } catch (error) {
+    outputDiv.innerText = "Connection error. Please check your internet connection or API settings.";
+  }
+}
+</script>
 
 </body>
 </html>
