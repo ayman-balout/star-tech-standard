@@ -1,1 +1,62 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Doctor | Star Tech Standard Ltd</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f8;color:#222}
+.box{max-width:700px;margin:40px auto;padding:25px;background:white;border-radius:12px;box-shadow:0 2px 12px #ccc}
+h1{margin-top:0}
+textarea,select,button{width:100%;box-sizing:border-box;padding:12px;margin-top:10px;border-radius:7px;border:1px solid #bbb;font-size:16px}
+button{background:#111;color:white;cursor:pointer}
+.result{margin-top:20px;padding:15px;background:#f0f3f5;border-radius:8px;display:none}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h1>Generator Doctor</h1>
+<p>Describe your generator problem and we will help identify the likely cause.</p>
+
+<label>Generator type</label>
+<select id="type">
+<option>Diesel Generator</option>
+<option>Other</option>
+</select>
+
+<label>What is the problem?</label>
+<textarea id="problem" rows="6" placeholder="Example: Generator cranks but does not start..."></textarea>
+
+<button onclick="diagnose()">Check My Generator</button>
+
+<div id="result" class="result"></div>
+</div>
+
+<script>
+function diagnose(){
+const p=document.getElementById('problem').value.toLowerCase();
+const r=document.getElementById('result');
+
+let text='Please describe the symptoms in more detail, including what happens when you try to start the generator.';
+
+if(p.includes('not start')||p.includes('does not start')||p.includes('won')){
+text='<b>Possible causes:</b><br>1. Weak or dead battery<br>2. Fuel supply problem<br>3. Fuel shut-off or solenoid issue<br>4. Air in the fuel system<br><br><b>Safe check:</b> Check battery condition and confirm there is clean fuel in the tank. Do not open high-pressure fuel lines while the engine is running.';
+}
+
+else if(p.includes('overheat')||p.includes('hot')||p.includes('temperature')){
+text='<b>Possible causes:</b><br>Low coolant, blocked radiator, faulty thermostat, cooling fan problem, or engine overload.<br><br><b>Safety:</b> Stop the generator and allow it to cool before opening the cooling system.';
+}
+
+else if(p.includes('voltage')||p.includes('avr')){
+text='<b>Possible causes:</b><br>AVR fault, excitation problem, loose connection, alternator fault, or incorrect engine speed/frequency.<br><br>Electrical testing should be carried out by a qualified technician.';
+}
+
+r.innerHTML=text;
+r.style.display='block';
+}
+</script>
+
+</body>
+</html>
