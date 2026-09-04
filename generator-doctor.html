@@ -3,62 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generator Doctor | Star Tech Standard Ltd</title>
+<title>Diesel Generator DoctorAI | Star Tech Standard Ltd</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
 font-family:Arial,sans-serif;
 margin:0;
 background:#f3f5f7;
-color:#222;
+color:#202124;
 }
+
 .container{
-max-width:700px;
-margin:25px auto;
-padding:20px;
+max-width:760px;
+margin:20px auto;
+padding:15px;
 }
+
 .card{
-background:white;
-padding:25px;
-border-radius:14px;
-box-shadow:0 2px 12px rgba(0,0,0,.12);
+background:#fff;
+padding:24px;
+border-radius:16px;
+box-shadow:0 3px 15px rgba(0,0,0,.12);
+margin-bottom:18px;
 }
+
+.header{
+background:#111;
+color:#fff;
+}
+
 h1{
+margin:0 0 8px;
+font-size:28px;
+}
+
+h2{
+font-size:20px;
 margin-top:0;
 }
+
 p{
 line-height:1.5;
 }
+
+.subtitle{
+color:#ddd;
+margin-bottom:0;
+}
+
 label{
 display:block;
 font-weight:bold;
-margin-top:18px;
+margin-top:17px;
 }
+
 input,select,textarea,button{
 width:100%;
-box-sizing:border-box;
 padding:13px;
 margin-top:8px;
 border:1px solid #ccc;
-border-radius:8px;
+border-radius:9px;
 font-size:16px;
+font-family:inherit;
 }
+
 textarea{
 min-height:130px;
+resize:vertical;
 }
+
 button{
-background:#111;
-color:white;
 border:none;
+background:#111;
+color:#fff;
 font-weight:bold;
-margin-top:22px;
+cursor:pointer;
 }
+
+button:hover{
+opacity:.9;
+}
+
+.green{
+background:#16803c;
+}
+
+.blue{
+background:#1769aa;
+}
+
+.red{
+background:#b42318;
+}
+
+.secondary{
+background:#666;
+}
+
 .note{
 background:#fff4d6;
-padding:12px;
-border-radius:8px;
-margin-top:18px;
+padding:13px;
+border-radius:9px;
+margin-top:17px;
 font-size:14px;
+line-height:1.5;
+}
+
+.warning{
+background:#ffe8e6;
+border-left:5px solid #b42318;
+padding:14px;
+border-radius:8px;
+margin-top:17px;
+}
+
+.success{
+background:#e8f7ed;
+border-left:5px solid #16803c;
+padding:14px;
+border-radius:8px;
+margin-top:17px;
+}
+
+.result{
+margin-top:22px;
+}
+
+.result-section{
+background:#f7f8fa;
+border-radius:10px;
+padding:15px;
+margin-top:12px;
+}
+
+.result-section h3{
+margin-top:0;
+}
+
+ul{
+padding-left:22px;
+line-height:1.6;
+}
+
+.photo-box{
+border:2px dashed #bbb;
+padding:18px;
+border-radius:10px;
+text-align:center;
+margin-top:8px;
+}
+
+.photo-box input{
+border:none;
+padding:5px;
+}
+
+.photo-note{
+font-size:13px;
+color:#555;
+margin-top:8px;
+}
+
+.preview{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:12px;
+}
+
+.preview-item{
+position:relative;
+}
+
+.preview img{
+width:95px;
+height:95px;
+object-fit:cover;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+.remove-photo{
+position:absolute;
+top:-7px;
+right:-7px;
+width:25px;
+height:25px;
+padding:0;
+margin:0;
+border-radius:50%;
+background:#b42318;
+font-size:13px;
+}
+
+.hidden{
+display:none;
+}
+
+.log{
+border:1px solid #ddd;
+border-radius:9px;
+padding:12px;
+margin-top:10px;
+}
+
+.log-date{
+font-size:12px;
+color:#777;
+}
+
+.action-row{
+display:flex;
+gap:10px;
+margin-top:12px;
+}
+
+.action-row button{
+flex:1;
+}
+
+@media(max-width:600px){
+.container{padding:10px}
+.card{padding:18px}
+.action-row{flex-direction:column}
 }
 </style>
 </head>
@@ -66,75 +235,327 @@ font-size:14px;
 <body>
 
 <div class="container">
+
+<!-- HEADER -->
+<div class="card header">
+<h1>🔧 Diesel Generator DoctorAI</h1>
+<p class="subtitle">
+Professional diesel generator diagnostic assistance by
+<b>Star Tech Standard Ltd</b>
+</p>
+</div>
+
+<!-- EQUIPMENT -->
 <div class="card">
 
-<h1>🔧 Generator Doctor</h1>
-
-<p>
-Describe your generator problem and Generator Doctor will help identify the possible cause.
-</p>
+<h2>1. Your Equipment</h2>
 
 <label>Generator Brand</label>
 <select id="brand">
 <option>Perkins</option>
 <option>Cummins</option>
 <option>Caterpillar (CAT)</option>
+<option>Volvo Penta</option>
+<option>FG Wilson</option>
 <option>Lovol</option>
+<option>Doosan</option>
 <option>Other</option>
 </select>
 
-<label>Generator Size</label>
-<input id="kva" type="text" placeholder="Example: 100 kVA">
+<label>Engine / Generator Model</label>
+<input id="model" placeholder="Example: Perkins 1104-44TAG2">
 
-<label>Problem</label>
-<select id="problemType">
-<option>Generator will not start</option>
-<option>Generator starts then stops</option>
-<option>Low or high voltage</option>
-<option>Overheating</option>
-<option>Low oil pressure</option>
-<option>Black smoke</option>
-<option>White smoke</option>
-<option>Excessive fuel consumption</option>
-<option>Battery / starting problem</option>
-<option>Other problem</option>
+<label>Generator Size</label>
+<input id="kva" placeholder="Example: 100 kVA">
+
+<label>Controller</label>
+<select id="controller">
+<option>Unknown / Not sure</option>
+<option>Deep Sea Electronics (DSE)</option>
+<option>ComAp</option>
+<option>SmartGen</option>
+<option>Woodward</option>
+<option>Other</option>
 </select>
 
-<label>Describe the symptoms</label>
-<textarea id="symptoms" placeholder="Tell us exactly what happens. Example: The engine cranks normally but does not start."></textarea>
+<label>Running Hours</label>
+<input id="hours" type="number" placeholder="Example: 5000">
 
-<div class="note">
-⚠️ Safety: Never open high-pressure diesel fuel lines while the engine is running. Stop the generator if there is overheating, abnormal noise, smoke, or another dangerous condition.
+<label>Voltage</label>
+<input id="voltage" placeholder="Example: 400V">
+
+<label>Frequency</label>
+<select id="frequency">
+<option>50 Hz</option>
+<option>60 Hz</option>
+<option>Unknown</option>
+</select>
+
 </div>
 
-<button onclick="checkProblem()">Continue Diagnosis</button>
+<!-- PROBLEM -->
+<div class="card">
 
-<div id="result"></div>
+<h2>2. What Is Wrong?</h2>
+
+<label>Main Problem</label>
+<select id="problemType">
+
+<option value="no_start">Generator will not start</option>
+<option value="starts_stops">Generator starts then stops</option>
+<option value="voltage">Low or high voltage</option>
+<option value="overheating">Overheating</option>
+<option value="oil_pressure">Low oil pressure</option>
+<option value="black_smoke">Black smoke</option>
+<option value="white_smoke">White smoke</option>
+<option value="fuel">Excessive fuel consumption</option>
+<option value="battery">Battery / starting problem</option>
+<option value="frequency">Low or high frequency / RPM</option>
+<option value="alternator">Alternator / charging problem</option>
+<option value="controller">Controller alarm / fault</option>
+<option value="other">Other problem</option>
+
+</select>
+
+<label>Describe the Symptoms</label>
+
+<textarea id="symptoms"
+placeholder="Tell us exactly what happens.
+
+Example:
+The engine cranks normally but does not start.
+Or:
+The generator starts normally but shuts down after 20 seconds with low oil pressure alarm."></textarea>
 
 </div>
+
+<!-- PHOTO -->
+<div class="card">
+
+<h2>3. Diagnostic Photos</h2>
+
+<div class="photo-box">
+
+📷 <b>Upload Generator Photos</b>
+
+<input
+type="file"
+id="photoInput"
+accept="image/*"
+multiple
+>
+
+<div class="photo-note">
+Upload photos ONLY of generator components, engine/fuel-system parts,
+alternator, wiring, terminals, or controller screens.
+<br><br>
+Clear photos of controller alarms and display screens are especially useful.
+</div>
+
+</div>
+
+<div id="preview" class="preview"></div>
+
+</div>
+
+<!-- SAFETY -->
+<div class="card">
+
+<div class="warning">
+
+<b>⚠️ Important Safety Warning</b>
+
+<ul>
+<li>Never open high-pressure diesel fuel lines while the engine is running.</li>
+<li>Do not touch exposed electrical terminals while energized.</li>
+<li>Stop the generator if there is severe overheating, abnormal noise, fire, fuel leakage, or dangerous electrical conditions.</li>
+<li>A diagnosis shown here is a preliminary diagnostic assessment, not confirmation of a failed component.</li>
+</ul>
+
+</div>
+
+<button class="green" onclick="startDiagnosis()">
+🔍 Start Diagnosis
+</button>
+
+</div>
+
+<!-- RESULT -->
+<div id="result" class="card hidden">
+
+<h2>🩺 Diagnostic Assessment</h2>
+
+<div id="diagnosisContent"></div>
+
+<div class="action-row">
+<button class="blue" onclick="copyReport()">📋 Copy Report</button>
+<button onclick="window.print()">🖨 Print</button>
+</div>
+
+</div>
+
+<!-- TECHNICIAN -->
+<div id="technician" class="card hidden">
+
+<h2>👨‍🔧 Professional Assistance</h2>
+
+<p>
+If the problem requires physical testing, repair, calibration or component
+replacement, you can request assistance from:
+</p>
+
+<div class="success">
+
+<b>Star Tech Standard Ltd</b><br>
+Diesel Generator Service & Diagnostics<br>
+Victoria Island, Lagos
+
+</div>
+
+<button class="green" onclick="requestTechnician()">
+📱 Request Star Tech Technician
+</button>
+
+</div>
+
+<!-- LOGS -->
+<div class="card">
+
+<h2>📁 Diagnostic Logs Vault</h2>
+
+<p>
+Your diagnostic cases can be saved on this device for future reference.
+</p>
+
+<button onclick="showLogs()">View Saved Cases</button>
+
+<div id="logs"></div>
+
+</div>
+
 </div>
 
 <script>
-function checkProblem(){
 
-let brand=document.getElementById("brand").value;
-let kva=document.getElementById("kva").value;
-let problem=document.getElementById("problemType").value;
-let symptoms=document.getElementById("symptoms").value;
+let selectedPhotos=[];
+let currentReport="";
 
-if(symptoms.trim()==""){
-alert("Please describe the symptoms first.");
+/* PHOTO UPLOAD */
+
+document.getElementById("photoInput").addEventListener("change",function(){
+
+const files=Array.from(this.files);
+
+files.forEach(file=>{
+
+if(!file.type.startsWith("image/")) return;
+
+selectedPhotos.push(file);
+
+});
+
+renderPhotos();
+
+this.value="";
+
+});
+
+function renderPhotos(){
+
+const preview=document.getElementById("preview");
+
+preview.innerHTML="";
+
+selectedPhotos.forEach((file,index)=>{
+
+const item=document.createElement("div");
+item.className="preview-item";
+
+const img=document.createElement("img");
+
+img.src=URL.createObjectURL(file);
+
+const remove=document.createElement("button");
+
+remove.className="remove-photo";
+remove.innerHTML="×";
+
+remove.onclick=function(){
+selectedPhotos.splice(index,1);
+renderPhotos();
+};
+
+item.appendChild(img);
+item.appendChild(remove);
+
+preview.appendChild(item);
+
+});
+
+}
+
+
+/* DIAGNOSIS */
+
+function startDiagnosis(){
+
+const brand=document.getElementById("brand").value;
+const model=document.getElementById("model").value;
+const kva=document.getElementById("kva").value;
+const controller=document.getElementById("controller").value;
+const hours=document.getElementById("hours").value;
+const voltage=document.getElementById("voltage").value;
+const frequency=document.getElementById("frequency").value;
+const problem=document.getElementById("problemType").value;
+const symptoms=document.getElementById("symptoms").value.trim();
+
+if(!symptoms){
+
+alert("Please describe the generator symptoms first.");
 return;
+
 }
 
-document.getElementById("result").innerHTML=
-"<div class='note'><b>Information received.</b><br><br>"+
-"Brand: "+brand+"<br>"+
-"Size: "+kva+"<br>"+
-"Problem: "+problem+"<br><br>"+
-"We are ready for the next diagnostic step.</div>";
-}
-</script>
+let diagnosis=getDiagnosis(problem);
 
-</body>
-</html>
+const report=`
+
+DIESEL GENERATOR DOCTORAI
+Star Tech Standard Ltd
+
+Generator Brand: ${brand}
+Model: ${model || "Not provided"}
+Size: ${kva || "Not provided"}
+Controller: ${controller}
+Running Hours: ${hours || "Not provided"}
+Voltage: ${voltage || "Not provided"}
+Frequency: ${frequency}
+
+Main Problem:
+${document.getElementById("problemType").selectedOptions[0].text}
+
+Symptoms:
+${symptoms}
+
+PRELIMINARY ASSESSMENT:
+${diagnosis.summary}
+
+POSSIBLE CAUSES:
+${diagnosis.causes.join("\n- ")}
+
+RECOMMENDED CHECKS:
+${diagnosis.checks.join("\n- ")}
+
+SAFETY:
+${diagnosis.safety}
+
+Photo references attached: ${selectedPhotos.length}
+
+This is a preliminary diagnostic assessment. Component failure should be confirmed by proper testing.
+`;
+
+currentReport=report;
+
+let html=`
+
+<div
