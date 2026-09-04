@@ -1,917 +1,201 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-43MGSDB87Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-43MGSDB87Z');
-  </script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Star Tech Standard Ltd | Generators, Diesel Service & Power Solutions</title>
-
-  <meta name="description" content="Star Tech Standard Ltd provides diesel generator sales, repairs and maintenance, diesel fuel systems, parts and industrial power solutions in Lagos, Nigeria.">
-
-  <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STAR TECH STANDARD LTD</title>
   <style>
-    /* Six Star Tech Standard service cards */
-    .cards article {
-      position: relative;
-      transition: box-shadow .15s ease, background .15s ease;
-      cursor: pointer;
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0d131d;
+      color: #ffffff;
     }
 
-    .cards article:hover {
-      background: #fafbfc;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1),
-                  inset 0 0 0 1px #e1a52c;
-    }
-
-    .card-link {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 10;
-      display: block;
-    }
-
-    /* Generator DoctorAI */
-    .doctor-link {
-      display: inline-block;
-      margin-top: 0;
-      padding: 10px 15px;
-      background: #111827;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 7px;
-      font-weight: bold;
-      position: relative;
-      z-index: 20;
-    }
-
-    .doctor-link:hover {
-      opacity: .9;
-    }
-
-    /* Keep cards and DoctorAI buttons neatly separated */
-    .service-item {
+    header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #0b1017;
+      border-bottom: 1px solid #1a2332;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
       gap: 10px;
     }
 
-    .service-item .doctor-link {
-      align-self: flex-start;
-    }
-
-    /* Generator Doctor AI Live Module Styles */
-    .doctor-ai-container {
-      background: #111827;
-      color: #ffffff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      margin: 40px auto;
-      max-width: 800px;
-    }
-
-    .doctor-ai-container h2 {
-      color: #e1a52c;
-      margin-top: 0;
-    }
-
-    .doctor-ai-container textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #374151;
-      background: #1f2937;
-      color: #fff;
-      font-size: 16px;
-      box-sizing: border-box;
-      resize: vertical;
-    }
-
-    .doctor-ai-container button {
-      background: #e1a52c;
-      color: #111827;
-      border: none;
-      padding: 12px 24px;
+    .logo-text {
       font-weight: bold;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .chat-btn {
+      background-color: #e2b13c;
+      color: #000000;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .card {
+      background-color: #141c2b;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border: 1px solid #202b3c;
+    }
+
+    .card-title {
+      color: #e2b13c;
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-description {
+      color: #b0bac9;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      height: 100px;
+      background-color: #1c273a;
+      border: 1px solid #2d3d59;
       border-radius: 6px;
+      color: #ffffff;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+      margin-bottom: 15px;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #e2b13c;
+    }
+
+    .action-btn {
+      width: 100%;
+      background-color: #e2b13c;
+      color: #000000;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 15px;
       cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-      transition: background 0.2s;
     }
 
-    .doctor-ai-container button:hover {
-      background: #d4931f;
+    .action-btn:active {
+      opacity: 0.9;
     }
 
-    .doctor-ai-response {
+    #aiResponseOutput {
+      display: none;
       margin-top: 20px;
       padding: 15px;
-      background: #1f2937;
-      border-left: 4px solid #e1a52c;
+      background-color: #1c273a;
+      border-left: 4px solid #e2b13c;
       border-radius: 4px;
-      white-space: pre-wrap;
-      display: none;
+      font-size: 14px;
+      line-height: 1.6;
+      word-wrap: break-word;
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <div class="wrap nav">
-
-    <a class="brand"
-       href="https://wa.me/2348033452862"
-       target="_blank"
-       rel="noopener"
-       aria-label="Chat with us on WhatsApp">
-      <img src="star-tech-logo.png"
-           alt="Star Tech Standard Ltd"
-           class="brand-logo">
-      <span>STAR TECH STANDARD LTD</span>
-    </a>
-
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#kat-power">Kat Power</a>
-      <a href="#locations">Locations</a>
-      <a href="#generator-doctor-app">DoctorAI</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <a class="btn small"
-       href="https://wa.me/2348033452862"
-       target="_blank"
-       rel="noopener">
-      Chat with Us
-    </a>
-
-  </div>
-</header>
-
-<main id="top">
-
-<section class="hero">
-  <div class="grid"></div>
-
-  <div class="wrap hero-in">
-
-    <p class="eyebrow">POWER • ENGINEERING • SERVICE</p>
-
-    <h1>
-      Reliable power solutions for businesses that cannot afford downtime.
-    </h1>
-
-    <p class="lead">
-      Star Tech Standard Ltd supplies generators and provides specialist
-      diesel-generator repairs, maintenance, diesel fuel systems, parts
-      and industrial power support.
-    </p>
-
-    <div class="actions">
-
-      <a class="btn" href="#contact">
-        Request a Quote
-      </a>
-
-      <a class="btn ghost"
-         href="https://wa.me/2348033452862"
-         target="_blank"
-         rel="noopener">
-        Chat on WhatsApp
-      </a>
-
+  <header>
+    <div class="logo-container">
+      <span style="color: #e2b13c; font-size: 20px;">★</span>
+      <span class="logo-text">STAR TECH STANDARD LTD</span>
     </div>
+    <a href="#" class="chat-btn">Chat with Us</a>
+  </header>
 
-    <p class="note">
-      Diesel generator repair and technical service.
-      Gasoline generators are supplied under our Kat Power brand;
-      gasoline-generator repair is not offered.
-    </p>
-
-  </div>
-</section>
-
-
-<section class="strip">
-
-  <div class="wrap stripgrid">
-
-    <div>
-      <b>DIESEL GENERATORS</b>
-      <span>Sales, repair & maintenance</span>
-    </div>
-
-    <div>
-      <b>DIESEL FUEL SYSTEMS</b>
-      <span>Pumps, tanks & transfer</span>
-    </div>
-
-    <div>
-      <b>PARTS</b>
-      <span>Engine & alternator components</span>
-    </div>
-
-    <div>
-      <b>TECHNICAL SUPPORT</b>
-      <span>Practical site solutions</span>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- SIX COMPANY ACTIVITY CARDS -->
-<section id="services" class="section">
-
-  <div class="wrap">
-
-    <p class="eyebrow dark">WHAT WE DO</p>
-
-    <div class="head">
-
-      <h2>
-        Generator and power services built around your site.
-      </h2>
-
-      <p>
-        From routine maintenance to complex diesel fuel and monitoring
-        systems, we focus on dependable operation and clear technical scope.
+  <div class="container">
+    <div class="card">
+      <h2 class="card-title">🩺 Diesel Generator Doctor AI</h2>
+      <p class="card-description">
+        Enter your generator model, fault code, or engine symptom below for instant troubleshooting advice.
       </p>
 
-    </div>
+      <textarea 
+        id="aiQueryInput" 
+        placeholder="Example: Perkins engine starting failure, fault code E04, or black exhaust smoke..."></textarea>
 
+      <button class="action-btn" onclick="askDoctorAI()">Ask Generator Doctor</button>
 
-    <div class="cards">
-
-
-      <!-- CARD 01 -->
-      <div class="service-item">
-
-        <article>
-
-          <i>01</i>
-
-          <h3>
-            Generator Sales
-          </h3>
-
-          <p>
-            Supply of diesel generator sets for commercial,
-            residential and industrial applications.
-          </p>
-
-          <a class="card-link"
-             href="generator-sales.html"
-             aria-label="Generator Sales — view details">
-          </a>
-
-        </article>
-
-        <a class="doctor-link"
-           href="#generator-doctor-app">
-          🩺 Generator DoctorAI
-        </a>
-
-      </div>
-
-
-      <!-- CARD 02 -->
-      <div class="service-item">
-
-        <article>
-
-          <i>02</i>
-
-          <h3>
-            Diesel Repairs & Maintenance
-          </h3>
-
-          <p>
-            Fault diagnosis, preventive maintenance, corrective repairs
-            and technical troubleshooting for diesel generators.
-          </p>
-
-          <a class="card-link"
-             href="repairs-maintenance.html"
-             aria-label="Diesel Repairs and Maintenance — view details">
-          </a>
-
-        </article>
-
-        <a class="doctor-link"
-           href="#generator-doctor-app">
-          🩺 Generator DoctorAI
-        </a>
-
-      </div>
-
-
-      <!-- CARD 03 -->
-      <div class="service-item">
-
-        <article>
-
-          <i>03</i>
-
-          <h3>
-            Diesel Fuel Systems
-          </h3>
-
-          <p>
-            Injector protection, fuel filtration and fuel-quality
-            diagnostics — identifying contamination and faults before
-            they damage your engine.
-          </p>
-
-          <a class="card-link"
-             href="fuel-quality-diagnostics.html"
-             aria-label="Diesel Fuel Systems — view details">
-          </a>
-
-        </article>
-
-        <a class="doctor-link"
-           href="#generator-doctor-app">
-          🩺 Generator DoctorAI
-        </a>
-
-      </div>
-
-
-      <!-- CARD 04 -->
-      <div class="service-item">
-
-        <article>
-
-          <i>04</i>
-
-          <h3>
-            Monitoring & Transfer
-          </h3>
-
-          <p>
-            Fuel transfer, flow metering, level protection and control
-            systems for generator plants and facilities.
-          </p>
-
-          <a class="card-link"
-             href="monitoring-transfer.html"
-             aria-label="Monitoring and Transfer — view tank and transfer system design">
-          </a>
-
-        </article>
-
-        <a class="doctor-link"
-           href="#generator-doctor-app">
-          🩺 Generator DoctorAI
-        </a>
-
-      </div>
-
-
-      <!-- CARD 05 -->
-      <div class="service-item">
-
-        <article>
-
-          <i>05</i>
-
-          <h3>
-            Parts & Components
-          </h3>
-
-          <p>
-            Specialist generator components including alternators,
-            AVR, pumps and engine-system parts.
-          </p>
-
-          <a class="card-link"
-             href="parts-components.html"
-             aria-label="Parts and Components — view details">
-          </a>
-
-        </article>
-
-        <a class="doctor-link"
-           href="#generator-doctor-app">
-          🩺 Generator DoctorAI
-        </a>
-
-      </div>
-
-
-      <!-- CARD 06 -->
-      <div class="service-item">
-
-        <article>
-
-          <i>06</i>
-
-          <h3>
-            Technical Support
-          </h3>
-
-          <p>
-            Practical support focused on reliability,
-            troubleshooting and reducing equipment downtime.
-          </p>
-
-          <a class="card-link"
-             href="technical-support.html"
-             aria-label="Technical Support — view details">
-          </a>
-
-        </article>
-
-        <a class="doctor-link"
-           href="#generator-doctor-app">
-          🩺 Generator DoctorAI
-        </a>
-
-      </div>
-
-
+      <div id="aiResponseOutput"></div>
     </div>
   </div>
 
-</section>
-
-
-<!-- KAT POWER — COMPLETELY SEPARATE FROM THE SIX COMPANY CARDS -->
-<section id="kat-power" class="feature">
-
-  <div class="wrap featuregrid">
-
-    <div class="kat-card">
-
-      <a href="katpower.html">
-
-        <img src="kat-power-logo.png"
-             alt="KAT-POWER gasoline generators"
-             class="kat-logo-img">
-
-      </a>
-
-      <div class="kat-caption">
-        GASOLINE GENERATORS
-      </div>
-
-    </div>
-
-
-    <div>
-
-      <p class="eyebrow dark">
-        KAT POWER
-      </p>
-
-      <h2>
-        Gasoline generators for sale.
-      </h2>
-
-      <p class="big">
-        Kat Power is our gasoline-generator brand.
-        Selected models are available for sale through our
-        showroom display locations.
-      </p>
-
-      <div class="notice">
-
-        <b>Important:</b>
-
-        Kat Power gasoline generators are supplied for sale.
-        Star Tech Standard's repair and maintenance service
-        is for diesel generators.
-
-      </div>
-
-
-      <div class="specs">
-
-        <span>
-          <b>Available</b>
-          8 kW / 10 kVA soundproof
-        </span>
-
-        <span>
-          <b>Available</b>
-          5 kW basic model
-        </span>
-
-        <span>
-          <b>Brand</b>
-          KAT POWER
-        </span>
-
-        <span>
-          <b>Sales</b>
-          Lagos showroom locations
-        </span>
-
-      </div>
-
-
-      <a class="btn" href="#locations">
-        View Sales Locations
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- GENERATOR DOCTOR AI APP SECTION -->
-<section id="generator-doctor-app" class="section">
-  <div class="wrap">
-    <div class="doctor-ai-container">
-      <h2>🩺 Diesel Generator Doctor AI</h2>
-      <p>Enter your generator model, fault code, or engine symptom below for instant troubleshooting advice.</p>
-      <textarea id="ai-user-input" rows="4" placeholder="Example: Perkins engine starting failure, fault code E04, or black exhaust smoke..."></textarea>
-      <button onclick="runGeneratorDoctor()">Ask Generator Doctor</button>
-      <div id="ai-output" class="doctor-ai-response"></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ABOUT STAR TECH STANDARD -->
-<section class="dark section">
-
-  <div class="wrap aboutgrid">
-
-    <div>
-
-      <p class="eyebrow">
-        ABOUT STAR TECH STANDARD
-      </p>
-
-      <h2>
-        Power equipment. Practical expertise. Dependable service.
-      </h2>
-
-    </div>
-
-
-    <div>
-
-      <p class="big">
-        Star Tech Standard Ltd is a Nigeria-based power equipment
-        and technical service company serving customers who depend
-        on reliable electrical power.
-      </p>
-
-      <p>
-        Our work covers generator sales, diesel generator repairs
-        and maintenance, diesel fuel systems, monitoring and
-        transfer systems, parts and specialist technical services.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- KAT POWER SALES LOCATIONS -->
-<section id="locations" class="section">
-
-  <div class="wrap">
-
-    <p class="eyebrow dark">
-      KAT POWER SALES LOCATIONS
-    </p>
-
-    <div class="head">
-
-      <h2>
-        Find a display location in Lagos.
-      </h2>
-
-      <p>
-        Use the Google Maps buttons below to open the location
-        directly in Google Maps.
-      </p>
-
-    </div>
-
-
-    <div class="locations">
-
-
-      <!-- SANGOTEDO -->
-      <article>
-
-        <small>
-          SANGOTEDO
-        </small>
-
-        <h3>
-          Koshar Home of Electronics
-        </h3>
-
-        <p>
-          The Emperor Estate Mall, Km 34, New Road,
-          Sangotedo, Lagos.
-        </p>
-
-        <a class="map"
-           href="https://www.google.com/maps/search/?api=1&query=Koshar+Home+of+Electronics+Sangotedo+Lagos"
-           target="_blank"
-           rel="noopener">
-          Open in Google Maps →
-        </a>
-
-      </article>
-
-
-      <!-- AJAH / LEKKI -->
-      <article>
-
-        <small>
-          AJAH / LEKKI
-        </small>
-
-        <h3>
-          Koshar Electronics
-        </h3>
-
-        <p>
-          Lekki–Epe Expressway, Ajah, Lekki 106104, Lagos.
-        </p>
-
-        <a class="map"
-           href="https://www.google.com/maps/search/?api=1&query=Koshar+Electronics+Ajah+Lagos"
-           target="_blank"
-           rel="noopener">
-          Open in Google Maps →
-        </a>
-
-      </article>
-
-
-      <!-- VICTORIA ISLAND -->
-      <article>
-
-        <small>
-          VICTORIA ISLAND
-        </small>
-
-        <h3>
-          MBE (Dream Plaza)
-        </h3>
-
-        <p>
-          Dream Plaza, 7 Bishop Aboyade Cole Street,
-          Eti-Osa, Lagos 106104.
-        </p>
-
-        <a class="map"
-           href="https://www.google.com/maps/search/?api=1&query=Dream+Plaza+7+Bishop+Aboyade+Cole+Street+Lagos"
-           target="_blank"
-           rel="noopener">
-          Open in Google Maps →
-        </a>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CONTACT -->
-<section id="contact" class="section contact">
-
-  <div class="wrap contactgrid">
-
-    <div>
-
-      <p class="eyebrow dark">
-        CONTACT
-      </p>
-
-      <h2>
-        Tell us what you need.
-      </h2>
-
-      <p>
-        For generator service, equipment supply, parts or a
-        power-system project, contact Star Tech Standard Ltd.
-      </p>
-
-
-      <div class="details">
-
-        <b>
-          Star Tech Standard Ltd
-        </b>
-
-        <span>
-          Victoria Island, Lagos, Nigeria
-        </span>
-
-        <a href="mailto:info@startechstandard.com">
-          info@startechstandard.com
-        </a>
-
-        <a href="https://wa.me/2348033452862"
-           target="_blank"
-           rel="noopener">
-          Chat with us on WhatsApp
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <div class="contact-actions">
-
-      <a class="btn"
-         href="https://wa.me/2348033452862"
-         target="_blank"
-         rel="noopener">
-        Chat on WhatsApp
-      </a>
-
-      <a class="btn outline-dark"
-         href="mailto:info@startechstandard.com?subject=Star%20Tech%20Standard%20Enquiry">
-        Email Us
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-</main>
-
-
-<!-- FOOTER -->
-<footer>
-
-  <div class="wrap foot">
-
-    <div class="brand">
-
-      <img src="star-tech-logo.png"
-           alt="Star Tech Standard Ltd"
-           class="brand-logo">
-
-      <span>
-        STAR TECH STANDARD LTD
-      </span>
-
-    </div>
-
-
-    <div>
-
-      <b>
-        POWER
-      </b>
-
-      <span>
-        Diesel generators
-      </span>
-
-      <span>
-        Fuel systems
-      </span>
-
-      <span>
-        Technical service
-      </span>
-
-    </div>
-
-
-    <div>
-
-      <b>
-        KAT POWER
-      </b>
-
-      <span>
-        Gasoline generators for sale
-      </span>
-
-      <span>
-        No gasoline-generator repair
-      </span>
-
-    </div>
-
-
-    <div>
-
-      <b>
-        CONTACT
-      </b>
-
-      <span>
-        Victoria Island, Lagos
-      </span>
-
-      <span>
-
-        <a href="https://wa.me/2348033452862"
-           target="_blank"
-           rel="noopener">
-          Chat on WhatsApp
-        </a>
-
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div class="wrap copy">
-
-    © 2026 Star Tech Standard Ltd. All rights reserved.
-
-  </div>
-
-</footer>
-
-<!-- JAVASCRIPT FOR GENERATOR DOCTOR AI -->
-<script>
-async function runGeneratorDoctor() {
-  const userInput = document.getElementById("ai-user-input").value;
-  const outputDiv = document.getElementById("ai-output");
-
-  if (!userInput.trim()) {
-    outputDiv.style.display = "block";
-    outputDiv.innerText = "Please describe the generator issue or fault code first.";
-    return;
-  }
-
-  outputDiv.style.display = "block";
-  outputDiv.innerText = "Analyzing generator fault...";
-
-  // PASTE YOUR GEMINI API KEY BETWEEN THE QUOTES BELOW
-  const apiKey = "AQ.Ab8RN6LUqVvpmFXEZDh6J6L7fiXG18rHKj2vVokHp8b1rWCf2Q";
-  
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-
-  const requestData = {
-    system_instruction: {
-      parts: [{ text: "You are the Star Tech Standard Diesel Generator Doctor AI. Provide concise, clear, expert diagnostic troubleshooting steps for diesel generator engines, electrical alternators, AVRs, and fault codes." }]
-    },
-    contents: [
-      {
-        parts: [{ text: userInput }]
+  <script>
+    async function askDoctorAI() {
+      const inputField = document.getElementById('aiQueryInput');
+      const responseBox = document.getElementById('aiResponseOutput');
+      const userPrompt = inputField.value.trim();
+
+      if (!userPrompt) {
+        responseBox.style.display = 'block';
+        responseBox.innerHTML = '<p style="color: #ff4d4d; margin:0;">Please enter a fault code or symptom first.</p>';
+        return;
       }
-    ]
-  };
 
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(requestData)
-    });
+      responseBox.style.display = 'block';
+      responseBox.innerHTML = '<p style="color: #e2b13c; margin:0;">DoctorAI is analyzing your generator issue...</p>';
 
-    const data = await response.json();
+      // REPLACE THE TEXT BELOW WITH YOUR GOOGLE AI STUDIO KEY (starts with AIzaSy...)
+      const apiKey = "AQ.Ab8RN6LUqVvpmFXEZDh6J6L7fiXG18rHKj2vVokHp8b1rWCf2Q";
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
-    if (data.candidates && data.candidates[0].content.parts[0].text) {
-      outputDiv.innerText = data.candidates[0].content.parts[0].text;
-    } else {
-      outputDiv.innerText = "Error: Unable to process diagnostic request. Please check your key or try again.";
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{ text: `You are an expert diesel generator engineer. Provide concise troubleshooting advice for: ${userPrompt}` }]
+            }]
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+          const reply = data.candidates[0].content.parts[0].text;
+          responseBox.innerHTML = `<p style="color: #ffffff; margin:0;">${reply.replace(/\n/g, '<br>')}</p>`;
+        } else {
+          throw new Error('Invalid API Response');
+        }
+      } catch (err) {
+        responseBox.innerHTML = '<p style="color: #ff4d4d; margin:0;">Error: Unable to process diagnostic request. Please check your key or try again.</p>';
+      }
     }
-  } catch (error) {
-    outputDiv.innerText = "Connection error. Please check your internet connection or API settings.";
-  }
-}
-</script>
+  </script>
 
 </body>
 </html>
