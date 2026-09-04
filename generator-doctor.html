@@ -1,60 +1,138 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generator Doctor | Star Tech Standard Ltd</title>
+
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#f4f6f8;color:#222}
-.box{max-width:700px;margin:40px auto;padding:25px;background:white;border-radius:12px;box-shadow:0 2px 12px #ccc}
-h1{margin-top:0}
-textarea,select,button{width:100%;box-sizing:border-box;padding:12px;margin-top:10px;border-radius:7px;border:1px solid #bbb;font-size:16px}
-button{background:#111;color:white;cursor:pointer}
-.result{margin-top:20px;padding:15px;background:#f0f3f5;border-radius:8px;display:none}
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f3f5f7;
+color:#222;
+}
+.container{
+max-width:700px;
+margin:25px auto;
+padding:20px;
+}
+.card{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+h1{
+margin-top:0;
+}
+p{
+line-height:1.5;
+}
+label{
+display:block;
+font-weight:bold;
+margin-top:18px;
+}
+input,select,textarea,button{
+width:100%;
+box-sizing:border-box;
+padding:13px;
+margin-top:8px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+textarea{
+min-height:130px;
+}
+button{
+background:#111;
+color:white;
+border:none;
+font-weight:bold;
+margin-top:22px;
+}
+.note{
+background:#fff4d6;
+padding:12px;
+border-radius:8px;
+margin-top:18px;
+font-size:14px;
+}
 </style>
 </head>
+
 <body>
 
-<div class="box">
-<h1>Generator Doctor</h1>
-<p>Describe your generator problem and we will help identify the likely cause.</p>
+<div class="container">
+<div class="card">
 
-<label>Generator type</label>
-<select id="type">
-<option>Diesel Generator</option>
+<h1>🔧 Generator Doctor</h1>
+
+<p>
+Describe your generator problem and Generator Doctor will help identify the possible cause.
+</p>
+
+<label>Generator Brand</label>
+<select id="brand">
+<option>Perkins</option>
+<option>Cummins</option>
+<option>Caterpillar (CAT)</option>
+<option>Lovol</option>
 <option>Other</option>
 </select>
 
-<label>What is the problem?</label>
-<textarea id="problem" rows="6" placeholder="Example: Generator cranks but does not start..."></textarea>
+<label>Generator Size</label>
+<input id="kva" type="text" placeholder="Example: 100 kVA">
 
-<button onclick="diagnose()">Check My Generator</button>
+<label>Problem</label>
+<select id="problemType">
+<option>Generator will not start</option>
+<option>Generator starts then stops</option>
+<option>Low or high voltage</option>
+<option>Overheating</option>
+<option>Low oil pressure</option>
+<option>Black smoke</option>
+<option>White smoke</option>
+<option>Excessive fuel consumption</option>
+<option>Battery / starting problem</option>
+<option>Other problem</option>
+</select>
 
-<div id="result" class="result"></div>
+<label>Describe the symptoms</label>
+<textarea id="symptoms" placeholder="Tell us exactly what happens. Example: The engine cranks normally but does not start."></textarea>
+
+<div class="note">
+⚠️ Safety: Never open high-pressure diesel fuel lines while the engine is running. Stop the generator if there is overheating, abnormal noise, smoke, or another dangerous condition.
+</div>
+
+<button onclick="checkProblem()">Continue Diagnosis</button>
+
+<div id="result"></div>
+
+</div>
 </div>
 
 <script>
-function diagnose(){
-const p=document.getElementById('problem').value.toLowerCase();
-const r=document.getElementById('result');
+function checkProblem(){
 
-let text='Please describe the symptoms in more detail, including what happens when you try to start the generator.';
+let brand=document.getElementById("brand").value;
+let kva=document.getElementById("kva").value;
+let problem=document.getElementById("problemType").value;
+let symptoms=document.getElementById("symptoms").value;
 
-if(p.includes('not start')||p.includes('does not start')||p.includes('won')){
-text='<b>Possible causes:</b><br>1. Weak or dead battery<br>2. Fuel supply problem<br>3. Fuel shut-off or solenoid issue<br>4. Air in the fuel system<br><br><b>Safe check:</b> Check battery condition and confirm there is clean fuel in the tank. Do not open high-pressure fuel lines while the engine is running.';
+if(symptoms.trim()==""){
+alert("Please describe the symptoms first.");
+return;
 }
 
-else if(p.includes('overheat')||p.includes('hot')||p.includes('temperature')){
-text='<b>Possible causes:</b><br>Low coolant, blocked radiator, faulty thermostat, cooling fan problem, or engine overload.<br><br><b>Safety:</b> Stop the generator and allow it to cool before opening the cooling system.';
-}
-
-else if(p.includes('voltage')||p.includes('avr')){
-text='<b>Possible causes:</b><br>AVR fault, excitation problem, loose connection, alternator fault, or incorrect engine speed/frequency.<br><br>Electrical testing should be carried out by a qualified technician.';
-}
-
-r.innerHTML=text;
-r.style.display='block';
+document.getElementById("result").innerHTML=
+"<div class='note'><b>Information received.</b><br><br>"+
+"Brand: "+brand+"<br>"+
+"Size: "+kva+"<br>"+
+"Problem: "+problem+"<br><br>"+
+"We are ready for the next diagnostic step.</div>";
 }
 </script>
 
