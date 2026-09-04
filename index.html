@@ -43,22 +43,33 @@
       display: block;
     }
 
-    /* Generator DoctorAI access */
+    /* Generator DoctorAI */
     .doctor-link {
       display: inline-block;
-      position: relative;
-      z-index: 20;
-      margin-top: 12px;
+      margin-top: 0;
       padding: 10px 15px;
       background: #111827;
       color: #fff;
       text-decoration: none;
       border-radius: 7px;
       font-weight: bold;
+      position: relative;
+      z-index: 20;
     }
 
     .doctor-link:hover {
       opacity: .9;
+    }
+
+    /* Keep cards and DoctorAI buttons neatly separated */
+    .service-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-item .doctor-link {
+      align-self: flex-start;
     }
   </style>
 </head>
@@ -73,11 +84,9 @@
        target="_blank"
        rel="noopener"
        aria-label="Chat with us on WhatsApp">
-
       <img src="star-tech-logo.png"
            alt="Star Tech Standard Ltd"
            class="brand-logo">
-
       <span>STAR TECH STANDARD LTD</span>
     </a>
 
@@ -101,7 +110,6 @@
 
 <main id="top">
 
-<!-- HERO -->
 <section class="hero">
   <div class="grid"></div>
 
@@ -121,7 +129,9 @@
 
     <div class="actions">
 
-      <a class="btn" href="#contact">Request a Quote</a>
+      <a class="btn" href="#contact">
+        Request a Quote
+      </a>
 
       <a class="btn ghost"
          href="https://wa.me/2348033452862"
@@ -142,8 +152,8 @@
 </section>
 
 
-<!-- STAR TECH STANDARD MAIN ACTIVITIES -->
 <section class="strip">
+
   <div class="wrap stripgrid">
 
     <div>
@@ -167,6 +177,7 @@
     </div>
 
   </div>
+
 </section>
 
 
@@ -179,7 +190,9 @@
 
     <div class="head">
 
-      <h2>Generator and power services built around your site.</h2>
+      <h2>
+        Generator and power services built around your site.
+      </h2>
 
       <p>
         From routine maintenance to complex diesel fuel and monitoring
@@ -191,158 +204,197 @@
 
     <div class="cards">
 
+
       <!-- CARD 01 -->
-      <article>
+      <div class="service-item">
 
-        <i>01</i>
+        <article>
 
-        <h3>Generator Sales</h3>
+          <i>01</i>
 
-        <p>
-          Supply of diesel generator sets for commercial,
-          residential and industrial applications.
-        </p>
+          <h3>
+            Generator Sales
+          </h3>
+
+          <p>
+            Supply of diesel generator sets for commercial,
+            residential and industrial applications.
+          </p>
+
+          <a class="card-link"
+             href="generator-sales.html"
+             aria-label="Generator Sales — view details">
+          </a>
+
+        </article>
 
         <a class="doctor-link"
            href="generator-doctor.html">
           🩺 Generator DoctorAI
         </a>
 
-        <a class="card-link"
-           href="generator-sales.html"
-           aria-label="Generator Sales — view details">
-        </a>
-
-      </article>
+      </div>
 
 
       <!-- CARD 02 -->
-      <article>
+      <div class="service-item">
 
-        <i>02</i>
+        <article>
 
-        <h3>Diesel Repairs & Maintenance</h3>
+          <i>02</i>
 
-        <p>
-          Fault diagnosis, preventive maintenance, corrective repairs
-          and technical troubleshooting for diesel generators.
-        </p>
+          <h3>
+            Diesel Repairs & Maintenance
+          </h3>
+
+          <p>
+            Fault diagnosis, preventive maintenance, corrective repairs
+            and technical troubleshooting for diesel generators.
+          </p>
+
+          <a class="card-link"
+             href="repairs-maintenance.html"
+             aria-label="Diesel Repairs and Maintenance — view details">
+          </a>
+
+        </article>
 
         <a class="doctor-link"
            href="generator-doctor.html">
           🩺 Generator DoctorAI
         </a>
 
-        <a class="card-link"
-           href="repairs-maintenance.html"
-           aria-label="Diesel Repairs and Maintenance — view details">
-        </a>
-
-      </article>
+      </div>
 
 
       <!-- CARD 03 -->
-      <article>
+      <div class="service-item">
 
-        <i>03</i>
+        <article>
 
-        <h3>Diesel Fuel Systems</h3>
+          <i>03</i>
 
-        <p>
-          Injector protection, fuel filtration and fuel-quality
-          diagnostics — identifying contamination and faults before
-          they damage your engine.
-        </p>
+          <h3>
+            Diesel Fuel Systems
+          </h3>
+
+          <p>
+            Injector protection, fuel filtration and fuel-quality
+            diagnostics — identifying contamination and faults before
+            they damage your engine.
+          </p>
+
+          <a class="card-link"
+             href="fuel-quality-diagnostics.html"
+             aria-label="Diesel Fuel Systems — view details">
+          </a>
+
+        </article>
 
         <a class="doctor-link"
            href="generator-doctor.html">
           🩺 Generator DoctorAI
         </a>
 
-        <a class="card-link"
-           href="fuel-quality-diagnostics.html"
-           aria-label="Diesel Fuel Systems — view details">
-        </a>
-
-      </article>
+      </div>
 
 
       <!-- CARD 04 -->
-      <article>
+      <div class="service-item">
 
-        <i>04</i>
+        <article>
 
-        <h3>Monitoring & Transfer</h3>
+          <i>04</i>
 
-        <p>
-          Fuel transfer, flow metering, level protection and control
-          systems for generator plants and facilities.
-        </p>
+          <h3>
+            Monitoring & Transfer
+          </h3>
+
+          <p>
+            Fuel transfer, flow metering, level protection and control
+            systems for generator plants and facilities.
+          </p>
+
+          <a class="card-link"
+             href="monitoring-transfer.html"
+             aria-label="Monitoring and Transfer — view tank and transfer system design">
+          </a>
+
+        </article>
 
         <a class="doctor-link"
            href="generator-doctor.html">
           🩺 Generator DoctorAI
         </a>
 
-        <a class="card-link"
-           href="monitoring-transfer.html"
-           aria-label="Monitoring and Transfer — view tank and transfer system design">
-        </a>
-
-      </article>
+      </div>
 
 
       <!-- CARD 05 -->
-      <article>
+      <div class="service-item">
 
-        <i>05</i>
+        <article>
 
-        <h3>Parts & Components</h3>
+          <i>05</i>
 
-        <p>
-          Specialist generator components including alternators,
-          AVR, pumps and engine-system parts.
-        </p>
+          <h3>
+            Parts & Components
+          </h3>
+
+          <p>
+            Specialist generator components including alternators,
+            AVR, pumps and engine-system parts.
+          </p>
+
+          <a class="card-link"
+             href="parts-components.html"
+             aria-label="Parts and Components — view details">
+          </a>
+
+        </article>
 
         <a class="doctor-link"
            href="generator-doctor.html">
           🩺 Generator DoctorAI
         </a>
 
-        <a class="card-link"
-           href="parts-components.html"
-           aria-label="Parts and Components — view details">
-        </a>
-
-      </article>
+      </div>
 
 
       <!-- CARD 06 -->
-      <article>
+      <div class="service-item">
 
-        <i>06</i>
+        <article>
 
-        <h3>Technical Support</h3>
+          <i>06</i>
 
-        <p>
-          Practical support focused on reliability,
-          troubleshooting and reducing equipment downtime.
-        </p>
+          <h3>
+            Technical Support
+          </h3>
+
+          <p>
+            Practical support focused on reliability,
+            troubleshooting and reducing equipment downtime.
+          </p>
+
+          <a class="card-link"
+             href="technical-support.html"
+             aria-label="Technical Support — view details">
+          </a>
+
+        </article>
 
         <a class="doctor-link"
            href="generator-doctor.html">
           🩺 Generator DoctorAI
         </a>
 
-        <a class="card-link"
-           href="technical-support.html"
-           aria-label="Technical Support — view details">
-        </a>
+      </div>
 
-      </article>
 
     </div>
   </div>
+
 </section>
 
 
@@ -370,9 +422,13 @@
 
     <div>
 
-      <p class="eyebrow dark">KAT POWER</p>
+      <p class="eyebrow dark">
+        KAT POWER
+      </p>
 
-      <h2>Gasoline generators for sale.</h2>
+      <h2>
+        Gasoline generators for sale.
+      </h2>
 
       <p class="big">
         Kat Power is our gasoline-generator brand.
@@ -389,6 +445,7 @@
         is for diesel generators.
 
       </div>
+
 
       <div class="specs">
 
@@ -414,6 +471,7 @@
 
       </div>
 
+
       <a class="btn" href="#locations">
         View Sales Locations
       </a>
@@ -421,6 +479,7 @@
     </div>
 
   </div>
+
 </section>
 
 
@@ -459,6 +518,7 @@
     </div>
 
   </div>
+
 </section>
 
 
@@ -487,10 +547,13 @@
 
     <div class="locations">
 
+
       <!-- SANGOTEDO -->
       <article>
 
-        <small>SANGOTEDO</small>
+        <small>
+          SANGOTEDO
+        </small>
 
         <h3>
           Koshar Home of Electronics
@@ -514,7 +577,9 @@
       <!-- AJAH / LEKKI -->
       <article>
 
-        <small>AJAH / LEKKI</small>
+        <small>
+          AJAH / LEKKI
+        </small>
 
         <h3>
           Koshar Electronics
@@ -537,7 +602,9 @@
       <!-- VICTORIA ISLAND -->
       <article>
 
-        <small>VICTORIA ISLAND</small>
+        <small>
+          VICTORIA ISLAND
+        </small>
 
         <h3>
           MBE (Dream Plaza)
@@ -557,8 +624,11 @@
 
       </article>
 
+
     </div>
+
   </div>
+
 </section>
 
 
@@ -625,7 +695,9 @@
     </div>
 
   </div>
+
 </section>
+
 
 </main>
 
@@ -650,7 +722,9 @@
 
     <div>
 
-      <b>POWER</b>
+      <b>
+        POWER
+      </b>
 
       <span>
         Diesel generators
@@ -669,7 +743,9 @@
 
     <div>
 
-      <b>KAT POWER</b>
+      <b>
+        KAT POWER
+      </b>
 
       <span>
         Gasoline generators for sale
@@ -684,18 +760,22 @@
 
     <div>
 
-      <b>CONTACT</b>
+      <b>
+        CONTACT
+      </b>
 
       <span>
         Victoria Island, Lagos
       </span>
 
       <span>
+
         <a href="https://wa.me/2348033452862"
            target="_blank"
            rel="noopener">
           Chat on WhatsApp
         </a>
+
       </span>
 
     </div>
@@ -704,10 +784,13 @@
 
 
   <div class="wrap copy">
+
     © 2026 Star Tech Standard Ltd. All rights reserved.
+
   </div>
 
 </footer>
+
 
 </body>
 </html>
