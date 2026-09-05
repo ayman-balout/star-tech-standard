@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Spec Check — Fuel Consumption & Health Comparison | Star Tech Standard</title>
+<meta name="description" content="Select your generator's manufacturer, model, and configuration to compare fuel consumption against industry benchmarks and flag possible issues.">
+<style>
+  :root{
+    --bg:#0e1116;
+    --panel:#161b22;
+    --panel-2:#1c2330;
+    --border:#2a3241;
+    --text:#e6e9ef;
+    --muted:#9aa4b2;
+    --accent:#ff8a00;
+    --accent-2:#ffb347;
+    --ok:#3ecf8e;
+    --warn:#ffb020;
+    --bad:#ff5c5c;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;
+  }
+  header.top{
+    padding:22px 20px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#12161d,#0e1116);
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .brand{font-weight:700;letter-spacing:.3px;font-size:18px;}
+  .brand span{color:var(--accent);}
+  nav.top-links a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px;}
+  nav.top-links a:hover{color:var(--accent-2);}
+
+  .hero{padding:34px 0 8px;}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+  h1{font-size:28px;margin:8px 0 6px;}
+  .lede{color:var(--muted);font-size:15px;max-width:640px;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+    margin-top:18px;
+  }
+  .card h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .step-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--accent);color:#1a1200;font-size:12px;font-weight:800;
+  }
+  .card .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+  .card.disabled{opacity:.45;pointer-events:none;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  select,input[type=number],input[type=text]{
+    width:100%;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:10px 10px;
+    border-radius:8px;
+    font-size:14px;
+  }
+  select:focus,input:focus{outline:none;border-color:var(--accent);}
+  .field{margin-bottom:4px;}
+
+  .radio-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .radio-chip{
+    border:1px solid var(--border);
+    background:var(--panel-2);
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:13px;
+    cursor:pointer;
+    color:var(--muted);
+  }
+  .radio-chip input{display:none;}
+  .radio-chip.active{border-color:var(--accent);color:var(--accent-2);background:#2a1f0f;}
+
+  .upload-note{
+    font-size:12.5px;color:var(--muted);margin-top:8px;
+    border:1px dashed var(--border);border-radius:8px;padding:10px 12px;
+  }
+  .upload-note strong{color:var(--accent-2);}
+
+  button.primary{
+    background:var(--accent);
+    color:#1a1200;
+    border:none;
+    padding:13px 22px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:6px;
+  }
+  button.primary:hover{background:var(--accent-2);}
+  button.primary:disabled{background:#3a3f47;color:#8b909a;cursor:not-allowed;}
+
+  .result-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+    margin-top:22px;
+    display:none;
+  }
+  .result-card.show{display:block;}
+  .verdict{
+    display:flex;align-items:center;gap:10px;
+    font-size:16px;font-weight:700;margin-bottom:12px;
+  }
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;}
+  .dot.ok{background:var(--ok);}
+  .dot.warn{background:var(--warn);}
+  .dot.bad{background:var(--bad);}
+  .dot.insufficient{background:var(--muted);}
+
+  table.benchmark{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+  table.benchmark th, table.benchmark td{
+    border:1px solid var(--border);padding:8px 10px;text-align:center;
+  }
+  table.benchmark th{background:var(--panel-2);color:var(--muted);font-weight:600;}
+  table.benchmark td.highlight{background:#2a1f0f;color:var(--accent-2);font-weight:700;}
+
+  ul.flags{list-style:none;padding:0;margin:14px 0;}
+  ul.flags li{
+    padding:10px 12px;border-radius:8px;margin-bottom:8px;
+    background:var(--panel-2);border:1px solid var(--border);
+    font-size:14px;display:flex;gap:10px;align-items:flex-start;
+  }
+  ul.flags li .icon{flex:0 0 auto;}
+
+  .disclaimer{
+    font-size:12.5px;color:var(--muted);margin-top:16px;
+    border-top:1px solid var(--border);padding-top:12px;
+  }
+
+  .cta{
+    margin-top:18px;padding:16px;border-radius:8px;
+    background:#1a2418;border:1px solid #2f4a2a;
+  }
+  .cta.soft{background:var(--panel-2);border:1px solid var(--border);}
+  .cta p{margin:0 0 10px;font-size:14px;color:var(--text);}
+  .cta a.wa{
+    display:inline-block;background:var(--ok);color:#0a1f14;
+    padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;
+  }
+
+  footer{padding:30px 0 60px;color:var(--muted);font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Star Tech <span>Standard</span></div>
+    <nav class="top-links">
+      <a href="index.html">Home</a>
+      <a href="generator-doctor.html">Generator DoctorAI</a>
+      <a href="monitoring-transfer.html">Monitoring &amp; Transfer</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Diagnostic Tool</div>
+    <h1>Generator Spec Check</h1>
+    <p class="lede">Select your generator's exact configuration below. We compare your reported fuel consumption against industry-standard benchmarks for that specific rating and load — not a generic guess — and flag anything that looks off.</p>
+  </div>
+
+  <!-- STEP 1: MANUFACTURER -->
+  <div class="card" id="step-manufacturer">
+    <h2><span class="step-num">1</span> Engine Manufacturer</h2>
+    <p class="sub">Choose the manufacturer stamped on your engine nameplate.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="manufacturer">Manufacturer</label>
+        <select id="manufacturer">
+          <option value="">Select manufacturer…</option>
+          <option value="perkins">Perkins</option>
+          <option value="cummins">Cummins</option>
+          <option value="caterpillar">Caterpillar</option>
+          <option value="other">Other / Unknown manufacturer</option>
+        </select>
+      </div>
+    </div>
+    <div class="upload-note" id="mfr-unknown-note" style="display:none;">
+      <strong>No problem.</strong> We can still run a rating-based benchmark comparison below using your generator's kVA/kW and load. For a full brand-specific check, send us a clear photo of the engine nameplate on WhatsApp.
+    </div>
+  </div>
+
+  <!-- STEP 2: MODEL -->
+  <div class="card disabled" id="step-model">
+    <h2><span class="step-num">2</span> Engine Model</h2>
+    <p class="sub">Common models for the selected manufacturer appear below.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="model">Model</label>
+        <select id="model">
+          <option value="">Select manufacturer first…</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: DIESEL SYSTEM -->
+  <div class="card disabled" id="step-fuelsystem">
+    <h2><span class="step-num">3</span> Diesel Injection System</h2>
+    <p class="sub">This helps us flag the right kind of fault (e.g. pump wear vs injector coking vs sensor fault).</p>
+    <div class="grid">
+      <div class="field">
+        <label for="injection">Injection system</label>
+        <select id="injection">
+          <option value="">Select injection system…</option>
+          <option value="inline">Inline pump</option>
+          <option value="rotary">Rotary / distributor pump</option>
+          <option value="common-rail">Common rail (electronic)</option>
+          <option value="unit-injector">Electronic unit injector</option>
+          <option value="unit-pump">Unit pump</option>
+          <option value="pt-system">PT system</option>
+          <option value="other">Other known system</option>
+          <option value="unknown">Unknown — will send photo</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fuelbrand">Fuel system manufacturer</label>
+        <select id="fuelbrand">
+          <option value="">Select fuel system brand…</option>
+          <option value="bosch">Bosch</option>
+          <option value="delphi">Delphi</option>
+          <option value="stanadyne">Stanadyne</option>
+          <option value="denso">Denso</option>
+          <option value="zexel">Zexel</option>
+          <option value="cummins-cpp">Cummins (own system)</option>
+          <option value="cat-cpp">Caterpillar (own system)</option>
+          <option value="other">Other</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:14px;">
+      <div class="field">
+        <label for="modified">Has this unit been modified from factory injection spec? (e.g. larger pump, upsized injectors, re-tuned governor to take more load)</label>
+        <select id="modified">
+          <option value="no">No — standard factory setup</option>
+          <option value="yes">Yes — pump/injectors/governor changed to increase output</option>
+          <option value="unknown">Not sure</option>
+        </select>
+      </div>
+      <div class="field" id="modifiedOutputWrap" style="display:none;">
+        <label for="modifiedOutput">Current actual tested output (kVA), if known — from a load bank test or your own logs, not the old nameplate</label>
+        <input type="number" id="modifiedOutput" min="1" placeholder="e.g. 320">
+      </div>
+    </div>
+    <div class="upload-note" id="modified-note" style="display:none;">
+      <strong>Noted.</strong> Modified fuel systems are usually tuned to trade efficiency for power, so they can legitimately burn 10–20% more per kWh than a stock benchmark even when perfectly healthy. We'll widen the comparison range and flag this as lower-confidence rather than treating extra consumption as a fault by default.
+    </div>
+  </div>
+
+  <!-- STEP 4: GENERATOR SPEC -->
+  <div class="card disabled" id="step-spec">
+    <h2><span class="step-num">4</span> Generator Specification</h2>
+    <p class="sub">Your rating and frequency are needed for the fuel-consumption benchmark — these two fields are required.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="freq">Frequency</label>
+        <select id="freq">
+          <option value="">Select…</option>
+          <option value="50">50 Hz (1500 RPM)</option>
+          <option value="60">60 Hz (1800 RPM)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ratingType">Rating input</label>
+        <select id="ratingType">
+          <option value="kva">I know kVA</option>
+          <option value="kw">I know kW</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ratingValue" id="ratingLabel">kVA rating</label>
+        <input type="number" id="ratingValue" placeholder="e.g. 250" min="1">
+      </div>
+      <div class="field">
+        <label for="phase">Phase</label>
+        <select id="phase">
+          <option value="3">3-phase</option>
+          <option value="1">1-phase</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="dutyClass">Duty class</label>
+        <select id="dutyClass">
+          <option value="standby">Standby</option>
+          <option value="prime">Prime</option>
+          <option value="rated">Continuous / Rated</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="voltage">Voltage</label>
+        <input type="text" id="voltage" placeholder="e.g. 415V / 230V">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: CONDITION -->
+  <div class="card disabled" id="step-condition">
+    <h2><span class="step-num">5</span> Current Condition &amp; Reading</h2>
+    <p class="sub">The more you fill in, the more precise the comparison. Load % (or your actual L/hr reading) is what drives the fuel-consumption check.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="ageYears">Generator age (years)</label>
+        <input type="number" id="ageYears" min="0" placeholder="e.g. 6">
+      </div>
+      <div class="field">
+        <label for="hours">Total running hours</label>
+        <input type="number" id="hours" min="0" placeholder="e.g. 8500">
+      </div>
+      <div class="field">
+        <label for="loadPct">Average load (%)</label>
+        <input type="number" id="loadPct" min="1" max="110" placeholder="e.g. 60">
+      </div>
+      <div class="field">
+        <label for="actualLph">Current fuel consumption (L/hr) — if measured</label>
+        <input type="number" id="actualLph" min="0" step="0.1" placeholder="optional, e.g. 42">
+      </div>
+      <div class="field">
+        <label for="overhaul">Recent major overhaul?</label>
+        <select id="overhaul">
+          <option value="unknown">Unknown</option>
+          <option value="yes-recent">Yes, within last 2,000 hrs</option>
+          <option value="yes-old">Yes, but over 5,000 hrs ago</option>
+          <option value="no">No overhaul done</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="injectorService">Injector / pump service history</label>
+        <select id="injectorService">
+          <option value="unknown">Unknown</option>
+          <option value="recent">Serviced within last 1,000 hrs</option>
+          <option value="overdue">Overdue / not sure when last done</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="turbo">Turbo condition</label>
+        <select id="turbo">
+          <option value="good">Normal / no symptoms</option>
+          <option value="noisy">Whining / unusual noise</option>
+          <option value="smoking">Excess smoke (black/blue)</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="airfilter">Air filter condition</label>
+        <select id="airfilter">
+          <option value="clean">Clean / recently changed</option>
+          <option value="dirty">Dirty / overdue change</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="cooling">Cooling system condition</label>
+        <select id="cooling">
+          <option value="good">Normal operating temperature</option>
+          <option value="overheating">Running hot / overheating</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:22px;">
+    <button class="primary" id="analyzeBtn" disabled>Check My Generator</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card" id="result">
+    <div class="verdict" id="verdictLine"><span class="dot" id="verdictDot"></span><span id="verdictText"></span></div>
+    <div id="resultBody"></div>
+  </div>
+
+  <div class="disclaimer">
+    This tool compares your generator against published industry-average diesel consumption benchmarks (approx. 0.22–0.28 L per kWh delivered, standard across manufacturer datasheets) combined with the condition details you provide. It is a screening estimate, not a substitute for a technician's inspection or your engine's exact spec sheet. Figures for your specific engine model may vary ±10–15% from these benchmarks even when everything is healthy.
+  </div>
+</div>
+
+<footer>
+  Star Tech Standard Ltd — Diesel Generator Sales, Repair &amp; Fuel Systems, Lagos, Nigeria<br>
+  WhatsApp: 2348033452862 · info@startechstandard.com
+</footer>
+
+<script>
+(function(){
+  const MODELS = {
+    perkins: [
+      "400 Series (400D/403D)", "1100 Series (1103A/1104A/1104C)", "1300 Series (1306)",
+      "2200 Series (2206/2506)", "4000 Series", "Other known Perkins model", "Unknown — will send photo"
+    ],
+    cummins: [
+      "4B/4BT", "6B/6BT", "6C/6CT", "QSB Series", "QSL9", "QSX15", "NT/NTA855", "KTA Series",
+      "Other known Cummins model", "Unknown — will send photo"
+    ],
+    caterpillar: [
+      "3304/3306", "3406", "C7", "C9", "C13", "C15/C18", "C27/C32", "3500 Series",
+      "Other known Caterpillar model", "Unknown — will send photo"
+    ],
+    other: ["Other known model", "Unknown — will send photo"]
+  };
+
+  const manufacturerSel = document.getElementById('manufacturer');
+  const modelStep = document.getElementById('step-model');
+  const modelSel = document.getElementById('model');
+  const fuelStep = document.getElementById('step-fuelsystem');
+  const specStep = document.getElementById('step-spec');
+  const conditionStep = document.getElementById('step-condition');
+  const mfrUnknownNote = document.getElementById('mfr-unknown-note');
+  const analyzeBtn = document.getElementById('analyzeBtn');
+
+  function unlock(el){ el.classList.remove('disabled'); }
+
+  manufacturerSel.addEventListener('change', function(){
+    const val = this.value;
+    mfrUnknownNote.style.display = (val === 'other') ? 'block' : 'none';
+    modelSel.innerHTML = '<option value="">Select model…</option>';
+    if (val && MODELS[val]) {
+      MODELS[val].forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m; opt.textContent = m;
+        modelSel.appendChild(opt);
+      });
+      unlock(modelStep);
+    } else {
+      modelStep.classList.add('disabled');
+    }
+    fuelStep.classList.add('disabled');
+    checkReady();
+  });
+
+  modelSel.addEventListener('change', function(){
+    if (this.value) unlock(fuelStep);
+    else fuelStep.classList.add('disabled');
+    checkReady();
+  });
+
+  document.getElementById('injection').addEventListener('change', function(){
+    if (this.value) unlock(specStep);
+    checkReady();
+  });
+  document.getElementById('fuelbrand').addEventListener('change', checkReady);
+
+  const modifiedSel = document.getElementById('modified');
+  const modifiedOutputWrap = document.getElementById('modifiedOutputWrap');
+  const modifiedNote = document.getElementById('modified-note');
+  modifiedSel.addEventListener('change', function(){
+    const show = this.value === 'yes';
+    modifiedOutputWrap.style.display = show ? 'block' : 'none';
+    modifiedNote.style.display = show ? 'block' : 'none';
+  });
+
+  const ratingType = document.getElementById('ratingType');
+  const ratingLabel = document.getElementById('ratingLabel');
+  ratingType.addEventListener('change', function(){
+    ratingLabel.textContent = this.value === 'kva' ? 'kVA rating' : 'kW rating';
+  });
+
+  ['freq','ratingValue','phase','dutyClass','voltage'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', function(){
+      const freq = document.getElementById('freq').value;
+      const rating = document.getElementById('ratingValue').value;
+      if (freq && rating) unlock(conditionStep);
+      checkReady();
+    });
+    document.getElementById(id).addEventListener('change', function(){
+      const freq = document.getElementById('freq').value;
+      const rating = document.getElementById('ratingValue').value;
+      if (freq && rating) unlock(conditionStep);
+      checkReady();
+    });
+  });
+
+  document.querySelectorAll('#step-condition input, #step-condition select').forEach(el=>{
+    el.addEventListener('input', checkReady);
+    el.addEventListener('change', checkReady);
+  });
+
+  function checkReady(){
+    const freq = document.getElementById('freq').value;
+    const rating = parseFloat(document.getElementById('ratingValue').value);
+    analyzeBtn.disabled = !(freq && rating > 0);
+  }
+
+  analyzeBtn.addEventListener('click', runCheck);
+
+  function esc(s){ return (s||'').toString(); }
+
+  function runCheck(){
+    const manufacturer = manufacturerSel.value;
+    const model = modelSel.value;
+    const injection = document.getElementById('injection').value;
+    const fuelbrand = document.getElementById('fuelbrand').value;
+    const modified = document.getElementById('modified').value;
+    const modifiedOutput = parseFloat(document.getElementById('modifiedOutput').value);
+    const freq = document.getElementById('freq').value;
+    const ratingType_ = ratingType.value;
+    let ratingValue = parseFloat(document.getElementById('ratingValue').value);
+    let usedTestedOutput = false;
+    let effectiveRatingType = ratingType_;
+    if (modified === 'yes' && modifiedOutput > 0) {
+      ratingValue = modifiedOutput;
+      effectiveRatingType = 'kva'; // tested output field is always entered as kVA
+      usedTestedOutput = true;
+    }
+    const dutyClass = document.getElementById('dutyClass').value;
+    const loadPct = parseFloat(document.getElementById('loadPct').value);
+    const actualLph = parseFloat(document.getElementById('actualLph').value);
+    const ageYears = document.getElementById('ageYears').value;
+    const hours = parseFloat(document.getElementById('hours').value);
+    const overhaul = document.getElementById('overhaul').value;
+    const injectorService = document.getElementById('injectorService').value;
+    const turbo = document.getElementById('turbo').value;
+    const airfilter = document.getElementById('airfilter').value;
+    const cooling = document.getElementById('cooling').value;
+
+    const result = document.getElementById('result');
+    const body = document.getElementById('resultBody');
+    const dot = document.getElementById('verdictDot');
+    const verdictText = document.getElementById('verdictText');
+
+    if (!freq || !ratingValue) {
+      dot.className = 'dot insufficient';
+      verdictText.textContent = 'INSUFFICIENT DATA';
+      body.innerHTML = '<p>Please select frequency and enter your generator\'s kVA or kW rating before we can run a fuel-consumption comparison.</p>';
+      result.classList.add('show');
+      return;
+    }
+
+    // Convert to kW baseline
+    const kW = effectiveRatingType === 'kva' ? ratingValue * 0.8 : ratingValue;
+
+    // Industry benchmark: 0.22–0.28 L/kWh standard; widen to 0.22–0.34 if unit is a known modified/uprated build
+    const isModified = (modified === 'yes');
+    const rateLow = 0.22;
+    const rateHigh = isModified ? 0.34 : 0.28;
+
+    const loadLevels = [25,50,75,100];
+    const rows = loadLevels.map(pct=>{
+      const outputKw = kW * (pct/100);
+      const low = outputKw * rateLow;
+      const high = outputKw * rateHigh;
+      return {pct, low, high};
+    });
+
+    let benchmarkHtml = '<table class="benchmark"><thead><tr><th>Load</th><th>Typical L/hr (range)</th></tr></thead><tbody>';
+    rows.forEach(r=>{
+      const isUserLoad = loadPct && Math.abs(r.pct - loadPct) <= 12.5;
+      benchmarkHtml += `<tr><td>${r.pct}%</td><td class="${isUserLoad?'highlight':''}">${r.low.toFixed(1)} – ${r.high.toFixed(1)} L/hr</td></tr>`;
+    });
+    benchmarkHtml += '</tbody></table>';
+
+    let flags = [];
+    let severity = 'ok'; // ok, warn, bad
+
+    // Consumption comparison
+    let consumptionNote = '';
+    if (usedTestedOutput) {
+      consumptionNote += `<p style="color:var(--accent-2);font-size:13.5px;">Using your reported current tested output (${modifiedOutput} kVA) instead of the original nameplate rating, since this unit has been modified. Benchmark tolerance widened accordingly.</p>`;
+    }
+    if (loadPct > 0) {
+      const outputKw = kW * (loadPct/100);
+      const expectedLow = outputKw * rateLow;
+      const expectedHigh = outputKw * rateHigh;
+      const overshootThreshold = isModified ? 1.20 : 1.15;
+      if (actualLph > 0) {
+        if (actualLph > expectedHigh * overshootThreshold) {
+          severity = 'bad';
+          flags.push({icon:'⚠️', text:`Reported consumption (${actualLph} L/hr) is significantly above the expected range (${expectedLow.toFixed(1)}–${expectedHigh.toFixed(1)} L/hr) for ${loadPct}% load${isModified ? ', even allowing for the wider tolerance on a modified fuel system' : ''}. This pattern is often linked to worn injectors/pump, a dirty air filter, poor fuel quality, or turbo underboost.`});
+        } else if (actualLph > expectedHigh) {
+          severity = severity === 'bad' ? 'bad' : 'warn';
+          flags.push({icon:'⚠️', text:`Reported consumption (${actualLph} L/hr) is a little above the typical range (${expectedLow.toFixed(1)}–${expectedHigh.toFixed(1)} L/hr) for ${loadPct}% load. Worth monitoring — recheck after a filter/service if it persists.`});
+        } else {
+          flags.push({icon:'✅', text:`Reported consumption (${actualLph} L/hr) falls within the expected range (${expectedLow.toFixed(1)}–${expectedHigh.toFixed(1)} L/hr) for ${loadPct}% load${isModified ? ' (widened range applied for a modified fuel system)' : ''}.`});
+        }
+      } else {
+        consumptionNote += `<p>No measured L/hr entered — here is the expected benchmark range at your reported ${loadPct}% load: <strong>${expectedLow.toFixed(1)}–${expectedHigh.toFixed(1)} L/hr</strong>. Log your actual consumption over a few hours and re-run this check for a direct comparison.</p>`;
+      }
+    } else {
+      consumptionNote += '<p>Enter your average load % for a load-specific comparison, or use the full benchmark table below.</p>';
+    }
+
+    // Condition-based flags
+    if (turbo === 'noisy') { flags.push({icon:'🔧', text:'Turbo noise reported — often an early sign of bearing wear or boost leak. Left unaddressed this typically increases fuel consumption and can lead to turbo failure.'}); severity = severity==='bad'?'bad':'warn'; }
+    if (turbo === 'smoking') { flags.push({icon:'🔧', text:'Excess smoke reported — commonly linked to turbo failure, injector faults, or an over-fueling condition. Recommend inspection before continued heavy use.'}); severity='bad'; }
+    if (airfilter === 'dirty') { flags.push({icon:'🌀', text:'Air filter reported dirty/overdue — a restricted filter forces richer fueling and raises consumption. Low-cost fix, worth doing first.'}); severity = severity==='bad'?'bad':'warn'; }
+    if (cooling === 'overheating') { flags.push({icon:'🌡️', text:'Overheating reported — this stresses injectors and pistons and can itself increase fuel consumption. Should be inspected before consumption is judged reliable.'}); severity='bad'; }
+    if (injectorService === 'overdue') { flags.push({icon:'💉', text:'Injector/pump service is overdue or unknown — worn injectors are one of the most common causes of excess diesel consumption in generators of any brand.'}); severity = severity==='bad'?'bad':'warn'; }
+    if (overhaul === 'no' && hours > 10000) { flags.push({icon:'🛠️', text:`${hours.toLocaleString()} hours with no major overhaul recorded — most manufacturers recommend a top overhaul in the 8,000–10,000 hour range depending on duty. Worth scheduling an inspection.`}); severity = severity==='bad'?'bad':'warn'; }
+
+    if (flags.length === 0) {
+      flags.push({icon:'✅', text:'No red flags based on the details provided. Keep to your regular service intervals.'});
+    }
+
+    // Verdict
+    if (severity === 'bad') { dot.className = 'dot bad'; verdictText.textContent = 'Possible issue detected — recommend inspection'; }
+    else if (severity === 'warn') { dot.className = 'dot warn'; verdictText.textContent = 'Minor flags found — worth monitoring'; }
+    else { dot.className = 'dot ok'; verdictText.textContent = 'No issues flagged'; }
+
+    let configSummary = `<p style="color:var(--muted);font-size:13px;">Checked configuration: <strong>${esc(manufacturer || 'Unspecified')} ${esc(model)}</strong>, ${esc(injection || 'injection system not specified')}${fuelbrand ? ', ' + esc(fuelbrand) + ' fuel system' : ''}, ${ratingValue}${effectiveRatingType==='kva'?' kVA':' kW'} @ ${freq}Hz, ${esc(dutyClass)} duty${isModified ? ' — modified/uprated fuel system' : ''}.</p>`;
+
+    let flagsHtml = '<ul class="flags">' + flags.map(f=>`<li><span class="icon">${f.icon}</span><span>${f.text}</span></li>`).join('') + '</ul>';
+
+    let ctaHtml = '';
+    const inScopeBrand = ['perkins','cummins','caterpillar'].includes(manufacturer);
+    if (severity === 'bad' || severity === 'warn') {
+      if (inScopeBrand) {
+        ctaHtml = `<div class="cta"><p>This is a brand we service directly. Send us these results on WhatsApp and we'll advise on next steps or schedule a technician visit.</p>
+        <a class="wa" href="https://wa.me/2348033452862?text=Hello%2C%20I%20ran%20a%20Generator%20Spec%20Check%20on%20my%20${encodeURIComponent(manufacturer)}%20${encodeURIComponent(model)}%20generator%20and%20got%20a%20flagged%20result.%20Can%20you%20advise%3F" target="_blank" rel="noopener">Chat with us on WhatsApp</a></div>`;
+      } else {
+        ctaHtml = `<div class="cta soft"><p>This result is outside our directly serviced brands (Perkins, Cummins, Caterpillar), but send us the details and a nameplate photo on WhatsApp — we can still advise.</p>
+        <a class="wa" href="https://wa.me/2348033452862?text=Hello%2C%20I%20ran%20a%20Generator%20Spec%20Check%20and%20got%20a%20flagged%20result%20on%20my%20generator.%20Can%20you%20advise%3F" target="_blank" rel="noopener">Chat with us on WhatsApp</a></div>`;
+      }
+    }
+
+    body.innerHTML = configSummary + consumptionNote + benchmarkHtml + flagsHtml + ctaHtml;
+    result.classList.add('show');
+    result.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+})();
+</script>
+
+</body>
+</html>
