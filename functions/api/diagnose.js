@@ -25,7 +25,7 @@ export async function onRequestPost(context) {
 
     if (!apiKey) {
       return new Response(
-        JSON.stringify({ error: "Server is missing GEMINI_API_KEY. Add it in Cloudflare Pages > Settings > Environment variables." }),
+        JSON.stringify({ error: "Server is missing GEMINI_API_KEY. AQ.Ab8RN6LlK2CERs1ndD9Qr0P5urElAkC5HmWV6kNBisGTSJoHvw" }),
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
