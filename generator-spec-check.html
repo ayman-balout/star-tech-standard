@@ -7,16 +7,17 @@
 <meta name="description" content="Select your generator's manufacturer, model, and configuration to compare fuel consumption against industry benchmarks and flag possible issues.">
 <style>
   :root{
-    --bg:#0e1116;
-    --panel:#161b22;
-    --panel-2:#1c2330;
-    --border:#2a3241;
-    --text:#e6e9ef;
-    --muted:#9aa4b2;
-    --accent:#ff8a00;
-    --accent-2:#ffb347;
+    --bg:#0a1220;
+    --panel:#101b2e;
+    --panel-2:#142238;
+    --border:#293b54;
+    --text:#ffffff;
+    --muted:#a7b3c4;
+    --accent:#e1a52b;
+    --accent-2:#f0bb52;
+    --accent-text:#0d1a2c;
     --ok:#3ecf8e;
-    --warn:#ffb020;
+    --warn:#e1a52b;
     --bad:#ff5c5c;
     --radius:10px;
   }
@@ -31,7 +32,7 @@
   header.top{
     padding:22px 20px;
     border-bottom:1px solid var(--border);
-    background:linear-gradient(180deg,#12161d,#0e1116);
+    background:linear-gradient(180deg,#0d1830,var(--bg));
   }
   .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
   header.top .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
@@ -56,7 +57,7 @@
   .step-num{
     display:inline-flex;align-items:center;justify-content:center;
     width:22px;height:22px;border-radius:50%;
-    background:var(--accent);color:#1a1200;font-size:12px;font-weight:800;
+    background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:800;
   }
   .card .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
   .card.disabled{opacity:.45;pointer-events:none;}
@@ -86,7 +87,7 @@
     color:var(--muted);
   }
   .radio-chip input{display:none;}
-  .radio-chip.active{border-color:var(--accent);color:var(--accent-2);background:#2a1f0f;}
+  .radio-chip.active{border-color:var(--accent);color:var(--accent-2);background:#2a2210;}
 
   .upload-note{
     font-size:12.5px;color:var(--muted);margin-top:8px;
@@ -96,7 +97,7 @@
 
   button.primary{
     background:var(--accent);
-    color:#1a1200;
+    color:var(--accent-text);
     border:none;
     padding:13px 22px;
     border-radius:8px;
@@ -106,7 +107,7 @@
     margin-top:6px;
   }
   button.primary:hover{background:var(--accent-2);}
-  button.primary:disabled{background:#3a3f47;color:#8b909a;cursor:not-allowed;}
+  button.primary:disabled{background:#3a4457;color:#8b95a8;cursor:not-allowed;}
 
   .result-card{
     background:var(--panel);
@@ -132,7 +133,7 @@
     border:1px solid var(--border);padding:8px 10px;text-align:center;
   }
   table.benchmark th{background:var(--panel-2);color:var(--muted);font-weight:600;}
-  table.benchmark td.highlight{background:#2a1f0f;color:var(--accent-2);font-weight:700;}
+  table.benchmark td.highlight{background:#2a2210;color:var(--accent-2);font-weight:700;}
 
   ul.flags{list-style:none;padding:0;margin:14px 0;}
   ul.flags li{
@@ -149,14 +150,16 @@
 
   .cta{
     margin-top:18px;padding:16px;border-radius:8px;
-    background:#1a2418;border:1px solid #2f4a2a;
+    background:var(--panel-2);border:1px solid #2f4a2a;
   }
   .cta.soft{background:var(--panel-2);border:1px solid var(--border);}
   .cta p{margin:0 0 10px;font-size:14px;color:var(--text);}
   .cta a.wa{
-    display:inline-block;background:var(--ok);color:#0a1f14;
-    padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;
+    display:inline-block;background:transparent;color:var(--text);
+    padding:10px 18px;border-radius:8px;border:1.5px solid var(--muted);
+    text-decoration:none;font-weight:700;font-size:14px;
   }
+  .cta a.wa:hover{border-color:var(--accent-2);color:var(--accent-2);}
 
   footer{padding:30px 0 60px;color:var(--muted);font-size:12.5px;text-align:center;}
 </style>
