@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost of Downtime &amp; Excess Fuel Calculator | Star Tech Standard</title>
+<meta name="description" content="Turn excess fuel consumption and generator downtime into a real Naira figure — see what an unresolved fault is actually costing you.">
+<style>
+  :root{
+    --bg:#0a1220;
+    --panel:#101b2e;
+    --panel-2:#142238;
+    --border:#293b54;
+    --text:#ffffff;
+    --muted:#a7b3c4;
+    --accent:#e1a52b;
+    --accent-2:#f0bb52;
+    --accent-text:#0d1a2c;
+    --ok:#3ecf8e;
+    --warn:#e1a52b;
+    --bad:#ff5c5c;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;
+  }
+  header.top{
+    padding:22px 20px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#0d1830,var(--bg));
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .brand{font-weight:700;letter-spacing:.3px;font-size:18px;}
+  .brand span{color:var(--accent);}
+  nav.top-links a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px;}
+  nav.top-links a:hover{color:var(--accent-2);}
+
+  .hero{padding:34px 0 8px;}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+  h1{font-size:28px;margin:8px 0 6px;}
+  .lede{color:var(--muted);font-size:15px;max-width:640px;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+    margin-top:18px;
+  }
+  .card h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .step-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:800;
+  }
+  .card .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  input[type=number]{
+    width:100%;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:10px 10px;
+    border-radius:8px;
+    font-size:14px;
+  }
+  input:focus{outline:none;border-color:var(--accent);}
+  .field{margin-bottom:4px;}
+
+  .upload-note{
+    font-size:12.5px;color:var(--muted);margin-top:8px;
+    border:1px dashed var(--border);border-radius:8px;padding:10px 12px;
+  }
+  .upload-note strong{color:var(--accent-2);}
+  .upload-note a{color:var(--accent-2);}
+
+  button.primary{
+    background:var(--accent);
+    color:var(--accent-text);
+    border:none;
+    padding:13px 22px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:6px;
+  }
+  button.primary:hover{background:var(--accent-2);}
+  button.primary:disabled{background:#3a4457;color:#8b95a8;cursor:not-allowed;}
+
+  .result-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+    margin-top:22px;
+    display:none;
+  }
+  .result-card.show{display:block;}
+  .verdict{
+    display:flex;align-items:center;gap:10px;
+    font-size:16px;font-weight:700;margin-bottom:12px;
+  }
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;}
+  .dot.ok{background:var(--ok);}
+  .dot.warn{background:var(--warn);}
+  .dot.bad{background:var(--bad);}
+  .dot.insufficient{background:var(--muted);}
+
+  table.cost{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+  table.cost th, table.cost td{
+    border:1px solid var(--border);padding:9px 10px;text-align:left;
+  }
+  table.cost th{background:var(--panel-2);color:var(--muted);font-weight:600;width:48%;}
+  table.cost td.figure{font-weight:700;color:var(--accent-2);}
+
+  .big-total{
+    background:var(--panel-2);border:1px solid var(--border);border-radius:8px;
+    padding:16px;margin:14px 0;text-align:center;
+  }
+  .big-total .amount{font-size:26px;font-weight:800;color:var(--accent-2);}
+  .big-total .label{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+  .disclaimer{
+    font-size:12.5px;color:var(--muted);margin-top:16px;
+    border-top:1px solid var(--border);padding-top:12px;
+  }
+
+  .cta{
+    margin-top:18px;padding:16px;border-radius:8px;
+    background:var(--panel-2);border:1px solid var(--border);
+  }
+  .cta p{margin:0 0 10px;font-size:14px;color:var(--text);}
+  .cta a.wa{
+    display:inline-block;background:transparent;color:var(--text);
+    padding:10px 18px;border-radius:8px;border:1.5px solid var(--muted);
+    text-decoration:none;font-weight:700;font-size:14px;
+  }
+  .cta a.wa:hover{border-color:var(--accent-2);color:var(--accent-2);}
+
+  footer{padding:30px 0 60px;color:var(--muted);font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Star Tech <span>Standard</span></div>
+    <nav class="top-links">
+      <a href="index.html">Home</a>
+      <a href="generator-doctor.html">Generator DoctorAI</a>
+      <a href="generator-spec-check.html">Spec Check</a>
+      <a href="generator-maintenance-check.html">Maintenance</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Diagnostic Tool</div>
+    <h1>Cost of Downtime &amp; Excess Fuel</h1>
+    <p class="lede">A fault doesn't just risk a breakdown — it costs real money every day it runs unresolved. Enter what you know below and see the actual Naira figure.</p>
+  </div>
+
+  <!-- STEP 1: FUEL PRICE -->
+  <div class="card" id="step-fuel">
+    <h2><span class="step-num">1</span> Fuel Price</h2>
+    <p class="sub">Required — used for the excess fuel calculation below.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="fuelPrice">Current diesel price (₦ per liter)</label>
+        <input type="number" id="fuelPrice" min="0" placeholder="e.g. 1150">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: EXCESS FUEL -->
+  <div class="card" id="step-excess">
+    <h2><span class="step-num">2</span> Excess Fuel Consumption <span style="font-weight:400;color:var(--muted);font-size:12.5px;">(optional)</span></h2>
+    <p class="sub">If your generator is burning more fuel than it should. Not sure what "normal" looks like for your setup? <a href="generator-spec-check.html" style="color:var(--accent-2);">Run Spec Check first</a> to get your expected L/hr.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="actualLph">Actual consumption (L/hr)</label>
+        <input type="number" id="actualLph" min="0" step="0.1" placeholder="e.g. 42">
+      </div>
+      <div class="field">
+        <label for="expectedLph">Expected/normal consumption (L/hr)</label>
+        <input type="number" id="expectedLph" min="0" step="0.1" placeholder="e.g. 34">
+      </div>
+      <div class="field">
+        <label for="hoursPerDayFuel">Generator running hours per day</label>
+        <input type="number" id="hoursPerDayFuel" min="0" step="0.5" placeholder="e.g. 10">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: DOWNTIME -->
+  <div class="card" id="step-downtime">
+    <h2><span class="step-num">3</span> Downtime Cost <span style="font-weight:400;color:var(--muted);font-size:12.5px;">(optional)</span></h2>
+    <p class="sub">If the generator is unreliable or out of service. Estimate what an hour without it actually costs you — alternative power source, lost production, spoiled goods, or lost sales.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="downtimeHoursMonth">Downtime hours per month (unplanned)</label>
+        <input type="number" id="downtimeHoursMonth" min="0" placeholder="e.g. 8">
+      </div>
+      <div class="field">
+        <label for="costPerHourDown">Your estimated cost per hour of downtime (₦)</label>
+        <input type="number" id="costPerHourDown" min="0" placeholder="e.g. 25000">
+      </div>
+    </div>
+    <div class="upload-note">
+      <strong>Not sure what to enter?</strong> A rough way to estimate this: what does it cost you (fuel for an alternative source, staff standing idle, orders you couldn't fulfil) for one hour with no power? Even a rough figure makes this calculation useful.
+    </div>
+  </div>
+
+  <div style="margin-top:22px;">
+    <button class="primary" id="calcBtn" disabled>Calculate the Cost</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card" id="result">
+    <div class="verdict" id="verdictLine"><span class="dot" id="verdictDot"></span><span id="verdictText"></span></div>
+    <div id="resultBody"></div>
+  </div>
+
+  <div class="disclaimer">
+    These figures are a direct calculation from the numbers you entered — they are only as accurate as your inputs (fuel price, running hours, and your own downtime cost estimate). This tool doesn't diagnose the fault itself; use Generator DoctorAI or Spec Check for that, then bring the numbers here to see what it's costing you to leave unresolved.
+  </div>
+</div>
+
+<footer>
+  Star Tech Standard Ltd — Diesel Generator Sales, Repair &amp; Fuel Systems, Lagos, Nigeria<br>
+  WhatsApp: 2348033452862 · info@startechstandard.com
+</footer>
+
+<script>
+(function(){
+
+  const fuelPriceInput = document.getElementById('fuelPrice');
+  const actualLphInput = document.getElementById('actualLph');
+  const expectedLphInput = document.getElementById('expectedLph');
+  const hoursPerDayFuelInput = document.getElementById('hoursPerDayFuel');
+  const downtimeHoursInput = document.getElementById('downtimeHoursMonth');
+  const costPerHourDownInput = document.getElementById('costPerHourDown');
+  const calcBtn = document.getElementById('calcBtn');
+
+  function fmtNaira(n){
+    return '₦' + Math.round(n).toLocaleString();
+  }
+
+  function checkReady(){
+    const fuelPrice = parseFloat(fuelPriceInput.value);
+    const hasFuelInputs = parseFloat(actualLphInput.value) > 0 && parseFloat(expectedLphInput.value) >= 0 && parseFloat(hoursPerDayFuelInput.value) > 0;
+    const hasDowntimeInputs = parseFloat(downtimeHoursInput.value) > 0 && parseFloat(costPerHourDownInput.value) > 0;
+    calcBtn.disabled = !(fuelPrice > 0 && (hasFuelInputs || hasDowntimeInputs));
+  }
+
+  [fuelPriceInput, actualLphInput, expectedLphInput, hoursPerDayFuelInput, downtimeHoursInput, costPerHourDownInput].forEach(el=>{
+    el.addEventListener('input', checkReady);
+  });
+
+  calcBtn.addEventListener('click', runCalc);
+
+  function runCalc(){
+    const fuelPrice = parseFloat(fuelPriceInput.value);
+    const actualLph = parseFloat(actualLphInput.value);
+    const expectedLph = parseFloat(expectedLphInput.value);
+    const hoursPerDayFuel = parseFloat(hoursPerDayFuelInput.value);
+    const downtimeHoursMonth = parseFloat(downtimeHoursInput.value);
+    const costPerHourDown = parseFloat(costPerHourDownInput.value);
+
+    const result = document.getElementById('result');
+    const body = document.getElementById('resultBody');
+    const dot = document.getElementById('verdictDot');
+    const verdictText = document.getElementById('verdictText');
+
+    const hasFuelInputs = actualLph > 0 && expectedLph >= 0 && hoursPerDayFuel > 0;
+    const hasDowntimeInputs = downtimeHoursMonth > 0 && costPerHourDown > 0;
+
+    if (!fuelPrice || (!hasFuelInputs && !hasDowntimeInputs)) {
+      dot.className = 'dot insufficient';
+      verdictText.textContent = 'INSUFFICIENT DATA';
+      body.innerHTML = '<p>Please enter the fuel price, plus at least one of the excess fuel figures or the downtime figures.</p>';
+      result.classList.add('show');
+      return;
+    }
+
+    let rows = '';
+    let totalMonthly = 0;
+    let hasWarning = false;
+
+    if (hasFuelInputs) {
+      const excessLph = Math.max(0, actualLph - expectedLph);
+      const excessLDay = excessLph * hoursPerDayFuel;
+      const costPerDay = excessLDay * fuelPrice;
+      const costPerMonth = costPerDay * 30;
+      const costPerYear = costPerDay * 365;
+      totalMonthly += costPerMonth;
+      if (excessLph > 0) hasWarning = true;
+
+      rows += `
+        <tr><th>Excess fuel per hour</th><td class="figure">${excessLph.toFixed(1)} L/hr</td></tr>
+        <tr><th>Excess fuel cost — per day</th><td class="figure">${fmtNaira(costPerDay)}</td></tr>
+        <tr><th>Excess fuel cost — per month</th><td class="figure">${fmtNaira(costPerMonth)}</td></tr>
+        <tr><th>Excess fuel cost — per year</th><td class="figure">${fmtNaira(costPerYear)}</td></tr>
+      `;
+    }
+
+    if (hasDowntimeInputs) {
+      const downtimeCostMonth = downtimeHoursMonth * costPerHourDown;
+      const downtimeCostYear = downtimeCostMonth * 12;
+      totalMonthly += downtimeCostMonth;
+      hasWarning = true;
+
+      rows += `
+        <tr><th>Downtime cost — per month</th><td class="figure">${fmtNaira(downtimeCostMonth)}</td></tr>
+        <tr><th>Downtime cost — per year</th><td class="figure">${fmtNaira(downtimeCostYear)}</td></tr>
+      `;
+    }
+
+    dot.className = 'dot ' + (hasWarning ? 'warn' : 'ok');
+    verdictText.textContent = hasWarning ? 'This is costing you money every month' : 'No excess cost calculated';
+
+    const totalBlock = `
+      <div class="big-total">
+        <div class="amount">${fmtNaira(totalMonthly)}</div>
+        <div class="label">estimated total cost per month from what you entered</div>
+      </div>
+    `;
+
+    let ctaHtml = '';
+    if (hasWarning) {
+      const msg = `Hello, I used the Star Tech Cost of Downtime calculator and it shows this issue is costing me roughly ${Math.round(totalMonthly).toLocaleString()} naira per month. Can you help me fix it?`;
+      ctaHtml = `<div class="cta"><p>That's real money leaving your business every month this stays unresolved. Send us these numbers on WhatsApp and let's get it fixed.</p>
+      <a class="wa" href="https://wa.me/2348033452862?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Chat with us on WhatsApp</a></div>`;
+    }
+
+    body.innerHTML = totalBlock + `<table class="cost">${rows}</table>` + ctaHtml;
+    result.classList.add('show');
+    result.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+})();
+</script>
+
+</body>
+</html>
