@@ -315,7 +315,16 @@ button{
 
   <div>
     <label>Frequency</label>
-    <input id="frequency" placeholder="e.g. 50Hz">
+    <input id="frequency" placeholder="e.g. 50Hz" value="50Hz">
+  </div>
+
+  <div>
+    <label>Battery Voltage (starting system)</label>
+    <select id="batteryVoltage">
+      <option value="">Not sure / not checked</option>
+      <option value="12V">12V</option>
+      <option value="24V">24V</option>
+    </select>
   </div>
 
   <div>
@@ -749,6 +758,9 @@ function startDiagnosis(){
   const frequency =
     document.getElementById("frequency").value.trim();
 
+  const batteryVoltage =
+    document.getElementById("batteryVoltage").value;
+
   const problem =
     document.getElementById("problem").value;
 
@@ -989,23 +1001,4 @@ function startDiagnosis(){
       "Alternator winding fault",
       "AVR fault",
       "Loose connection",
-      "Excitation circuit problem",
-      "Rectifier or diode fault"
-    );
-
-    checks.push(
-      "Inspect alternator terminals",
-      "Test AVR",
-      "Check excitation circuit",
-      "Test windings",
-      "Inspect rectifier and diodes"
-    );
-
-  }
-
-
-  else if(problem === "Controller alarm"){
-
-    causes.push(
-      "Engine protection shutdown",
-    
+      "Excitatio
