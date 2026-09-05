@@ -210,6 +210,59 @@ button{
   to{transform:rotate(360deg);}
 }
 
+/* Deep chat styles */
+
+.chat-window{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+  padding:14px;
+  margin-top:10px;
+  max-height:420px;
+  overflow-y:auto;
+}
+
+.chat-msg{
+  padding:10px 13px;
+  border-radius:10px;
+  margin-bottom:10px;
+  max-width:88%;
+  line-height:1.4;
+  font-size:14.5px;
+  white-space:pre-wrap;
+}
+
+.chat-msg.ai{
+  background:#faf5ff;
+  border:1px solid #e9d5ff;
+  margin-right:auto;
+}
+
+.chat-msg.user{
+  background:#111827;
+  color:#fff;
+  margin-left:auto;
+}
+
+.chat-msg img{
+  max-width:160px;
+  border-radius:6px;
+  display:block;
+  margin-top:6px;
+}
+
+.chat-input-row{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+
+.chat-input-row textarea{
+  flex:1;
+  min-height:48px;
+}
+
 @media print{
   button,.whatsapp,input,select,textarea,.warning,.info,.success{
     display:none!important;
@@ -300,7 +353,7 @@ button{
 
 <div class="info">
   <strong>Diagnostic Process:</strong>
-  First provide the generator information and symptoms. DoctorAI will perform a preliminary diagnostic assessment, then a deeper AI-powered analysis. If visual confirmation is useful, you will then be asked to provide photographs of the relevant generator components or controller screen.
+  First provide the generator information and symptoms. DoctorAI will perform a preliminary diagnostic assessment, then a deeper AI-powered analysis, then continue in a live chat — asking follow-up questions and photos — until the fault is narrowed down.
 </div>
 
   </div>  <!-- DIAGNOSIS -->  <div class="card"><button class="primary" onclick="startDiagnosis()">
@@ -352,6 +405,28 @@ button{
   Continue With Photo Confirmation
 </button>
 
+  </div>  <!-- DEEP AI DIAGNOSIS CHAT -->  <div class="card hidden" id="chatCard"><h2>Deep AI Diagnosis Chat</h2>
+
+<p class="small">
+  DoctorAI will ask follow-up questions and may request specific photos to narrow down the exact fault. Answer in the box below and attach photos when asked.
+</p>
+
+<div id="chatMessages" class="chat-window"></div>
+
+<div id="chatPhotoGrid" class="photo-grid"></div>
+
+<div class="chat-input-row">
+
+  <textarea id="chatInput" placeholder="Type your answer here..."></textarea>
+
+  <div>
+    <input type="file" id="chatPhotoInput" accept="image/*" multiple style="width:auto;padding:6px">
+    <br>
+    <button class="primary" onclick="sendChatMessage()" style="margin-top:6px">Send</button>
+  </div>
+
+</div>
+
   </div>  <!-- PROFESSIONAL ASSISTANCE -->  <div class="card"><h2>Professional Assistance</h2>
 
 <p>
@@ -374,24 +449,123 @@ button{
   </div></div><script>
 
 /* =========================
-   AI DIAGNOSIS ENDPOINT
-   No API key here — the key lives safely on the server side
-   (Cloudflare Pages Function at /api/diagnose).
+   GROQ CONFIG
+   Free tier: no card, no billing, rate-limited only.
+   Called directly from the browser — acceptable here because
+   there is no billing risk if the key is ever seen (worst case
+   is the free rate-limit gets used, not a charge).
 ========================= */
 
-const DIAGNOSE_ENDPOINT = "/api/diagnose";
+const GROQ_API_KEY = "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";
+const GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
+const GROQ_TEXT_MODEL = "llama-3.3-70b-versatile";
+const GROQ_VISION_MODEL = "qwen/qwen3.6-27b";
+
+const MAX_IMAGE_DIMENSION = 1024;
+
+
+async function callGroq(messages, model){
+
+  const response = await fetch(GROQ_ENDPOINT, {
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":"Bearer " + GROQ_API_KEY
+    },
+
+    body:JSON.stringify({
+      model:model,
+      messages:messages,
+      temperature:0.4,
+      max_completion_tokens:700
+    })
+
+  });
+
+  const data = await response.json();
+
+  if(!response.ok){
+    const msg = (data && data.error && data.error.message) ? data.error.message : ("Request failed: " + response.status);
+    throw new Error(msg);
+  }
+
+  const text = data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+
+  if(!text){
+    throw new Error("Empty response from AI.");
+  }
+
+  return text;
+
+}
+
+
+/* =========================
+   IMAGE COMPRESSION
+   Shrinks phone-camera photos before sending, to keep
+   payloads small and requests fast on the free tier.
+========================= */
+
+function compressImage(dataUrl){
+
+  return new Promise((resolve)=>{
+
+    const img = new Image();
+
+    img.onload = function(){
+
+      let w = img.width;
+      let h = img.height;
+
+      if(w > h && w > MAX_IMAGE_DIMENSION){
+        h = Math.round(h * (MAX_IMAGE_DIMENSION / w));
+        w = MAX_IMAGE_DIMENSION;
+      } else if(h > MAX_IMAGE_DIMENSION){
+        w = Math.round(w * (MAX_IMAGE_DIMENSION / h));
+        h = MAX_IMAGE_DIMENSION;
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, w, h);
+
+      resolve(canvas.toDataURL("image/jpeg", 0.72));
+
+    };
+
+    img.onerror = function(){
+      resolve(dataUrl);
+    };
+
+    img.src = dataUrl;
+
+  });
+
+}
 
 
 let selectedPhotos = [];
 let lastReport = null;
+let chatHistory = [];
+let chatPendingPhotos = [];
 
 const photoInput = document.getElementById("photoInput");
 const photoGrid = document.getElementById("photoGrid");
 const photoCard = document.getElementById("photoCard");
 
+const chatCard = document.getElementById("chatCard");
+const chatMessages = document.getElementById("chatMessages");
+const chatPhotoInput = document.getElementById("chatPhotoInput");
+const chatPhotoGrid = document.getElementById("chatPhotoGrid");
+
 
 /* =========================
-   PHOTO SELECTION
+   PHOTO SELECTION (preliminary photo confirmation)
 ========================= */
 
 photoInput.addEventListener("change", function(){
@@ -404,11 +578,13 @@ photoInput.addEventListener("change", function(){
 
     const reader = new FileReader();
 
-    reader.onload = function(e){
+    reader.onload = async function(e){
+
+      const compressed = await compressImage(e.target.result);
 
       selectedPhotos.push({
         name:file.name,
-        src:e.target.result
+        src:compressed
       });
 
       renderPhotos();
@@ -455,6 +631,77 @@ function removePhoto(index){
   selectedPhotos.splice(index,1);
 
   renderPhotos();
+
+}
+
+
+/* =========================
+   CHAT PHOTO SELECTION
+========================= */
+
+chatPhotoInput.addEventListener("change", function(){
+
+  const files = Array.from(this.files);
+
+  files.forEach(file => {
+
+    if(!file.type.startsWith("image/")) return;
+
+    const reader = new FileReader();
+
+    reader.onload = async function(e){
+
+      const compressed = await compressImage(e.target.result);
+
+      chatPendingPhotos.push({
+        name:file.name,
+        src:compressed
+      });
+
+      renderChatPendingPhotos();
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+  this.value = "";
+
+});
+
+
+function renderChatPendingPhotos(){
+
+  chatPhotoGrid.innerHTML = "";
+
+  chatPendingPhotos.forEach((photo,index)=>{
+
+    const box = document.createElement("div");
+
+    box.className = "photo-box";
+
+    box.innerHTML = `
+      <img src="${photo.src}" alt="Attached photo">
+      <button
+        class="remove-photo"
+        onclick="removeChatPhoto(${index})"
+        title="Remove photo"
+      >×</button>
+    `;
+
+    chatPhotoGrid.appendChild(box);
+
+  });
+
+}
+
+
+function removeChatPhoto(index){
+
+  chatPendingPhotos.splice(index,1);
+
+  renderChatPendingPhotos();
 
 }
 
@@ -850,8 +1097,25 @@ function startDiagnosis(){
 
 
 /* =========================
-   GEMINI AI DEEP ANALYSIS
+   GROQ AI DEEP ANALYSIS (text pass)
 ========================= */
+
+function buildReportSummary(report){
+
+  return (
+    "Brand: " + (report.equipment.brand || "not specified") + "\n" +
+    "Model: " + (report.equipment.model || "not specified") + "\n" +
+    "Capacity: " + (report.equipment.kva || "not specified") + " kVA\n" +
+    "Controller: " + (report.equipment.controller || "not specified") + "\n" +
+    "Running hours: " + (report.equipment.hours || "not specified") + "\n" +
+    "Voltage: " + (report.equipment.voltage || "not specified") + "\n" +
+    "Frequency: " + (report.equipment.frequency || "not specified") + "\n" +
+    "Main problem selected: " + (report.problem || "not specified") + "\n" +
+    "Customer's description of symptoms: " + (report.symptoms || "none provided")
+  );
+
+}
+
 
 async function runAIAnalysis(report){
 
@@ -864,33 +1128,18 @@ async function runAIAnalysis(report){
 
   try{
 
-    const response = await fetch(DIAGNOSE_ENDPOINT, {
+    const systemPrompt =
+      "You are an expert diesel generator technician assisting a generator sales, repair and fuel-systems company " +
+      "(Star Tech Standard Ltd, servicing Perkins, Cummins and Caterpillar generators). " +
+      "Give a deeper technical analysis than a basic checklist: reason about how the symptoms relate to each other, " +
+      "rank the most likely root cause first, explain WHY, and give a clear step-by-step troubleshooting order a field technician should follow. " +
+      "Keep it practical and specific to diesel generators. Keep the whole answer under 220 words. " +
+      "Do not use markdown formatting like asterisks or hash symbols, just plain text with line breaks.";
 
-      method:"POST",
-
-      headers:{
-        "Content-Type":"application/json"
-      },
-
-      body:JSON.stringify({ report })
-
-    });
-
-    const data = await response.json();
-
-    if(!response.ok || data.error){
-
-      throw new Error(data.error || ("Request failed: " + response.status));
-
-    }
-
-    const aiText = data.text;
-
-    if(!aiText){
-
-      throw new Error("Empty response from server");
-
-    }
+    const aiText = await callGroq([
+      { role:"system", content: systemPrompt },
+      { role:"user", content: buildReportSummary(report) }
+    ], GROQ_TEXT_MODEL);
 
     report.aiAnalysis = aiText;
 
@@ -907,12 +1156,156 @@ async function runAIAnalysis(report){
         ${escapeHTML(aiText).replace(/\n/g,"<br>")}
       </div>`;
 
+    startDeepChat(report);
+
   }catch(err){
 
     console.error(err);
 
     box.innerHTML =
       `<div class="warning"><strong>AI analysis unavailable right now.</strong> The checklist above still applies. (${escapeHTML(err.message)})</div>`;
+
+  }
+
+}
+
+
+/* =========================
+   DEEP AI DIAGNOSIS CHAT
+   A real back-and-forth: the AI asks targeted follow-up
+   questions and can request/analyze photos until the fault
+   is narrowed down.
+========================= */
+
+function startDeepChat(report){
+
+  chatCard.classList.remove("hidden");
+
+  chatHistory = [
+    {
+      role:"system",
+      content:
+        "You are DoctorAI, an expert diesel generator diagnostic technician working for Star Tech Standard Ltd " +
+        "(servicing Perkins, Cummins and Caterpillar diesel generators). You are now in a live back-and-forth " +
+        "conversation with the customer to go deeper than the initial checklist. " +
+        "Ask ONE focused follow-up question at a time (never a long list of questions). " +
+        "When a photo would help confirm something (a controller screen, a component, a wiring point, a leak, smoke, etc.), " +
+        "explicitly ask the customer to attach a photo of that specific thing using the attach button. " +
+        "When the customer sends a photo, examine it carefully and reason about what it shows before continuing. " +
+        "Keep responses short and conversational, under 90 words, plain text, no markdown symbols. " +
+        "Your goal is to narrow down the exact root cause and give a clear resolution or repair recommendation. " +
+        "If the fault appears serious, electrical, or beyond safe DIY repair, tell the customer to request a Star Tech Standard technician. " +
+        "Here is the case so far:\n\n" + buildReportSummary(report)
+    }
+  ];
+
+  chatMessages.innerHTML = "";
+
+  appendChatBubble("ai", "Starting deep diagnosis...", []);
+
+  callGroq(chatHistory, GROQ_TEXT_MODEL)
+    .then(reply=>{
+
+      chatHistory.push({ role:"assistant", content: reply });
+
+      chatMessages.innerHTML = "";
+
+      appendChatBubble("ai", reply, []);
+
+    })
+    .catch(err=>{
+
+      chatMessages.innerHTML = "";
+
+      appendChatBubble("ai", "Deep chat is unavailable right now (" + err.message + "). The checklist and analysis above still apply.", []);
+
+    });
+
+}
+
+
+function appendChatBubble(role, text, images){
+
+  const bubble = document.createElement("div");
+
+  bubble.className = "chat-msg " + (role === "user" ? "user" : "ai");
+
+  let html = escapeHTML(text).replace(/\n/g,"<br>");
+
+  (images || []).forEach(src=>{
+    html += `<img src="${src}" alt="attached photo">`;
+  });
+
+  bubble.innerHTML = html;
+
+  chatMessages.appendChild(bubble);
+
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+}
+
+
+async function sendChatMessage(){
+
+  const input = document.getElementById("chatInput");
+
+  const text = input.value.trim();
+
+  if(!text && chatPendingPhotos.length === 0){
+    alert("Type an answer or attach a photo before sending.");
+    return;
+  }
+
+  const imagesForDisplay = chatPendingPhotos.map(p=>p.src);
+
+  appendChatBubble("user", text || "(photo attached)", imagesForDisplay);
+
+  const userContent = [];
+
+  if(text){
+    userContent.push({ type:"text", text:text });
+  } else {
+    userContent.push({ type:"text", text:"(see attached photo)" });
+  }
+
+  chatPendingPhotos.forEach(photo=>{
+    userContent.push({
+      type:"image_url",
+      image_url:{ url: photo.src }
+    });
+  });
+
+  chatHistory.push({ role:"user", content: userContent });
+
+  const usingImages = chatPendingPhotos.length > 0;
+
+  input.value = "";
+  chatPendingPhotos = [];
+  renderChatPendingPhotos();
+
+  appendChatBubble("ai", "Thinking...", []);
+
+  try{
+
+    const reply = await callGroq(chatHistory, usingImages ? GROQ_VISION_MODEL : GROQ_TEXT_MODEL);
+
+    chatMessages.lastChild.remove();
+
+    chatHistory.push({ role:"assistant", content: reply });
+
+    appendChatBubble("ai", reply, []);
+
+    if(lastReport){
+      lastReport.aiChat = chatHistory.filter(m=>m.role !== "system");
+      localStorage.setItem("doctor_last_report", JSON.stringify(lastReport));
+      updateLastLog(lastReport);
+    }
+
+  }catch(err){
+
+    chatMessages.lastChild.remove();
+
+    appendChatBubble("ai", "Sorry, the AI is unavailable right now (" + err.message + "). Try again in a moment, or request a Star Tech technician below.", []);
 
   }
 
@@ -1009,9 +1402,8 @@ function displayDiagnosis(report){
       <div class="info">
         <strong>Next Step:</strong>
         The preliminary assessment is now complete.
-        If the fault requires visual confirmation, use the
-        Photo Confirmation section below to provide relevant
-        generator or controller photographs.
+        Continue below in the Deep AI Diagnosis Chat, and use Photo Confirmation
+        to attach relevant generator or controller photographs.
       </div>
 
 
@@ -1236,6 +1628,11 @@ function displayPhotoConfirmation(report){
       condition of a component. Measurements and physical testing
       may still be required before replacing parts.
 
+    </div>
+
+    <div class="info">
+      <strong>Tip:</strong> You can also attach these same photos directly in the
+      Deep AI Diagnosis Chat below and ask DoctorAI to look at them.
     </div>
 
   `;
@@ -1542,8 +1939,18 @@ function clearForm(){
 
   lastReport=null;
 
+  chatHistory=[];
+
+  chatPendingPhotos=[];
+
 
   renderPhotos();
+
+  renderChatPendingPhotos();
+
+  chatMessages.innerHTML = "";
+
+  chatCard.classList.add("hidden");
 
 
   document.getElementById(
