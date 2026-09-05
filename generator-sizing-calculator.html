@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Sizing Calculator | Star Tech Standard</title>
+<meta name="description" content="Add your appliances and equipment to find the right generator kVA size, accounting for motor starting surge and safety margin.">
+<style>
+  :root{
+    --bg:#0a1220;
+    --panel:#101b2e;
+    --panel-2:#142238;
+    --border:#293b54;
+    --text:#ffffff;
+    --muted:#a7b3c4;
+    --accent:#e1a52b;
+    --accent-2:#f0bb52;
+    --accent-text:#0d1a2c;
+    --ok:#3ecf8e;
+    --warn:#e1a52b;
+    --bad:#ff5c5c;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;
+  }
+  header.top{
+    padding:22px 20px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#0d1830,var(--bg));
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .brand{font-weight:700;letter-spacing:.3px;font-size:18px;}
+  .brand span{color:var(--accent);}
+  nav.top-links a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px;}
+  nav.top-links a:hover{color:var(--accent-2);}
+
+  .hero{padding:34px 0 8px;}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+  h1{font-size:28px;margin:8px 0 6px;}
+  .lede{color:var(--muted);font-size:15px;max-width:640px;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+    margin-top:18px;
+  }
+  .card h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .step-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:800;
+  }
+  .card .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  select,input[type=number],input[type=text]{
+    width:100%;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:10px 10px;
+    border-radius:8px;
+    font-size:14px;
+  }
+  select:focus,input:focus{outline:none;border-color:var(--accent);}
+  .field{margin-bottom:4px;}
+
+  .add-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+  .add-row .field{flex:1;min-width:160px;}
+
+  button.primary{
+    background:var(--accent);
+    color:var(--accent-text);
+    border:none;
+    padding:13px 22px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+  }
+  button.primary:hover{background:var(--accent-2);}
+  button.primary:disabled{background:#3a4457;color:#8b95a8;cursor:not-allowed;}
+  button.secondary{
+    background:var(--panel-2);
+    color:var(--text);
+    border:1px solid var(--border);
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:13.5px;
+    cursor:pointer;
+  }
+  button.secondary:hover{border-color:var(--accent-2);color:var(--accent-2);}
+
+  table.loads{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;}
+  table.loads th, table.loads td{
+    border:1px solid var(--border);padding:8px;text-align:left;vertical-align:middle;
+  }
+  table.loads th{background:var(--panel-2);color:var(--muted);font-weight:600;font-size:12px;}
+  table.loads input[type=number], table.loads input[type=text]{padding:6px 8px;font-size:13px;}
+  table.loads .qty-col{width:60px;}
+  table.loads .motor-col{width:60px;text-align:center;}
+  table.loads .remove-col{width:36px;text-align:center;}
+  .remove-btn{
+    background:var(--bad);color:#fff;border:none;border-radius:50%;
+    width:22px;height:22px;cursor:pointer;font-weight:800;line-height:1;
+  }
+  .empty-loads{color:var(--muted);font-size:13.5px;padding:14px 0;text-align:center;}
+
+  .result-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+    margin-top:22px;
+    display:none;
+  }
+  .result-card.show{display:block;}
+  .verdict{
+    display:flex;align-items:center;gap:10px;
+    font-size:16px;font-weight:700;margin-bottom:12px;
+  }
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;}
+  .dot.ok{background:var(--ok);}
+  .dot.insufficient{background:var(--muted);}
+
+  table.spec{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+  table.spec th, table.spec td{
+    border:1px solid var(--border);padding:9px 10px;text-align:left;
+  }
+  table.spec th{background:var(--panel-2);color:var(--muted);font-weight:600;width:52%;}
+  table.spec td.figure{font-weight:700;color:var(--accent-2);}
+
+  .big-total{
+    background:var(--panel-2);border:1px solid var(--border);border-radius:8px;
+    padding:16px;margin:14px 0;text-align:center;
+  }
+  .big-total .amount{font-size:26px;font-weight:800;color:var(--accent-2);}
+  .big-total .label{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+  .disclaimer{
+    font-size:12.5px;color:var(--muted);margin-top:16px;
+    border-top:1px solid var(--border);padding-top:12px;
+  }
+
+  .cta{
+    margin-top:18px;padding:16px;border-radius:8px;
+    background:var(--panel-2);border:1px solid var(--border);
+  }
+  .cta p{margin:0 0 10px;font-size:14px;color:var(--text);}
+  .cta a.wa{
+    display:inline-block;background:transparent;color:var(--text);
+    padding:10px 18px;border-radius:8px;border:1.5px solid var(--muted);
+    text-decoration:none;font-weight:700;font-size:14px;
+  }
+  .cta a.wa:hover{border-color:var(--accent-2);color:var(--accent-2);}
+
+  footer{padding:30px 0 60px;color:var(--muted);font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Star Tech <span>Standard</span></div>
+    <nav class="top-links">
+      <a href="index.html">Home</a>
+      <a href="generator-doctor.html">DoctorAI</a>
+      <a href="generator-spec-check.html">Spec Check</a>
+      <a href="generator-maintenance-check.html">Maintenance</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Buying Guide</div>
+    <h1>Generator Sizing Calculator</h1>
+    <p class="lede">Add the appliances and equipment you need to run. We total the running load, account for the surge of your largest motor starting, and recommend the right generator size.</p>
+  </div>
+
+  <!-- STEP 1: ADD LOADS -->
+  <div class="card" id="step-loads">
+    <h2><span class="step-num">1</span> Your Equipment</h2>
+    <p class="sub">Pick a common item to prefill typical wattage, then adjust quantity — or add a custom item with your own figures.</p>
+
+    <div class="add-row">
+      <div class="field">
+        <label for="presetSelect">Add common item</label>
+        <select id="presetSelect">
+          <option value="">Select an item…</option>
+        </select>
+      </div>
+      <div class="field" style="flex:0 0 auto;">
+        <button class="secondary" id="addPresetBtn" type="button" style="margin-top:2px;">Add</button>
+      </div>
+      <div class="field" style="flex:0 0 auto;">
+        <button class="secondary" id="addCustomBtn" type="button" style="margin-top:2px;">Add Custom Item</button>
+      </div>
+    </div>
+
+    <table class="loads" id="loadsTable">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Running (W)</th>
+          <th class="qty-col">Qty</th>
+          <th class="motor-col">Motor?</th>
+          <th>Start ×</th>
+          <th class="remove-col"></th>
+        </tr>
+      </thead>
+      <tbody id="loadsBody"></tbody>
+    </table>
+    <div class="empty-loads" id="emptyLoadsMsg">No items added yet — pick something above to get started.</div>
+  </div>
+
+  <!-- STEP 2: SETTINGS -->
+  <div class="card" id="step-settings">
+    <h2><span class="step-num">2</span> Sizing Settings</h2>
+    <p class="sub">Defaults are standard industry figures — adjust only if you know your specifics.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="powerFactor">Power factor</label>
+        <input type="number" id="powerFactor" min="0.5" max="1" step="0.01" value="0.8">
+      </div>
+      <div class="field">
+        <label for="safetyMargin">Safety margin (%)</label>
+        <input type="number" id="safetyMargin" min="0" max="50" value="20">
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:22px;">
+    <button class="primary" id="calcBtn" disabled>Calculate Recommended Size</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card" id="result">
+    <div class="verdict" id="verdictLine"><span class="dot" id="verdictDot"></span><span id="verdictText"></span></div>
+    <div id="resultBody"></div>
+  </div>
+
+  <div class="disclaimer">
+    This is a screening estimate using standard sizing methodology (total running load converted to kVA, plus the starting surge of your single largest motor, plus a safety margin). It does not account for voltage dip limits, harmonics, altitude/temperature derating, or future load expansion beyond the margin entered. Confirm your final selection with us before purchase, especially for industrial or multi-motor sites.
+  </div>
+</div>
+
+<footer>
+  Star Tech Standard Ltd — Diesel Generator Sales, Repair &amp; Fuel Systems, Lagos, Nigeria<br>
+  WhatsApp: 2348033452862 · info@startechstandard.com
+</footer>
+
+<script>
+(function(){
+
+  const PRESETS = [
+    {name:"LED bulb", watts:15, motor:false},
+    {name:"Fluorescent tube light", watts:40, motor:false},
+    {name:"Ceiling/standing fan", watts:80, motor:true, mult:2},
+    {name:"LED television", watts:120, motor:false},
+    {name:"Laptop", watts:65, motor:false},
+    {name:"Desktop computer", watts:200, motor:false},
+    {name:"Printer / photocopier", watts:300, motor:false},
+    {name:"Refrigerator (medium)", watts:150, motor:true, mult:3},
+    {name:"Chest freezer", watts:200, motor:true, mult:3},
+    {name:"Washing machine", watts:500, motor:true, mult:3},
+    {name:"Electric iron", watts:1000, motor:false},
+    {name:"Microwave oven", watts:1200, motor:false},
+    {name:"Split AC — 1HP", watts:900, motor:true, mult:3},
+    {name:"Split AC — 1.5HP", watts:1300, motor:true, mult:3},
+    {name:"Split AC — 2HP", watts:1800, motor:true, mult:3},
+    {name:"Water pump — 0.5HP", watts:400, motor:true, mult:4},
+    {name:"Borehole pump — 1HP", watts:750, motor:true, mult:5},
+    {name:"Air compressor — 2HP", watts:1500, motor:true, mult:5},
+    {name:"Small welding machine", watts:4000, motor:false},
+    {name:"Industrial motor — 5HP", watts:3730, motor:true, mult:5},
+    {name:"Industrial motor — 10HP", watts:7460, motor:true, mult:5}
+  ];
+
+  const STANDARD_SIZES = [10,15,20,25,30,40,45,50,60,75,80,100,125,135,150,180,200,250,300,350,400,455,500,550,600,650,700,750,800,900,1000,1250,1500,1750,2000];
+
+  const presetSelect = document.getElementById('presetSelect');
+  const loadsBody = document.getElementById('loadsBody');
+  const emptyLoadsMsg = document.getElementById('emptyLoadsMsg');
+  const calcBtn = document.getElementById('calcBtn');
+
+  PRESETS.forEach((p,i)=>{
+    const opt = document.createElement('option');
+    opt.value = i; opt.textContent = p.name + ' (~' + p.watts + 'W)';
+    presetSelect.appendChild(opt);
+  });
+
+  let rowCounter = 0;
+
+  function addRow(name, watts, motor, mult){
+    rowCounter++;
+    const tr = document.createElement('tr');
+    tr.dataset.id = rowCounter;
+    tr.innerHTML = `
+      <td><input type="text" class="row-name" value="${name.replace(/"/g,'&quot;')}"></td>
+      <td><input type="number" class="row-watts" min="0" value="${watts}"></td>
+      <td class="qty-col"><input type="number" class="row-qty" min="1" value="1"></td>
+      <td class="motor-col"><input type="checkbox" class="row-motor" ${motor ? 'checked' : ''}></td>
+      <td><input type="number" class="row-mult" min="1" max="10" step="0.5" value="${mult || 3}" style="${motor ? '' : 'display:none;'}"></td>
+      <td class="remove-col"><button type="button" class="remove-btn" title="Remove">×</button></td>
+    `;
+    loadsBody.appendChild(tr);
+
+    const motorCheckbox = tr.querySelector('.row-motor');
+    const multInput = tr.querySelector('.row-mult');
+    motorCheckbox.addEventListener('change', function(){
+      multInput.style.display = this.checked ? '' : 'none';
+      checkReady();
+    });
+
+    tr.querySelector('.remove-btn').addEventListener('click', function(){
+      tr.remove();
+      updateEmptyState();
+      checkReady();
+    });
+
+    tr.querySelectorAll('input').forEach(inp=>{
+      inp.addEventListener('input', checkReady);
+    });
+
+    updateEmptyState();
+    checkReady();
+  }
+
+  function updateEmptyState(){
+    emptyLoadsMsg.style.display = loadsBody.children.length === 0 ? 'block' : 'none';
+  }
+
+  document.getElementById('addPresetBtn').addEventListener('click', function(){
+    const idx = presetSelect.value;
+    if (idx === '') return;
+    const p = PRESETS[idx];
+    addRow(p.name, p.watts, p.motor, p.mult);
+  });
+
+  document.getElementById('addCustomBtn').addEventListener('click', function(){
+    addRow('Custom item', 0, false, 3);
+  });
+
+  function checkReady(){
+    const rows = loadsBody.querySelectorAll('tr');
+    let hasValidRow = false;
+    rows.forEach(tr=>{
+      const watts = parseFloat(tr.querySelector('.row-watts').value);
+      if (watts > 0) hasValidRow = true;
+    });
+    calcBtn.disabled = !hasValidRow;
+  }
+
+  calcBtn.addEventListener('click', runCalc);
+
+  function esc(s){ return (s||'').toString().replace(/</g,'&lt;'); }
+
+  function runCalc(){
+    const rows = loadsBody.querySelectorAll('tr');
+    const powerFactor = parseFloat(document.getElementById('powerFactor').value) || 0.8;
+    const safetyMarginPct = parseFloat(document.getElementById('safetyMargin').value) || 0;
+
+    const result = document.getElementById('result');
+    const body = document.getElementById('resultBody');
+    const dot = document.getElementById('verdictDot');
+    const verdictText = document.getElementById('verdictText');
+
+    let items = [];
+    rows.forEach(tr=>{
+      const name = tr.querySelector('.row-name').value || 'Item';
+      const watts = parseFloat(tr.querySelector('.row-watts').value) || 0;
+      const qty = parseFloat(tr.querySelector('.row-qty').value) || 1;
+      const isMotor = tr.querySelector('.row-motor').checked;
+      const mult = parseFloat(tr.querySelector('.row-mult').value) || 3;
+      if (watts > 0) {
+        items.push({name, watts, qty, isMotor, mult, totalRunningW: watts * qty});
+      }
+    });
+
+    if (items.length === 0) {
+      dot.className = 'dot insufficient';
+      verdictText.textContent = 'INSUFFICIENT DATA';
+      body.innerHTML = '<p>Add at least one item with a running wattage above zero.</p>';
+      result.classList.add('show');
+      return;
+    }
+
+    const totalRunningW = items.reduce((sum,it)=>sum + it.totalRunningW, 0);
+
+    // Find the single largest motor item by per-unit starting watts
+    let largestMotor = null;
+    let largestMotorStartW = 0;
+    items.forEach(it=>{
+      if (it.isMotor) {
+        const perUnitStartW = it.watts * it.mult;
+        if (perUnitStartW > largestMotorStartW) {
+          largestMotorStartW = perUnitStartW;
+          largestMotor = it;
+        }
+      }
+    });
+
+    const extraSurgeW = largestMotor ? (largestMotorStartW - largestMotor.watts) : 0;
+    const peakDemandW = totalRunningW + extraSurgeW;
+
+    const finalWattsWithMargin = peakDemandW * (1 + safetyMarginPct / 100);
+    const finalKW = finalWattsWithMargin / 1000;
+    const requiredKVA = finalKW / powerFactor;
+
+    const recommendedSize = STANDARD_SIZES.find(s => s >= requiredKVA) || STANDARD_SIZES[STANDARD_SIZES.length - 1];
+
+    dot.className = 'dot ok';
+    verdictText.textContent = 'Recommended generator size';
+
+    const itemRows = items.map(it=>`<tr><td>${esc(it.name)}${it.isMotor ? ' <span style="color:var(--accent-2);font-size:11.5px;">(motor)</span>' : ''}</td><td>${it.watts}W × ${it.qty}</td><td class="figure">${it.totalRunningW.toLocaleString()} W</td></tr>`).join('');
+
+    const summary = `
+      <div class="big-total">
+        <div class="amount">${recommendedSize} kVA</div>
+        <div class="label">recommended generator size (raw calculated requirement: ${requiredKVA.toFixed(1)} kVA)</div>
+      </div>
+
+      <table class="spec">
+        <tr><th>Total running load</th><td class="figure">${(totalRunningW/1000).toFixed(2)} kW</td></tr>
+        <tr><th>Largest motor</th><td>${largestMotor ? esc(largestMotor.name) + ' (' + largestMotor.mult + '× start factor)' : 'None selected as motor-driven'}</td></tr>
+        <tr><th>Added starting surge</th><td class="figure">${(extraSurgeW/1000).toFixed(2)} kW</td></tr>
+        <tr><th>Power factor used</th><td>${powerFactor}</td></tr>
+        <tr><th>Safety margin applied</th><td>${safetyMarginPct}%</td></tr>
+      </table>
+
+      <table class="loads" style="margin-top:10px;">
+        <thead><tr><th>Item</th><th>Rating</th><th>Total</th></tr></thead>
+        <tbody>${itemRows}</tbody>
+      </table>
+    `;
+
+    const msg = `Hello, I used the Star Tech Generator Sizing Calculator and it recommends a ${recommendedSize} kVA generator for my equipment list. Can you help me with pricing and availability?`;
+    const ctaHtml = `<div class="cta"><p>Talk to us about a ${recommendedSize} kVA Perkins, Cummins, or Caterpillar generator — we'll confirm the exact spec for your load.</p>
+      <a class="wa" href="https://wa.me/2348033452862?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Chat with us on WhatsApp</a></div>`;
+
+    body.innerHTML = summary + ctaHtml;
+    result.classList.add('show');
+    result.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+})();
+</script>
+
+</body>
+</html>
