@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Maintenance Check — Oil, Filters &amp; Service Interval | Star Tech Standard</title>
+<meta name="description" content="Select your diesel generator's manufacturer and model to get oil quantity, recommended oil grade, filter guidance, and service interval status.">
+<style>
+  :root{
+    --bg:#0a1220;
+    --panel:#101b2e;
+    --panel-2:#142238;
+    --border:#293b54;
+    --text:#ffffff;
+    --muted:#a7b3c4;
+    --accent:#e1a52b;
+    --accent-2:#f0bb52;
+    --accent-text:#0d1a2c;
+    --ok:#3ecf8e;
+    --warn:#e1a52b;
+    --bad:#ff5c5c;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    line-height:1.5;
+  }
+  header.top{
+    padding:22px 20px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#0d1830,var(--bg));
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .brand{font-weight:700;letter-spacing:.3px;font-size:18px;}
+  .brand span{color:var(--accent);}
+  nav.top-links a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px;}
+  nav.top-links a:hover{color:var(--accent-2);}
+
+  .hero{padding:34px 0 8px;}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+  h1{font-size:28px;margin:8px 0 6px;}
+  .lede{color:var(--muted);font-size:15px;max-width:640px;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px;
+    margin-top:18px;
+  }
+  .card h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  .step-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--accent);color:var(--accent-text);font-size:12px;font-weight:800;
+  }
+  .card .sub{color:var(--muted);font-size:13px;margin:0 0 14px;}
+  .card.disabled{opacity:.45;pointer-events:none;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  select,input[type=number],input[type=text]{
+    width:100%;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:10px 10px;
+    border-radius:8px;
+    font-size:14px;
+  }
+  select:focus,input:focus{outline:none;border-color:var(--accent);}
+  .field{margin-bottom:4px;}
+
+  .upload-note{
+    font-size:12.5px;color:var(--muted);margin-top:8px;
+    border:1px dashed var(--border);border-radius:8px;padding:10px 12px;
+  }
+  .upload-note strong{color:var(--accent-2);}
+
+  button.primary{
+    background:var(--accent);
+    color:var(--accent-text);
+    border:none;
+    padding:13px 22px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:6px;
+  }
+  button.primary:hover{background:var(--accent-2);}
+  button.primary:disabled{background:#3a4457;color:#8b95a8;cursor:not-allowed;}
+
+  .result-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+    margin-top:22px;
+    display:none;
+  }
+  .result-card.show{display:block;}
+  .verdict{
+    display:flex;align-items:center;gap:10px;
+    font-size:16px;font-weight:700;margin-bottom:12px;
+  }
+  .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto;}
+  .dot.ok{background:var(--ok);}
+  .dot.warn{background:var(--warn);}
+  .dot.bad{background:var(--bad);}
+  .dot.insufficient{background:var(--muted);}
+
+  table.spec{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+  table.spec th, table.spec td{
+    border:1px solid var(--border);padding:9px 10px;text-align:left;
+  }
+  table.spec th{background:var(--panel-2);color:var(--muted);font-weight:600;width:38%;}
+
+  .confidence-tag{
+    display:inline-block;font-size:11.5px;font-weight:700;
+    padding:3px 9px;border-radius:20px;margin-left:8px;vertical-align:middle;
+  }
+  .confidence-tag.confirmed{background:#123a2c;color:var(--ok);}
+  .confidence-tag.estimate{background:#3a2e0f;color:var(--accent-2);}
+
+  ul.flags{list-style:none;padding:0;margin:14px 0;}
+  ul.flags li{
+    padding:10px 12px;border-radius:8px;margin-bottom:8px;
+    background:var(--panel-2);border:1px solid var(--border);
+    font-size:14px;display:flex;gap:10px;align-items:flex-start;
+  }
+  ul.flags li .icon{flex:0 0 auto;}
+
+  .disclaimer{
+    font-size:12.5px;color:var(--muted);margin-top:16px;
+    border-top:1px solid var(--border);padding-top:12px;
+  }
+
+  .cta{
+    margin-top:18px;padding:16px;border-radius:8px;
+    background:var(--panel-2);border:1px solid var(--border);
+  }
+  .cta p{margin:0 0 10px;font-size:14px;color:var(--text);}
+  .cta a.wa{
+    display:inline-block;background:transparent;color:var(--text);
+    padding:10px 18px;border-radius:8px;border:1.5px solid var(--muted);
+    text-decoration:none;font-weight:700;font-size:14px;
+  }
+  .cta a.wa:hover{border-color:var(--accent-2);color:var(--accent-2);}
+
+  footer{padding:30px 0 60px;color:var(--muted);font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Star Tech <span>Standard</span></div>
+    <nav class="top-links">
+      <a href="index.html">Home</a>
+      <a href="generator-doctor.html">Generator DoctorAI</a>
+      <a href="generator-spec-check.html">Spec Check</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Diagnostic Tool</div>
+    <h1>Generator Maintenance Check</h1>
+    <p class="lede">Select your diesel generator's manufacturer and model to get its oil quantity, recommended oil grade, filter guidance, and whether your service is due, upcoming, or overdue.</p>
+  </div>
+
+  <!-- STEP 1: MANUFACTURER -->
+  <div class="card" id="step-manufacturer">
+    <h2><span class="step-num">1</span> Engine Manufacturer</h2>
+    <p class="sub">Choose the manufacturer stamped on your engine nameplate.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="manufacturer">Manufacturer</label>
+        <select id="manufacturer">
+          <option value="">Select manufacturer…</option>
+          <option value="perkins">Perkins</option>
+          <option value="cummins">Cummins</option>
+          <option value="caterpillar">Caterpillar</option>
+          <option value="other">Other / Unknown manufacturer</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: MODEL -->
+  <div class="card disabled" id="step-model">
+    <h2><span class="step-num">2</span> Engine Model</h2>
+    <p class="sub">Common models for the selected manufacturer appear below.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="model">Model</label>
+        <select id="model">
+          <option value="">Select manufacturer first…</option>
+        </select>
+      </div>
+    </div>
+    <div class="upload-note" id="no-data-note" style="display:none;">
+      <strong>No published spec on file for this one.</strong> Enter your oil capacity manually below if you know it (check your dipstick or engine manual), or send us the nameplate photo on WhatsApp and we'll confirm it for you.
+    </div>
+  </div>
+
+  <!-- STEP 3: HOURS -->
+  <div class="card disabled" id="step-hours">
+    <h2><span class="step-num">3</span> Running Hours</h2>
+    <p class="sub">Both fields are required to check whether your service is due.</p>
+    <div class="grid">
+      <div class="field">
+        <label for="currentHours">Current total running hours</label>
+        <input type="number" id="currentHours" min="0" placeholder="e.g. 8600">
+      </div>
+      <div class="field">
+        <label for="lastServiceHours">Running hours at last oil/filter change</label>
+        <input type="number" id="lastServiceHours" min="0" placeholder="e.g. 8200">
+      </div>
+      <div class="field">
+        <label for="manualCapacity">Known oil capacity in liters (optional — overrides our figure)</label>
+        <input type="number" id="manualCapacity" min="0" step="0.1" placeholder="leave blank to use our spec">
+      </div>
+      <div class="field">
+        <label for="avgHoursPerDay">Average running hours per day (optional)</label>
+        <input type="number" id="avgHoursPerDay" min="0" step="0.5" placeholder="e.g. 6">
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:22px;">
+    <button class="primary" id="checkBtn" disabled>Check My Service Status</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card" id="result">
+    <div class="verdict" id="verdictLine"><span class="dot" id="verdictDot"></span><span id="verdictText"></span></div>
+    <div id="resultBody"></div>
+  </div>
+
+  <div class="disclaimer">
+    Oil capacities and intervals marked "Confirmed" come from published manufacturer/engine specification sheets. Those marked "Estimate" are typical figures for that engine family and should be confirmed against your dipstick, nameplate, or manual before ordering oil in bulk — capacities vary between sub-variants of the same series. This tool does not replace inspection by a qualified technician.
+  </div>
+</div>
+
+<footer>
+  Star Tech Standard Ltd — Diesel Generator Sales, Repair &amp; Fuel Systems, Lagos, Nigeria<br>
+  WhatsApp: 2348033452862 · info@startechstandard.com
+</footer>
+
+<script>
+(function(){
+
+  // Oil data: capacity in liters, recommended grade, filter note, service interval hours, confidence
+  const OIL_DATA = {
+    perkins: {
+      "400 Series (400D/403D)": {capacity:3.5, grade:"SAE 15W-40 (API CH-4/CI-4)", filter:"Compact spin-on oil filter — confirm exact part number against your engine serial number.", interval:250, confidence:"estimate"},
+      "1100 Series (1103A/1104A/1104C)": {capacity:8.0, grade:"SAE 15W-40 (API CH-4/CI-4)", filter:"Spin-on oil filter, commonly Perkins part 2654407 on 1104C-44 — confirm against your engine serial number.", interval:500, confidence:"confirmed"},
+      "1300 Series (1306)": {capacity:23, grade:"SAE 15W-40 (API CH-4/CI-4)", filter:"Spin-on oil filter — confirm exact part number against your engine serial number.", interval:500, confidence:"estimate"},
+      "2200 Series (2206/2506)": {capacity:25, grade:"SAE 15W-40 (API CH-4/CI-4)", filter:"Spin-on oil filter — confirm exact part number against your engine serial number.", interval:500, confidence:"estimate"},
+      "4000 Series": {capacity:80, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on or cartridge filter (larger industrial unit) — confirm exact part number against your engine serial number.", interval:500, confidence:"estimate"},
+      "Other known Perkins model": null,
+      "Unknown — will send photo": null
+    },
+    cummins: {
+      "4B/4BT": {capacity:10.3, grade:"SAE 15W-40 (API CH-4/CI-4)", filter:"Spin-on filter, 1x16 TPI thread — confirm exact cross-reference against your engine serial number.", interval:500, confidence:"confirmed"},
+      "6B/6BT": {capacity:15.3, grade:"SAE 15W-40 (API CH-4/CI-4)", filter:"Spin-on filter, 1x16 TPI thread — confirm exact cross-reference against your engine serial number.", interval:500, confidence:"confirmed"},
+      "6C/6CT": {capacity:17, grade:"SAE 15W-40 (API CH-4/CI-4)", filter:"Spin-on filter — confirm exact cross-reference against your engine serial number.", interval:500, confidence:"estimate"},
+      "QSB Series": {capacity:12, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on filter — confirm exact cross-reference against your engine serial number.", interval:500, confidence:"estimate"},
+      "QSL9": {capacity:22, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on filter — confirm exact cross-reference against your engine serial number.", interval:500, confidence:"estimate"},
+      "NT/NTA855": {capacity:40, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on or cartridge filter (large classic engine) — confirm exact cross-reference against your engine serial number.", interval:500, confidence:"estimate"},
+      "KTA Series": {capacity:75, grade:"SAE 15W-40 (API CI-4)", filter:"Cartridge-type filter (large industrial unit) — confirm exact cross-reference against your engine serial number.", interval:500, confidence:"estimate"},
+      "Other known Cummins model": null,
+      "Unknown — will send photo": null
+    },
+    caterpillar: {
+      "3304/3306": {capacity:27, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on filter — confirm exact part number against your engine serial number.", interval:250, confidence:"estimate"},
+      "3406": {capacity:36, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on filter — confirm exact part number against your engine serial number.", interval:250, confidence:"estimate"},
+      "C7": {capacity:14, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on filter — confirm exact part number against your engine serial number.", interval:500, confidence:"estimate"},
+      "C9": {capacity:30, grade:"SAE 15W-40 (API CI-4/CJ-4)", filter:"Spin-on filter — confirm exact part number against your engine serial number.", interval:250, confidence:"confirmed"},
+      "C13": {capacity:33, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on filter — confirm exact part number against your engine serial number.", interval:250, confidence:"estimate"},
+      "C15/C18": {capacity:38, grade:"SAE 15W-40 (API CI-4)", filter:"Spin-on filter — confirm exact part number against your engine serial number.", interval:250, confidence:"estimate"},
+      "C27/C32": {capacity:65, grade:"SAE 15W-40 (API CI-4)", filter:"Cartridge-type filter (large industrial unit) — confirm exact part number against your engine serial number.", interval:250, confidence:"estimate"},
+      "3500 Series": {capacity:110, grade:"SAE 15W-40 (API CI-4)", filter:"Cartridge-type filter (large industrial unit) — confirm exact part number against your engine serial number.", interval:250, confidence:"estimate"},
+      "Other known Caterpillar model": null,
+      "Unknown — will send photo": null
+    },
+    other: {
+      "Other known model": null,
+      "Unknown — will send photo": null
+    }
+  };
+
+  const manufacturerSel = document.getElementById('manufacturer');
+  const modelStep = document.getElementById('step-model');
+  const modelSel = document.getElementById('model');
+  const hoursStep = document.getElementById('step-hours');
+  const noDataNote = document.getElementById('no-data-note');
+  const checkBtn = document.getElementById('checkBtn');
+
+  function unlock(el){ el.classList.remove('disabled'); }
+
+  manufacturerSel.addEventListener('change', function(){
+    const val = this.value;
+    modelSel.innerHTML = '<option value="">Select model…</option>';
+    if (val && OIL_DATA[val]) {
+      Object.keys(OIL_DATA[val]).forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m; opt.textContent = m;
+        modelSel.appendChild(opt);
+      });
+      unlock(modelStep);
+    } else {
+      modelStep.classList.add('disabled');
+    }
+    hoursStep.classList.add('disabled');
+    noDataNote.style.display = 'none';
+    checkReady();
+  });
+
+  modelSel.addEventListener('change', function(){
+    const mfr = manufacturerSel.value;
+    const data = mfr && OIL_DATA[mfr] ? OIL_DATA[mfr][this.value] : null;
+    noDataNote.style.display = (this.value && !data) ? 'block' : 'none';
+    if (this.value) unlock(hoursStep);
+    else hoursStep.classList.add('disabled');
+    checkReady();
+  });
+
+  ['currentHours','lastServiceHours'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', checkReady);
+  });
+
+  function checkReady(){
+    const current = parseFloat(document.getElementById('currentHours').value);
+    const last = parseFloat(document.getElementById('lastServiceHours').value);
+    const model = modelSel.value;
+    checkBtn.disabled = !(model && current >= 0 && last >= 0 && current >= last);
+  }
+
+  checkBtn.addEventListener('click', runCheck);
+
+  function esc(s){ return (s||'').toString(); }
+
+  function runCheck(){
+    const manufacturer = manufacturerSel.value;
+    const model = modelSel.value;
+    const data = (manufacturer && OIL_DATA[manufacturer]) ? OIL_DATA[manufacturer][model] : null;
+    const manualCapacity = parseFloat(document.getElementById('manualCapacity').value);
+    const currentHours = parseFloat(document.getElementById('currentHours').value);
+    const lastServiceHours = parseFloat(document.getElementById('lastServiceHours').value);
+    const avgHoursPerDay = parseFloat(document.getElementById('avgHoursPerDay').value);
+
+    const result = document.getElementById('result');
+    const body = document.getElementById('resultBody');
+    const dot = document.getElementById('verdictDot');
+    const verdictText = document.getElementById('verdictText');
+
+    const capacity = (manualCapacity > 0) ? manualCapacity : (data ? data.capacity : null);
+
+    if (!capacity) {
+      dot.className = 'dot insufficient';
+      verdictText.textContent = 'INSUFFICIENT DATA';
+      body.innerHTML = '<p>We don\'t have a published oil capacity for this model, and none was entered manually. Enter your known oil capacity above (check the dipstick or engine manual), or send us a nameplate photo on WhatsApp so we can confirm it.</p>';
+      result.classList.add('show');
+      return;
+    }
+
+    const hoursSince = currentHours - lastServiceHours;
+    const interval = data ? data.interval : 500;
+    const pctUsed = (hoursSince / interval) * 100;
+
+    let severity = 'ok';
+    let statusLine = '';
+    if (hoursSince >= interval) {
+      severity = 'bad';
+      statusLine = `Service is overdue by ${(hoursSince - interval).toLocaleString()} hours (based on a ${interval}-hour interval for this engine).`;
+    } else if (pctUsed >= 85) {
+      severity = 'warn';
+      statusLine = `Service is due soon — ${(interval - hoursSince).toLocaleString()} hours remaining out of the ${interval}-hour interval.`;
+    } else {
+      severity = 'ok';
+      statusLine = `Service is not yet due — ${(interval - hoursSince).toLocaleString()} hours remaining out of the ${interval}-hour interval.`;
+    }
+
+    let daysNote = '';
+    if (avgHoursPerDay > 0 && severity !== 'bad') {
+      const hoursLeft = interval - hoursSince;
+      const daysLeft = Math.round(hoursLeft / avgHoursPerDay);
+      daysNote = `<p>At your reported average of ${avgHoursPerDay} hrs/day, that's roughly <strong>${daysLeft} day(s)</strong> away.</p>`;
+    } else if (avgHoursPerDay > 0 && severity === 'bad') {
+      daysNote = `<p>This generator has already run ${(hoursSince - interval).toLocaleString()} hours past its interval — schedule service as soon as possible rather than waiting for a calendar estimate.</p>`;
+    }
+
+    const oilToBuy = Math.ceil((capacity * 1.1) * 2) / 2; // round up to nearest 0.5L, +10% margin
+
+    if (dot) {
+      dot.className = 'dot ' + severity;
+    }
+    if (severity === 'bad') verdictText.textContent = 'Service overdue';
+    else if (severity === 'warn') verdictText.textContent = 'Service due soon';
+    else verdictText.textContent = 'Service on schedule';
+
+    const confidenceTag = data
+      ? `<span class="confidence-tag ${data.confidence}">${data.confidence === 'confirmed' ? 'Confirmed spec' : 'Estimate — confirm before ordering'}</span>`
+      : `<span class="confidence-tag estimate">Manually entered capacity</span>`;
+
+    let specTable = `
+      <table class="spec">
+        <tr><th>Configuration</th><td>${esc(manufacturer || 'Unspecified')} ${esc(model)}</td></tr>
+        <tr><th>Oil capacity</th><td>${capacity.toFixed(1)} L ${confidenceTag}</td></tr>
+        <tr><th>Recommended oil grade</th><td>${data ? esc(data.grade) : 'SAE 15W-40 (API CH-4/CI-4) — general recommendation, confirm against your engine manual'}</td></tr>
+        <tr><th>Oil 
