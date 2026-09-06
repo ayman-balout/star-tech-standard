@@ -770,6 +770,15 @@ function escapeHTML(value){
 }
 
 
+function formatAIText(value){
+
+  return escapeHTML(value)
+    .replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")
+    .replace(/\n/g,"<br>");
+
+}
+
+
 /* =========================
    PRELIMINARY DIAGNOSIS
 ========================= */
@@ -1205,7 +1214,7 @@ async function runAIAnalysis(report){
     box.innerHTML =
       `<div class="ai-box">
         <h3 style="margin-top:0">Deep AI Diagnostic Analysis</h3>
-        ${escapeHTML(aiText).replace(/\n/g,"<br>")}
+        ${formatAIText(aiText)}
       </div>`;
 
     startDeepChat(report);
@@ -1285,7 +1294,7 @@ function appendChatBubble(role, text, images){
 
   bubble.className = "chat-msg " + (role === "user" ? "user" : "ai");
 
-  let html = escapeHTML(text).replace(/\n/g,"<br>");
+  let html = (role === "user") ? escapeHTML(text).replace(/\n/g,"<br>") : formatAIText(text);
 
   (images || []).forEach(src=>{
     html += `<img src="${src}" alt="attached photo">`;
@@ -1915,7 +1924,7 @@ function viewLog(index){
         box.innerHTML =
           `<div class="ai-box">
             <h3 style="margin-top:0">Deep AI Diagnostic Analysis</h3>
-            ${escapeHTML(logs[index].aiAnalysis).replace(/\n/g,"<br>")}
+            ${formatAIText(logs[index].aiAnalysis)}
           </div>`;
 
       }
