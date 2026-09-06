@@ -163,8 +163,11 @@
     <div class="brand">Star Tech <span>Standard</span></div>
     <nav class="top-links">
       <a href="index.html">Home</a>
-      <a href="generator-doctor.html">Generator DoctorAI</a>
+      <a href="tools.html">Free Tools</a>
+      <a href="generator-doctor.html">DoctorAI</a>
       <a href="generator-spec-check.html">Spec Check</a>
+      <a href="generator-downtime-cost.html">Downtime Cost</a>
+      <a href="generator-sizing-calculator.html">Sizing</a>
     </nav>
   </div>
 </header>
@@ -417,4 +420,34 @@
         <tr><th>Configuration</th><td>${esc(manufacturer || 'Unspecified')} ${esc(model)}</td></tr>
         <tr><th>Oil capacity</th><td>${capacity.toFixed(1)} L ${confidenceTag}</td></tr>
         <tr><th>Recommended oil grade</th><td>${data ? esc(data.grade) : 'SAE 15W-40 (API CH-4/CI-4) — general recommendation, confirm against your engine manual'}</td></tr>
-        <tr><th>Oil 
+        <tr><th>Oil filter</th><td>${data ? esc(data.filter) : 'Confirm filter part number using your engine serial number.'}</td></tr>
+        <tr><th>Service interval</th><td>Every ${interval} hours</td></tr>
+        <tr><th>Oil to buy</th><td>${oilToBuy} L (includes ~10% margin for spillage/dipstick top-up)</td></tr>
+      </table>
+    `;
+
+    let flagsHtml = `<ul class="flags"><li><span class="icon">${severity==='bad'?'⚠️':severity==='warn'?'🕒':'✅'}</span><span>${statusLine}</span></li></ul>`;
+
+    let ctaHtml = '';
+    const inScopeBrand = ['perkins','cummins','caterpillar'].includes(manufacturer);
+    if (severity === 'bad' || severity === 'warn') {
+      const msg = `Hello, I ran a Generator Maintenance Check on my ${encodeURIComponent(manufacturer||'')} ${encodeURIComponent(model||'')} generator and it shows service is ${severity==='bad'?'overdue':'due soon'}. Can you help?`;
+      if (inScopeBrand) {
+        ctaHtml = `<div class="cta"><p>This is a brand we service directly. Send us these results on WhatsApp and we'll schedule your oil, filter, and inspection service.</p>
+        <a class="wa" href="https://wa.me/2348033452862?text=${msg}" target="_blank" rel="noopener">Chat with us on WhatsApp</a></div>`;
+      } else {
+        ctaHtml = `<div class="cta"><p>This result is outside our directly serviced brands (Perkins, Cummins, Caterpillar), but send us the details on WhatsApp — we can still advise.</p>
+        <a class="wa" href="https://wa.me/2348033452862?text=${msg}" target="_blank" rel="noopener">Chat with us on WhatsApp</a></div>`;
+      }
+    }
+
+    body.innerHTML = specTable + daysNote + flagsHtml + ctaHtml;
+    result.classList.add('show');
+    result.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+})();
+</script>
+
+</body>
+</html>
