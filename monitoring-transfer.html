@@ -6,6 +6,38 @@
 <title>Monitoring & Transfer | Star Tech Standard Ltd</title>
 <meta name="description" content="Monitoring and transfer systems by Star Tech Standard Ltd — tanker offloading skids, day tank distribution, flow metering, and standing tank specifications from 500 to 100,000 litres.">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Responsive spec table: normal table on wider screens, stacked cards on narrow phones */
+@media (max-width: 640px) {
+  .table-scroll{overflow:visible;}
+  table.spec-table{display:block;width:100%;border:0;}
+  table.spec-table tr:first-child{display:none;} /* hides the original header row */
+  table.spec-table tr{
+    display:block;
+    margin-bottom:16px;
+    border:1px solid rgba(0,0,0,.12);
+    border-radius:8px;
+    padding:12px 14px;
+    background:rgba(0,0,0,.02);
+  }
+  table.spec-table td{
+    display:block;
+    padding:6px 0;
+    border:0;
+    font-size:14px;
+    line-height:1.4;
+  }
+  table.spec-table td:before{
+    content:attr(data-label);
+    display:block;
+    font-weight:bold;
+    font-size:12px;
+    text-transform:uppercase;
+    opacity:.6;
+    margin-bottom:2px;
+  }
+}
+</style>
 </head>
 <body>
 <header>
@@ -184,10 +216,34 @@
     <div class="table-scroll">
     <table class="spec-table">
       <tr><th>Capacity range</th><th>Typical diameter</th><th>Typical length / height</th><th>Construction</th><th>Standard fittings</th></tr>
-      <tr><td>500 – 2,000 L</td><td>1.0 – 1.2 m</td><td>1.0 – 1.8 m (vertical or horizontal)</td><td>Mild steel, 4–5 mm shell</td><td>Fill inlet, vent, level gauge, outlet, drain valve</td></tr>
-      <tr><td>2,000 – 10,000 L</td><td>1.4 – 1.8 m</td><td>2.5 – 5.0 m (horizontal)</td><td>Mild steel, 5–6 mm shell, internal baffles</td><td>Fill inlet, vent, level counter, manhole, drain valve</td></tr>
-      <tr><td>10,000 – 30,000 L</td><td>2.0 – 2.4 m</td><td>4.0 – 8.0 m (horizontal)</td><td>Mild steel, 6–8 mm shell, baffles, saddle supports</td><td>Fill inlet, vent, level counter, overflow switch, manhole</td></tr>
-      <tr><td>30,000 – 100,000 L</td><td>2.5 – 3.5 m</td><td>8.0 – 16.0 m (horizontal) or vertical silo</td><td>Mild steel, 8–10 mm shell, reinforced saddles/foundation</td><td>Fill inlet, vent, level counter, overflow switch, bunding, manhole</td></tr>
+      <tr>
+        <td data-label="Capacity range">500 – 2,000 L</td>
+        <td data-label="Typical diameter">1.0 – 1.2 m</td>
+        <td data-label="Typical length / height">1.0 – 1.8 m (vertical or horizontal)</td>
+        <td data-label="Construction">Mild steel, 4–5 mm shell</td>
+        <td data-label="Standard fittings">Fill inlet, vent, level gauge, outlet, drain valve</td>
+      </tr>
+      <tr>
+        <td data-label="Capacity range">2,000 – 10,000 L</td>
+        <td data-label="Typical diameter">1.4 – 1.8 m</td>
+        <td data-label="Typical length / height">2.5 – 5.0 m (horizontal)</td>
+        <td data-label="Construction">Mild steel, 5–6 mm shell, internal baffles</td>
+        <td data-label="Standard fittings">Fill inlet, vent, level counter, manhole, drain valve</td>
+      </tr>
+      <tr>
+        <td data-label="Capacity range">10,000 – 30,000 L</td>
+        <td data-label="Typical diameter">2.0 – 2.4 m</td>
+        <td data-label="Typical length / height">4.0 – 8.0 m (horizontal)</td>
+        <td data-label="Construction">Mild steel, 6–8 mm shell, baffles, saddle supports</td>
+        <td data-label="Standard fittings">Fill inlet, vent, level counter, overflow switch, manhole</td>
+      </tr>
+      <tr>
+        <td data-label="Capacity range">30,000 – 100,000 L</td>
+        <td data-label="Typical diameter">2.5 – 3.5 m</td>
+        <td data-label="Typical length / height">8.0 – 16.0 m (horizontal) or vertical silo</td>
+        <td data-label="Construction">Mild steel, 8–10 mm shell, reinforced saddles/foundation</td>
+        <td data-label="Standard fittings">Fill inlet, vent, level counter, overflow switch, bunding, manhole</td>
+      </tr>
     </table>
     </div>
     <div class="notice">All configurations and dimensions shown above are illustrative examples. Every diesel tank and transfer system we deliver is custom-engineered to your generator load, site layout and applicable fire and safety codes.</div>
