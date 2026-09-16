@@ -7,35 +7,77 @@
 <meta name="description" content="Monitoring and transfer systems by Star Tech Standard Ltd — tanker offloading skids, day tank distribution, flow metering, and standing tank specifications from 500 to 100,000 litres.">
 <link rel="stylesheet" href="style.css">
 <style>
-/* Responsive spec table: normal table on wider screens, stacked cards on narrow phones */
-@media (max-width: 640px) {
-  .table-scroll{overflow:visible;}
-  table.spec-table{display:block;width:100%;border:0;}
-  table.spec-table tr:first-child{display:none;} /* hides the original header row */
-  table.spec-table tr{
-    display:block;
-    margin-bottom:16px;
-    border:1px solid rgba(0,0,0,.12);
-    border-radius:8px;
-    padding:12px 14px;
-    background:rgba(0,0,0,.02);
-  }
-  table.spec-table td{
-    display:block;
-    padding:6px 0;
-    border:0;
-    font-size:14px;
-    line-height:1.4;
-  }
-  table.spec-table td:before{
-    content:attr(data-label);
-    display:block;
-    font-weight:bold;
-    font-size:12px;
-    text-transform:uppercase;
-    opacity:.6;
-    margin-bottom:2px;
-  }
+/* Tank spec cards — replaces the old table on every screen size */
+.tank-spec-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+  margin-top:28px;
+}
+.tank-spec-card{
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:10px;
+  overflow:hidden;
+  background:rgba(0,0,0,.02);
+  cursor:pointer;
+  transition:box-shadow .15s ease, background .15s ease;
+}
+.tank-spec-card:hover{
+  background:#fafbfc;
+  box-shadow:0 4px 12px rgba(0,0,0,.1), inset 0 0 0 1px #e1a52c;
+}
+.tank-spec-card .tsc-head{
+  padding:16px 18px;
+}
+.tank-spec-card .tsc-head h4{
+  margin:0 0 4px;
+  font-size:17px;
+}
+.tank-spec-card .tsc-head span{
+  font-size:13px;
+  opacity:.65;
+}
+.tank-spec-card .tsc-body{
+  display:none;
+  padding:0 18px 18px;
+  font-size:14px;
+  line-height:1.6;
+}
+.tank-spec-card .tsc-body dl{
+  margin:0;
+}
+.tank-spec-card .tsc-body dt{
+  font-weight:bold;
+  font-size:12px;
+  text-transform:uppercase;
+  opacity:.6;
+  margin-top:10px;
+}
+.tank-spec-card .tsc-body dt:first-child{
+  margin-top:0;
+}
+.tank-spec-card .tsc-body dd{
+  margin:2px 0 0;
+}
+.tank-spec-card .tsc-photo{
+  margin-top:14px;
+  border:1px dashed rgba(0,0,0,.25);
+  border-radius:8px;
+  padding:22px 14px;
+  text-align:center;
+  font-size:13px;
+  opacity:.6;
+}
+.tank-spec-card .tsc-toggle{
+  margin:12px 18px 16px;
+  background:none;
+  border:none;
+  color:inherit;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:0;
+  font-size:13px;
+  display:block;
 }
 </style>
 </head>
@@ -211,42 +253,82 @@
     <p class="eyebrow dark">STANDING TANK SPECIFICATIONS</p>
     <div class="head">
       <h2>Reference dimensions, 500 to 100,000 litres.</h2>
-      <p>Indicative dimensions and fittings for standing diesel storage tanks. Final specifications are engineered per project, site space and local code requirements.</p>
+      <p>Indicative dimensions and fittings for standing diesel storage tanks. Tap any card for full details. Final specifications are engineered per project, site space and local code requirements.</p>
     </div>
-    <div class="table-scroll">
-    <table class="spec-table">
-      <tr><th>Capacity range</th><th>Typical diameter</th><th>Typical length / height</th><th>Construction</th><th>Standard fittings</th></tr>
-      <tr>
-        <td data-label="Capacity range">500 – 2,000 L</td>
-        <td data-label="Typical diameter">1.0 – 1.2 m</td>
-        <td data-label="Typical length / height">1.0 – 1.8 m (vertical or horizontal)</td>
-        <td data-label="Construction">Mild steel, 4–5 mm shell</td>
-        <td data-label="Standard fittings">Fill inlet, vent, level gauge, outlet, drain valve</td>
-      </tr>
-      <tr>
-        <td data-label="Capacity range">2,000 – 10,000 L</td>
-        <td data-label="Typical diameter">1.4 – 1.8 m</td>
-        <td data-label="Typical length / height">2.5 – 5.0 m (horizontal)</td>
-        <td data-label="Construction">Mild steel, 5–6 mm shell, internal baffles</td>
-        <td data-label="Standard fittings">Fill inlet, vent, level counter, manhole, drain valve</td>
-      </tr>
-      <tr>
-        <td data-label="Capacity range">10,000 – 30,000 L</td>
-        <td data-label="Typical diameter">2.0 – 2.4 m</td>
-        <td data-label="Typical length / height">4.0 – 8.0 m (horizontal)</td>
-        <td data-label="Construction">Mild steel, 6–8 mm shell, baffles, saddle supports</td>
-        <td data-label="Standard fittings">Fill inlet, vent, level counter, overflow switch, manhole</td>
-      </tr>
-      <tr>
-        <td data-label="Capacity range">30,000 – 100,000 L</td>
-        <td data-label="Typical diameter">2.5 – 3.5 m</td>
-        <td data-label="Typical length / height">8.0 – 16.0 m (horizontal) or vertical silo</td>
-        <td data-label="Construction">Mild steel, 8–10 mm shell, reinforced saddles/foundation</td>
-        <td data-label="Standard fittings">Fill inlet, vent, level counter, overflow switch, bunding, manhole</td>
-      </tr>
-    </table>
+
+    <div class="tank-spec-grid">
+
+      <article class="tank-spec-card" onclick="toggleTankCard(this)">
+        <div class="tsc-head">
+          <h4>500 – 2,000 L</h4>
+          <span>Small standing tank</span>
+        </div>
+        <div class="tsc-body">
+          <dl>
+            <dt>Typical diameter</dt><dd>1.0 – 1.2 m</dd>
+            <dt>Typical length / height</dt><dd>1.0 – 1.8 m (vertical or horizontal)</dd>
+            <dt>Construction</dt><dd>Mild steel, 4–5 mm shell</dd>
+            <dt>Standard fittings</dt><dd>Fill inlet, vent, level gauge, outlet, drain valve</dd>
+          </dl>
+          <div class="tsc-photo">Photo of this tank size coming soon</div>
+        </div>
+        <button type="button" class="tsc-toggle">View details</button>
+      </article>
+
+      <article class="tank-spec-card" onclick="toggleTankCard(this)">
+        <div class="tsc-head">
+          <h4>2,000 – 10,000 L</h4>
+          <span>Medium standing tank</span>
+        </div>
+        <div class="tsc-body">
+          <dl>
+            <dt>Typical diameter</dt><dd>1.4 – 1.8 m</dd>
+            <dt>Typical length / height</dt><dd>2.5 – 5.0 m (horizontal)</dd>
+            <dt>Construction</dt><dd>Mild steel, 5–6 mm shell, internal baffles</dd>
+            <dt>Standard fittings</dt><dd>Fill inlet, vent, level counter, manhole, drain valve</dd>
+          </dl>
+          <div class="tsc-photo">Photo of this tank size coming soon</div>
+        </div>
+        <button type="button" class="tsc-toggle">View details</button>
+      </article>
+
+      <article class="tank-spec-card" onclick="toggleTankCard(this)">
+        <div class="tsc-head">
+          <h4>10,000 – 30,000 L</h4>
+          <span>Large standing tank</span>
+        </div>
+        <div class="tsc-body">
+          <dl>
+            <dt>Typical diameter</dt><dd>2.0 – 2.4 m</dd>
+            <dt>Typical length / height</dt><dd>4.0 – 8.0 m (horizontal)</dd>
+            <dt>Construction</dt><dd>Mild steel, 6–8 mm shell, baffles, saddle supports</dd>
+            <dt>Standard fittings</dt><dd>Fill inlet, vent, level counter, overflow switch, manhole</dd>
+          </dl>
+          <div class="tsc-photo">Photo of this tank size coming soon</div>
+        </div>
+        <button type="button" class="tsc-toggle">View details</button>
+      </article>
+
+      <article class="tank-spec-card" onclick="toggleTankCard(this)">
+        <div class="tsc-head">
+          <h4>30,000 – 100,000 L</h4>
+          <span>Bulk storage / silo</span>
+        </div>
+        <div class="tsc-body">
+          <dl>
+            <dt>Typical diameter</dt><dd>2.5 – 3.5 m</dd>
+            <dt>Typical length / height</dt><dd>8.0 – 16.0 m (horizontal) or vertical silo</dd>
+            <dt>Construction</dt><dd>Mild steel, 8–10 mm shell, reinforced saddles/foundation</dd>
+            <dt>Standard fittings</dt><dd>Fill inlet, vent, level counter, overflow switch, bunding, manhole</dd>
+          </dl>
+          <div class="tsc-photo">Photo of this tank size coming soon</div>
+        </div>
+        <button type="button" class="tsc-toggle">View details</button>
+      </article>
+
     </div>
-    <div class="notice">All configurations and dimensions shown above are illustrative examples. Every diesel tank and transfer system we deliver is custom-engineered to your generator load, site layout and applicable fire and safety codes.</div>
+
+    <div class="notice" style="margin-top:24px;">All configurations and dimensions shown above are illustrative examples. Every diesel tank and transfer system we deliver is custom-engineered to your generator load, site layout and applicable fire and safety codes.</div>
   </div>
 </section>
 
@@ -259,5 +341,19 @@
 </main>
 
 <footer><div class="wrap foot"><div class="brand"><img src="star-tech-logo.png" alt="Star Tech Standard Ltd" class="brand-logo"><span>STAR TECH STANDARD LTD</span></div><div><b>POWER</b><span>Diesel generators</span><span>Fuel systems</span><span>Technical service</span></div><div><b>KAT POWER</b><span>Gasoline generators for sale</span><span>No gasoline-generator repair</span></div><div><b>CONTACT</b><span>Victoria Island, Lagos</span><span><a href="https://wa.me/2348033452862" target="_blank" rel="noopener">Chat on WhatsApp</a></span></div></div><div class="wrap copy">© 2026 Star Tech Standard Ltd. All rights reserved.</div></footer>
+
+<script>
+function toggleTankCard(card) {
+  var body = card.querySelector('.tsc-body');
+  var btn = card.querySelector('.tsc-toggle');
+  if (body.style.display === 'block') {
+    body.style.display = 'none';
+    btn.textContent = 'View details';
+  } else {
+    body.style.display = 'block';
+    btn.textContent = 'Hide details';
+  }
+}
+</script>
 </body>
 </html>
